@@ -1,177 +1,78 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모바일 청첩장</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<!-- 지도 -->
+<section class="card">
+  <h2>오시는 길</h2>
+  <p>라루체 명동</p>
 
-  <div class="page">
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps?q=라루체%20명동&output=embed"
+      width="100%"
+      height="300"
+      style="border:0;"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
 
-    <!-- 메인 -->
-    <section class="card">
-      <h1>우리 드디어 결혼해요</h1>
+  <p style="margin-top:10px;">
+    <a href="https://map.naver.com/v5/search/라루체명동" target="_blank">
+      네이버지도 열기
+    </a>
+  </p>
 
-      <p class="names">
-        신랑 신준섭<br>
-        신부 김가람
+  <!-- 교통 안내 (같은 하얀 박스 안) -->
+  <div class="transport-box">
+
+    <div class="transport-header" onclick="toggleTransport(this)">
+      🚇 지하철 안내
+    </div>
+    <div class="transport-content">
+      <p>
+        4호선 <strong>명동역 3번 출구</strong><br>
+        퍼시픽호텔 우측길로 도보 60m
+      </p>
+    </div>
+
+    <div class="transport-header" onclick="toggleTransport(this)">
+      🚌 버스 안내
+    </div>
+    <div class="transport-content">
+      <p>
+        <strong>퇴계로2가·명동역</strong><br>
+        104, 105, 421, 463, 507, 604, N16, 7011
+      </p>
+      <p>
+        <strong>명동입구</strong><br>
+        104, 421, 463, 507, 604, N16, 7011, 05
+      </p>
+    </div>
+
+    <div class="transport-header" onclick="toggleTransport(this)">
+      🚗 자가용 안내
+    </div>
+    <div class="transport-content">
+      <p>
+        <strong>강남에서 오실 때</strong><br>
+        반포대교 → 남산3호터널 → 통과 후<br>
+        쌍용 플래티넘 아파트 옆 우회전 →<br>
+        아파트 끼고 좌회전 후 라루체 진입
       </p>
 
       <p>
-        2026년 7월 5일 일요일<br>
-        오후 1시 30분<br>
-        라루체 명동 5층 그레이스 홀
+        <strong>서울역에서 오실 때</strong><br>
+        서울역 → 퇴계로 방면 → 회현역 → 회현사거리 직진 →<br>
+        스테이트타워·뉴오리엔탈호텔 사이 우회전 →<br>
+        왼쪽 첫 번째 골목 라루체
       </p>
-    </section>
 
-    <!-- 인사말 -->
-    <section class="card">
       <p>
-        두 사람이 만나<br>
-        평생을 함께하기로 약속했습니다.<br><br>
-        소중한 분들을 초대합니다.
+        <strong>왕십리 방향에서 오실 때</strong><br>
+        왕십리역 → 퇴계로 남대문 방향 직진 →<br>
+        퇴계로2가 지하차도 → 신세계백화점 앞 유턴 →<br>
+        스테이트타워·뉴오리엔탈호텔 사이 우회전 →<br>
+        왼쪽 첫 번째 골목 라루체
       </p>
-    </section>
-
-    <!-- 지도 -->
-    <section class="card">
-      <h2>오시는 길</h2>
-      <p>라루체 명동</p>
-
-      <div class="map-wrap">
-        <iframe
-          src="https://www.google.com/maps?q=라루체%20명동&output=embed"
-          width="100%"
-          height="300"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy">
-        </iframe>
-      </div>
-
-      <p style="margin-top:10px;">
-  
-        <a href="https://map.naver.com/v5/search/라루체명동" target="_blank">
-          📍 네이버지도 열기
-        </a>
-      </p>
-    </section>
-<div class="transport-box">
-
-  <div class="transport-header" onclick="toggleTransport(this)">
-    🚇 지하철 안내
-  </div>
-  <div class="transport-content">
-    <p>
-      4호선 <strong>명동역 3번 출구</strong><br>
-      퍼시픽호텔 우측길로 도보 60m
-    </p>
-  </div>
-
-  <div class="transport-header" onclick="toggleTransport(this)">
-    🚌 버스 안내
-  </div>
-  <div class="transport-content">
-    <p>
-      <strong>퇴계로2가·명동역</strong><br>
-      104, 105, 421, 463, 507, 604, N16, 7011
-    </p>
-    <p>
-      <strong>명동입구</strong><br>
-      104, 421, 463, 507, 604, N16, 7011, 05
-    </p>
-  </div>
-
-  <div class="transport-header" onclick="toggleTransport(this)">
-    🚗 자가용 안내
-  </div>
-  <div class="transport-content">
-    <p>
-      <strong>강남에서 오실 때</strong><br>
-      반포대교 → 남산3호터널 → 통과 후<br>
-      쌍용 플래티넘 아파트 옆 우회전 →<br>
-      아파트 끼고 좌회전 후 라루체 진입
-    </p>
-
-    <p>
-      <strong>서울역에서 오실 때</strong><br>
-      서울역 → 퇴계로 방면 → 회현역 → 회현사거리 직진 →<br>
-      스테이트타워·뉴오리엔탈호텔 사이 우회전 →<br>
-      왼쪽 첫 번째 골목 라루체
-    </p>
-
-    <p>
-      <strong>왕십리 방향에서 오실 때</strong><br>
-      왕십리역 → 퇴계로 남대문 방향 직진 →<br>
-      퇴계로2가 지하차도 → 신세계백화점 앞 유턴 →<br>
-      스테이트타워·뉴오리엔탈호텔 사이 우회전 →<br>
-      왼쪽 첫 번째 골목 라루체
-    </p>
-  </div>
-
-</div>
-
-
-</div>
-
-<div class="white-box">
-
-  <div class="account-section">
-
-    <div class="account-header" onclick="toggleAccount(this)">
-      신랑 계좌 보기
-    </div>
-    <div class="account-content">
-      <p id="groom-account">기업은행 588-018494-01-019</p>
-      <button onclick="copyAccount(event, 'groom-account')">계좌번호 복사</button>
-    </div>
-
-    <div class="account-header" onclick="toggleAccount(this)">
-      신부 계좌 보기
-    </div>
-    <div class="account-content">
-      <p id="bride-account">카카오뱅크 </p>
-      <button onclick="copyAccount(event, 'bride-account')">계좌번호 복사</button>
     </div>
 
   </div>
-
-</div>
-<script>
-
-function toggleTransport(header) {
-  const content = header.nextElementSibling;
-
-  if (content.style.height && content.style.height !== "0px") {
-    content.style.height = "0px";
-  } else {
-    content.style.height = content.scrollHeight + "px";
-  }
-}
-function toggleAccount(header) {
-  const content = header.nextElementSibling;
-
-  if (content.style.height && content.style.height !== "0px") {
-    content.style.height = "0px";
-  } else {
-    content.style.height = content.scrollHeight + "px";
-  }
-}
-
-function copyAccount(event, id) {
-  event.stopPropagation();
-  const text = document.getElementById(id).innerText;
-
-  navigator.clipboard.writeText(text).then(() => {
-    alert("계좌번호가 복사되었습니다 😊");
-  });
-}
-</script>
-  
-</body>
-</html>
-
-
-
+</section>
