@@ -86,7 +86,26 @@
   </div>
 
 </div>
+<script>
+function toggleAccount(header) {
+  const content = header.nextElementSibling;
 
+  if (content.style.height && content.style.height !== "0px") {
+    content.style.height = "0px";
+  } else {
+    content.style.height = content.scrollHeight + "px";
+  }
+}
+
+function copyAccount(event, id) {
+  event.stopPropagation();
+  const text = document.getElementById(id).innerText;
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert("계좌번호가 복사되었습니다 😊");
+  });
+}
+</script>
   
 </body>
 </html>
