@@ -140,6 +140,18 @@
 
 </div>
 <script>
+
+  <script>
+function toggleTransport(header) {
+  const content = header.nextElementSibling;
+
+  if (content.style.height && content.style.height !== "0px") {
+    content.style.height = "0px";
+  } else {
+    content.style.height = content.scrollHeight + "px";
+  }
+}
+</script>
 function toggleAccount(header) {
   const content = header.nextElementSibling;
 
