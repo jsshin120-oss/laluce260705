@@ -188,7 +188,8 @@
       <p>
         2026년 7월 5일 일요일<br>
         오후 1시 30분<br>
-        라루체 명동 5층 그레이스 홀
+        라루체 명동<br>
+        5층 그레이스 홀
       </p>
     </section>
 
@@ -204,7 +205,7 @@
     <!-- 지도 + 교통 -->
     <section class="card">
       <h2>오시는 길</h2>
-      <p>라루체 명동</p>
+      <p>서울특별시 중구 퇴계로 18길 46</p>
 
       <div class="map-wrap">
         <iframe
@@ -223,7 +224,7 @@
 
       <div class="transport-box">
         <div class="transport-header" onclick="toggleBox(this)">
-          🚇 지하철 안내
+          지하철 안내
         </div>
         <div class="transport-content">
           <p>
@@ -233,7 +234,7 @@
         </div>
 
         <div class="transport-header" onclick="toggleBox(this)">
-          🚌 버스 안내
+          버스 안내
         </div>
         <div class="transport-content">
           <p>
@@ -247,7 +248,7 @@
         </div>
 
         <div class="transport-header" onclick="toggleBox(this)">
-          🚗 자가용 안내
+          자가용 안내
         </div>
         <div class="transport-content">
           <p>
@@ -299,7 +300,7 @@
       e.stopPropagation();
       const text = document.getElementById(id).innerText;
       navigator.clipboard.writeText(text).then(() => {
-        alert("계좌번호가 복사되었습니다 😊");
+        alert("계좌번호가 복사되었습니다");
       });
     }
   </script>
