@@ -147,3 +147,7 @@ body::before {
   line-height: 1.6;
   color: #333;
 }
+/* 교통 안내 글 가운데 정렬 */
+.transport-content {
+  text-align: center;
+}
