@@ -42,3 +42,55 @@ body::before {
   opacity: 0.4;   /* ← 투명도 조절 */
   z-index: -1;
 }
+
+
+.white-box {
+  max-width: 360px;
+  margin: 40px auto;
+  padding: 24px 18px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  text-align: center;          /* ← 전체 가운데 정렬 */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.account-section {
+  width: 100%;
+}
+
+.account-header {
+  padding: 14px;
+  margin-top: 12px;
+  background: #111;
+  color: #fff;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.account-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: rgba(245,245,245,1);
+  border-radius: 0 0 14px 14px;
+}
+
+.account-content.open {
+  max-height: 200px;
+  padding: 14px;
+}
+
+.account-content p {
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.account-content button {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+}
