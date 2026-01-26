@@ -12,12 +12,12 @@ body::before {
   position: fixed;
   inset: 0;
 
-  background-image: url("./images/bg.jpg"); /* ⭐ 여기 */
+  background-image: url("./images/bg.jpg"); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  opacity: 0.4;          /* 반투명 */
+  opacity: 0.4;       
   z-index: -1;
 }
 
