@@ -1,78 +1,270 @@
-<!-- 지도 -->
-<section class="card">
-  <h2>오시는 길</h2>
-  <p>라루체 명동</p>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모바일 청첩장</title>
 
-  <div class="map-wrap">
-    <iframe
-      src="https://www.google.com/maps?q=라루체%20명동&output=embed"
-      width="100%"
-      height="300"
-      style="border:0;"
-      allowfullscreen
-      loading="lazy">
-    </iframe>
+  <style>
+    /* ===== 기본 ===== */
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: #333;
+    }
+
+    .page {
+      padding: 20px 14px 40px;
+    }
+
+    /* ===== 카드 (하얀 박스) ===== */
+    .card,
+    .white-box {
+      background: #fff;
+      width: 100%;
+      max-width: 390px;
+      margin: 20px auto;
+      padding: 24px 18px;
+      border-radius: 20px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .names {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 6px 0;
+    }
+
+    /* ===== 지도 ===== */
+    .map-wrap iframe {
+      width: 100%;
+      height: 240px;
+      border: 0;
+      border-radius: 16px;
+      margin-top: 10px;
+    }
+
+    .map-link {
+      margin-top: 10px;
+      display: inline-block;
+      font-size: 14px;
+      text-decoration: none;
+      color: #2b7de9;
+    }
+
+    /* ===== 교통 안내 ===== */
+    .transport-box {
+      max-width: 390px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .transport-header {
+      background: #f6f6f6;
+      padding: 16px;
+      margin-top: 12px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .transport-content {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.3s ease;
+      padding: 0 6px;
+    }
+
+    .transport-content p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 12px 0;
+    }
+
+    /* ===== 계좌 ===== */
+    .account-header {
+      background: #f6f6f6;
+      padding: 16px;
+      margin-top: 12px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .account-content {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.3s ease;
+      text-align: center;
+    }
+
+    .account-content p {
+      margin: 14px 0 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .account-content button {
+      padding: 10px 14px;
+      font-size: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- 메인 -->
+    <section class="card">
+      <h1>우리 드디어 결혼해요</h1>
+      <p class="names">
+        신랑 신준섭<br />
+        신부 김가람
+      </p>
+      <p>
+        2026년 7월 5일 일요일<br />
+        오후 1시 30분<br />
+        라루체 명동 5층 그레이스 홀
+      </p>
+    </section>
+
+    <!-- 인사말 -->
+    <section class="card">
+      <p>
+        두 사람이 만나<br />
+        평생을 함께하기로 약속했습니다.<br /><br />
+        소중한 분들을 초대합니다.
+      </p>
+    </section>
+
+    <!-- 지도 -->
+    <section class="card">
+      <h2>오시는 길</h2>
+      <p>라루체 명동</p>
+
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps?q=라루체%20명동&output=embed"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <a
+        class="map-link"
+        href="https://map.naver.com/v5/search/라루체명동"
+        target="_blank">
+        네이버지도에서 보기
+      </a>
+
+      <!-- 교통 안내 -->
+      <div class="transport-box">
+        <div class="transport-header" onclick="toggleBox(this)">
+          🚇 지하철 안내
+        </div>
+        <div class="transport-content">
+          <p>
+            4호선 <strong>명동역 3번 출구</strong><br />
+            퍼시픽호텔 우측길로 도보 60m
+          </p>
+        </div>
+
+        <div class="transport-header" onclick="toggleBox(this)">
+          🚌 버스 안내
+        </div>
+        <div class="transport-content">
+          <p>
+            <strong>퇴계로2가·명동역</strong><br />
+            104, 105, 421, 463, 507, 604, N16, 7011
+          </p>
+          <p>
+            <strong>명동입구</strong><br />
+            104, 421, 463, 507, 604, N16, 7011, 05
+          </p>
+        </div>
+
+        <div class="transport-header" onclick="toggleBox(this)">
+          🚗 자가용 안내
+        </div>
+        <div class="transport-content">
+          <p>
+            <strong>강남 →</strong><br />
+            반포대교 → 남산3호터널 → 쌍용플래티넘 옆 우회전 →
+            좌회전 후 라루체
+          </p>
+          <p>
+            <strong>서울역 →</strong><br />
+            회현사거리 직진 → 스테이트타워·뉴오리엔탈호텔 사이
+            우회전 → 왼쪽 첫 골목
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 계좌 -->
+    <div class="white-box">
+      <div class="account-header" onclick="toggleBox(this)">
+        신랑 계좌 보기
+      </div>
+      <div class="account-content">
+        <p id="groom">기업은행 588-018494-01-019</p>
+        <button onclick="copyText(event,'groom')">계좌번호 복사</button>
+      </div>
+
+      <div class="account-header" onclick="toggleBox(this)">
+        신부 계좌 보기
+      </div>
+      <div class="account-content">
+        <p id="bride">카카오뱅크 3333-12-3456789</p>
+        <button onclick="copyText(event,'bride')">계좌번호 복사</button>
+      </div>
+    </div>
+
   </div>
 
-  <p style="margin-top:10px;">
-    <a href="https://map.naver.com/v5/search/라루체명동" target="_blank">
-      네이버지도 열기
-    </a>
-  </p>
+  <script>
+    function toggleBox(header) {
+      const content = header.nextElementSibling;
+      if (content.style.height && content.style.height !== "0px") {
+        content.style.height = "0px";
+      } else {
+        content.style.height = content.scrollHeight + "px";
+      }
+    }
 
-  <!-- 교통 안내 (같은 하얀 박스 안) -->
-  <div class="transport-box">
-
-    <div class="transport-header" onclick="toggleTransport(this)">
-      🚇 지하철 안내
-    </div>
-    <div class="transport-content">
-      <p>
-        4호선 <strong>명동역 3번 출구</strong><br>
-        퍼시픽호텔 우측길로 도보 60m
-      </p>
-    </div>
-
-    <div class="transport-header" onclick="toggleTransport(this)">
-      🚌 버스 안내
-    </div>
-    <div class="transport-content">
-      <p>
-        <strong>퇴계로2가·명동역</strong><br>
-        104, 105, 421, 463, 507, 604, N16, 7011
-      </p>
-      <p>
-        <strong>명동입구</strong><br>
-        104, 421, 463, 507, 604, N16, 7011, 05
-      </p>
-    </div>
-
-    <div class="transport-header" onclick="toggleTransport(this)">
-      🚗 자가용 안내
-    </div>
-    <div class="transport-content">
-      <p>
-        <strong>강남에서 오실 때</strong><br>
-        반포대교 → 남산3호터널 → 통과 후<br>
-        쌍용 플래티넘 아파트 옆 우회전 →<br>
-        아파트 끼고 좌회전 후 라루체 진입
-      </p>
-
-      <p>
-        <strong>서울역에서 오실 때</strong><br>
-        서울역 → 퇴계로 방면 → 회현역 → 회현사거리 직진 →<br>
-        스테이트타워·뉴오리엔탈호텔 사이 우회전 →<br>
-        왼쪽 첫 번째 골목 라루체
-      </p>
-
-      <p>
-        <strong>왕십리 방향에서 오실 때</strong><br>
-        왕십리역 → 퇴계로 남대문 방향 직진 →<br>
-        퇴계로2가 지하차도 → 신세계백화점 앞 유턴 →<br>
-        스테이트타워·뉴오리엔탈호텔 사이 우회전 →<br>
-        왼쪽 첫 번째 골목 라루체
-      </p>
-    </div>
-
-  </div>
-</section>
+    function copyText(e, id) {
+      e.stopPropagation();
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("복사되었습니다 😊");
+      });
+    }
+  </script>
+</body>
+</html>
