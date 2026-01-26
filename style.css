@@ -1,12 +1,4 @@
 /* ================= 기본 설정 ================= */
-body {
-margin: 0;
-font-family: -apple-system, BlinkMacSystemFont,
-"Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-color: #333;
-position: relative;
-min-height: 100vh;
-}
 
 /* 배경 이미지 + 반투명 레이어 */
 body::before {
