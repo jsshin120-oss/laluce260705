@@ -94,3 +94,32 @@ body::before {
   color: #fff;
   font-size: 14px;
 }
+.transport-box {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.transport-header {
+  margin-top: 12px;
+  padding: 14px;
+  background: #222;
+  color: #fff;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.transport-content {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  background: rgba(245,245,245,1);
+  border-radius: 0 0 14px 14px;
+}
+
+.transport-content p {
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333;
+}
