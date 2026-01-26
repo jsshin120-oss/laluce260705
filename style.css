@@ -165,3 +165,19 @@ p {
   font-size: 14px;
   cursor: pointer;
 }
+
+body::before {
+content: "";
+position: fixed;
+inset: 0;
+
+
+background-image: url("images/bg.jpg"); /* ← 여기만 확인 */
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+
+opacity: 0.25;
+z-index: -1;
+}
