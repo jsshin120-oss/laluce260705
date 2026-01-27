@@ -1,65 +1,64 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>모바일 청첩장</title>
 
   <style>
     /* ================= 기본 ================= */
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: -apple-system, BlinkMacSystemFont,
         "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      color: #333;
-      position: relative;
-      min-height: 100vh;
     }
 
-    /* 배경 이미지 + 반투명 */
-    body::before {
-      content: "";
+    /* ================= 비디오 배경 ================= */
+    .video-bg {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .video-bg video {
       width: 100%;
       height: 100%;
-      background-image: url("images/bg.jpg"); /* 배경 사진 경로 */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      opacity: 0.25;
-      z-index: -1;
+      object-fit: cover;
+      opacity: 0.35;
     }
 
+    .video-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+    }
+
+    /* ================= 페이지 래퍼 ================= */
     .page {
       max-width: 420px;
       margin: 0 auto;
       padding: 20px 14px 40px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     /* ================= 카드 ================= */
     .card {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255,255,255,0.94);
       backdrop-filter: blur(2px);
       padding: 24px 16px;
       margin-bottom: 16px;
       border-radius: 20px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
     }
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
+    h1 { font-size: 22px; margin-bottom: 12px; }
+    h2 { font-size: 18px; margin-bottom: 8px; }
 
     .names {
       font-size: 18px;
@@ -94,16 +93,12 @@
       text-decoration: none;
     }
 
-    /* ================= 교통 안내 ================= */
-    .transport-box {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .transport-header {
+    /* ================= 토글 박스 ================= */
+    .transport-header,
+    .account-header {
       margin-top: 12px;
       padding: 14px;
-      background: #222;
+      background: #111;
       color: #fff;
       border-radius: 14px;
       cursor: pointer;
@@ -111,16 +106,17 @@
       font-weight: 600;
     }
 
-    .transport-content {
+    .transport-content,
+    .account-content {
       height: 0;
       overflow: hidden;
       transition: height 0.3s ease;
-      background: rgba(245,245,245,1);
+      background: #f5f5f5;
       border-radius: 0 0 14px 14px;
-      text-align: center;
     }
 
-    .transport-content p {
+    .transport-content p,
+    .account-content p {
       margin: 12px 0;
       font-size: 13px;
       line-height: 1.8;
@@ -133,37 +129,10 @@
       padding: 24px 18px;
       background: rgba(255,255,255,0.95);
       border-radius: 20px;
-      text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
 
-    .account-header {
-      padding: 14px;
-      margin-top: 12px;
-      background: #111;
-      color: #fff;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .account-content {
-      height: 0;
-      overflow: hidden;
-      transition: height 0.3s ease;
-      background: rgba(245,245,245,1);
-      border-radius: 0 0 14px 14px;
-      text-align: center;
-    }
-
-    .account-content p {
-      margin: 14px 0 10px;
-      font-weight: 500;
-      font-size: 14px;
-    }
-
-    .account-content button {
+    button {
       margin-bottom: 14px;
       padding: 10px 18px;
       border: none;
@@ -177,9 +146,17 @@
 </head>
 
 <body>
+
+  <!-- 🔥 비디오 배경 -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="bg.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- ================= 콘텐츠 ================= -->
   <div class="page">
 
-    <!-- 메인 -->
     <section class="card">
       <h1>우리 드디어 결혼해요</h1>
       <p class="names">
@@ -189,121 +166,28 @@
       <p>
         2026년 7월 5일 일요일<br>
         오후 1시 30분<br>
-        라루체 명동<br>
-        5층 그레이스 홀
+        라루체 명동 5층 그레이스홀
       </p>
     </section>
-
-    <!-- 인사말 -->
-    <section class="card">
-      <p>
-        두 사람이 만나<br>
-        평생을 함께하기로 약속했습니다.<br><br>
-        소중한 분들을 초대합니다.
-      </p>
-    </section>
-
-    <!-- 지도 + 교통 -->
-    <section class="card">
-      <h2>오시는 길</h2>
-      <p>서울특별시 중구 퇴계로 18길 46</p>
-
-      <div class="map-wrap">
-        <iframe
-          src="https://www.google.com/maps?q=라루체%20명동&output=embed"
-          loading="lazy"
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <a
-        class="map-link"
-        href="https://map.naver.com/v5/search/라루체명동"
-        target="_blank">
-        네이버지도에서 보기
-      </a>
-
-      <div class="transport-box">
-        <div class="transport-header" onclick="toggleBox(this)">
-          지하철 안내
-        </div>
-        <div class="transport-content">
-          <p>
-            4호선 <strong>명동역 3번 출구</strong><br>
-            퍼시픽호텔 우측길로 도보 60m
-          </p>
-        </div>
-
-        <div class="transport-header" onclick="toggleBox(this)">
-          버스 안내
-        </div>
-        <div class="transport-content">
-          <p>
-            <strong>퇴계로2가·명동역</strong><br>
-            104, 105, 421, 463, 507, 604, N16, 7011
-          </p>
-          <p>
-            <strong>명동입구</strong><br>
-            104, 421, 463, 507, 604, N16, 7011, 05
-          </p>
-        </div>
-
-        <div class="transport-header" onclick="toggleBox(this)">
-          자가용 안내
-        </div>
-        <div class="transport-content">
-          <p>
-            <strong>강남 →</strong><br>
-            반포대교 → 남산3호터널 →<br>
-            쌍용플래티넘 옆 우회전 → 좌회전
-          </p>
-          <p>
-            <strong>서울역 →</strong><br>
-            회현사거리 직진 →<br>
-            스테이트타워·뉴오리엔탈호텔 사이 우회전
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 계좌 -->
-    <div class="white-box">
-      <div class="account-header" onclick="toggleBox(this)">
-        신랑 계좌 보기
-      </div>
-      <div class="account-content">
-        <p id="groom">기업은행 588-018494-01-019</p>
-        <button onclick="copyText(event,'groom')">계좌번호 복사</button>
-      </div>
-
-      <div class="account-header" onclick="toggleBox(this)">
-        신부 계좌 보기
-      </div>
-      <div class="account-content">
-        <p id="bride">카카오뱅크 3333-12-3456789</p>
-        <button onclick="copyText(event,'bride')">계좌번호 복사</button>
-      </div>
-    </div>
 
   </div>
 
   <script>
     function toggleBox(header) {
       const content = header.nextElementSibling;
-      if (content.style.height && content.style.height !== "0px") {
-        content.style.height = "0px";
-      } else {
-        content.style.height = content.scrollHeight + "px";
-      }
+      content.style.height =
+        content.style.height && content.style.height !== "0px"
+          ? "0px"
+          : content.scrollHeight + "px";
     }
 
     function copyText(e, id) {
       e.stopPropagation();
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("계좌번호가 복사되었습니다");
-      });
+      navigator.clipboard.writeText(
+        document.getElementById(id).innerText
+      ).then(() => alert("계좌번호가 복사되었습니다"));
     }
   </script>
+
 </body>
 </html>
