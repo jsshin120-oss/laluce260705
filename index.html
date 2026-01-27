@@ -1,165 +1,173 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>모바일 청첩장</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모바일 청첩장</title>
+  <style>
+    html, body {
+      margin:0; padding:0; min-height:100%;
+      font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+      background:transparent; overflow-y:auto;
+      font-weight:300; /* 글씨 가늘게 */
+    }
 
-<style>
-  html, body {
-    margin:0; padding:0; min-height:100%;
-    font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
-    background:transparent;
-    overflow-y:auto;
-    text-align:center;
-  }
+    /* 비디오 배경 */
+    .video-bg {
+      position:fixed; inset:0; z-index:-1; overflow:hidden;
+    }
+    .video-bg video {
+      width:100%; height:100%; object-fit:cover; opacity:0.35;
+    }
+    .video-bg::after {
+      content:""; position:absolute; inset:0; background: transparent;
+    }
 
-  /* 비디오 배경 */
-  .video-bg {
-    position:fixed; inset:0; z-index:-1; overflow:hidden;
-  }
-  .video-bg video {
-    width:100%; height:100%; object-fit:cover; opacity:0.4;
-  }
-  .video-bg::after {
-    content:""; position:absolute; inset:0; background: rgba(0,0,0,0);
-  }
+    /* 페이지 */
+    .page {
+      max-width:420px; margin:0 auto; padding:24px 14px 60px;
+      text-align:center; position:relative; z-index:10;
+    }
 
-  /* 페이지 */
-  .page {
-    max-width:420px; margin:0 auto; padding:24px 14px 60px;
-    position:relative; z-index:10;
-  }
+    /* 카드 */
+    .card {
+      background: rgba(255,255,255,0.95);
+      padding:20px 16px;
+      margin-bottom:18px;
+      border-radius:20px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.12);
+      text-align:center;
+    }
+    h1 { font-size:20px; margin-bottom:10px; font-weight:400; }
+    h2 { font-size:16px; margin-bottom:6px; font-weight:400; }
+    .names { font-size:16px; font-weight:500; margin:10px 0; }
+    p { font-size:13px; line-height:1.6; margin:4px 0; }
 
-  /* 카드 */
-  .card {
-    background: rgba(255,255,255,0.95);
-    padding:20px 16px;
-    margin-bottom:18px;
-    border-radius:20px;
-    box-shadow:0 10px 24px rgba(0,0,0,0.12);
-  }
+    /* 지도 */
+    .map-wrap { margin-top:10px; border-radius:16px; overflow:hidden; }
+    .map-wrap iframe { width:100%; height:220px; border:0; }
+    .map-link {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:10px;
+      font-size:14px;
+      color:#03C75A;
+      background:#E7F7ED;
+      padding:6px 10px;
+      border-radius:8px;
+      text-decoration:none;
+      gap:6px;
+    }
+    .map-link img { width:18px; height:18px; vertical-align:middle; }
 
-  h1 { font-size:20px; margin-bottom:10px; font-weight:500; }
-  h2 { font-size:16px; margin-bottom:6px; font-weight:500; }
-  .names { font-size:16px; font-weight:500; margin:10px 0; }
-  p { font-size:13px; line-height:1.6; margin:4px 0; }
+    /* 토글 박스 */
+    .toggle-header {
+      margin-top:12px; padding:12px;
+      background:#111; color:#fff; border-radius:14px;
+      cursor:pointer; font-size:14px; font-weight:500;
+    }
+    .toggle-content {
+      height:0; overflow:hidden; transition:height 0.3s ease;
+      background:#f5f5f5; border-radius:0 0 14px 14px;
+    }
+    .toggle-content p { margin:10px 0; font-size:13px; line-height:1.6; }
 
-  /* 지도 */
-  .map-wrap { margin-top:12px; border-radius:16px; overflow:hidden; }
-  .map-wrap iframe { width:100%; height:220px; border:0; }
-  .map-link {
-    display:inline-flex; align-items:center; justify-content:center;
-    gap:6px; margin-top:10px; padding:6px 12px;
-    font-size:13px; font-weight:500;
-    color:#03C75A; /* 네이버 색상 */
-    background:#E7F7ED;
-    border-radius:8px;
-    text-decoration:none;
-  }
-  .map-link img { width:18px; height:18px; display:inline-block; }
+    /* 구글폼 */
+    .form-iframe {
+      width:100%; height:280px;
+      border:none; border-radius:12px; margin-top:12px;
+    }
 
-  /* 토글 박스 */
-  .toggle-header {
-    margin-top:12px; padding:12px;
-    background:#111; color:#fff; border-radius:14px;
-    cursor:pointer; font-size:14px; font-weight:500;
-  }
-  .toggle-content {
-    height:0; overflow:hidden; transition:height 0.3s ease;
-    background:#f5f5f5; border-radius:0 0 14px 14px;
-  }
-  .toggle-content p { margin:10px 0; font-size:13px; line-height:1.6; }
-
-  /* 구글폼 iframe */
-  .form-iframe {
-    width:100%; height:280px;
-    border:none; border-radius:14px; margin-top:10px;
-  }
-
-  button {
-    margin-bottom:12px; padding:8px 16px;
-    border:none; border-radius:20px; background:#000; color:#fff;
-    font-size:13px; cursor:pointer;
-  }
-</style>
+    button {
+      margin-top:6px; padding:8px 16px;
+      border:none; border-radius:16px; background:#000; color:#fff;
+      font-size:13px; cursor:pointer;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- 비디오 배경 -->
-<div class="video-bg">
-  <video autoplay muted loop playsinline>
-    <source src="bg.mp4" type="video/mp4">
-  </video>
-</div>
+  <!-- 비디오 배경 -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="bg.mp4" type="video/mp4">
+    </video>
+  </div>
 
-<div class="page">
+  <div class="page">
 
-  <!-- 메인 -->
-  <section class="card">
-    <h1>우리 드디어 결혼해요</h1>
-    <p class="names">신랑 신준섭<br>신부 김가람</p>
-    <p>2026년 7월 5일 일요일<br>오후 1시 30분<br>라루체 명동 5층 그레이스홀</p>
-  </section>
+    <!-- 메인 -->
+    <section class="card">
+      <h1>우리 드디어 결혼해요</h1>
+      <p class="names">신랑 신준섭<br>신부 김가람</p>
+      <p>2026년 7월 5일 일요일<br>오후 1시 30분<br>라루체 명동 5층 그레이스홀</p>
+    </section>
 
-  <!-- 지도 -->
-  <section class="card">
-    <h2>오시는 길</h2>
-    <p>서울특별시 중구 퇴계로18길 46</p>
-    <div class="map-wrap">
-      <iframe src="https://www.google.com/maps?q=라루체%20명동&output=embed" loading="lazy"></iframe>
-    </div>
-    <a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
-      <img src="https://ssl.pstatic.net/imgmap/naver_map_ico.png" alt="Naver Map">네이버지도에서 보기
-    </a>
+    <!-- 지도 -->
+    <section class="card">
+      <h2>오시는 길</h2>
+      <p>서울특별시 중구 퇴계로18길 46</p>
+      <div class="map-wrap">
+        <iframe src="https://www.google.com/maps?q=라루체%20명동&output=embed" loading="lazy"></iframe>
+      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABvUlEQVQ4T6WTv0tUYRSGn3fTPVygbSwhAiCgYgk0QozKxiFxdTSxAhE8giUJgYKyNlZ2/gD2AQkpC6WiAkgxKn7GznrmT1Xc/8xZ46e7p7/c5znnPP8+f/SOTw7tz7DAw8D1f4DFU8nYmAVEXOw6Hmi3pYQjI3zqlUqa57jAfU4ozxKQmF7hXj8AFtMKiLqA4sBpE+2M+c/5ROStC6RAx6j2wnRKK1poa0bOWeVtDlyNGE3h1T9v0zH+ITPTWnKauCsDjO2y5i6Fv+uH6OplEDqGJmF/ELAJMVsIYoFoylQXgYpT4IrQDh9wl5o1MVS8sLRW3thDeH/cnRjUvJipjQx3HBK22dQdQDDKnAd0iG0bkC17CX4xQH5xUCL+IGt7GxZxGI0LdrnFx+o1tq9P8Bm9TJc+HcLtMk9Clh2XlmwJS+6hQSevOQUepKpRWUuAmxkL2n0YldM25+8cRVxeDN4bXHmrkEj2s6PPO0nt7I8eQ+qXc0LrG3q7wS0qG5Hh6C6yLvXewkJnm2k62vZ8Ag6IuUO2BvsL9sAAAAASUVORK5CYII=" alt="Naver Map Icon">
+        네이버지도에서 보기
+      </a>
 
-    <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-    <div class="toggle-content"><p>4호선 <strong>명동역 3번 출구</strong><br>(퍼시픽 호텔 우측길 도보 60M)</p></div>
+      <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
+      <div class="toggle-content"><p>4호선 <strong>명동역 3번 출구</strong><br>(퍼시픽 호텔 우측길로 도보 60M)</p></div>
 
-    <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
-    <div class="toggle-content"><p>퇴계로2가. 명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05</p></div>
-  </section>
+      <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
+      <div class="toggle-content"><p>퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05</p></div>
+    </section>
 
-  <!-- 참석 여부 -->
-  <section class="card">
-    <h2>참석 여부 회신</h2>
-    <p style="font-size:13px; line-height:1.5; opacity:0.8;">원활한 예식 준비를 위해 참석 여부를 알려주세요</p>
-    <iframe class="form-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?embedded=true"></iframe>
-  </section>
+    <!-- 참석 여부 -->
+    <section class="card">
+      <h2>참석 여부 회신</h2>
+      <p style="font-size:13px; line-height:1.5; opacity:0.8;">
+        원활한 예식 준비를 위해<br>참석 여부를 알려주세요
+      </p>
+      <iframe class="form-iframe"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?embedded=true">
+      </iframe>
+    </section>
 
-  <!-- 계좌 카드 -->
-  <section class="card">
-    <h2>마음 전하실 곳</h2>
-    <p style="font-size:13px; line-height:1.5; opacity:0.8;">축하의 마음만으로도 감사합니다</p>
+    <!-- 계좌 카드 -->
+    <section class="card">
+      <h2>마음 전하실 곳</h2>
+      <p style="font-size:13px; line-height:1.5; opacity:0.8;">축하의 마음만으로도 감사합니다</p>
 
-    <div class="toggle-header" onclick="toggleBox(this)">신랑 계좌</div>
-    <div class="toggle-content">
-      <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
-      <button onclick="copyText(event,'groom-account')">계좌번호 복사</button>
-    </div>
+      <!-- 신랑 계좌 -->
+      <div class="toggle-header" onclick="toggleBox(this)">신랑 계좌</div>
+      <div class="toggle-content">
+        <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
+        <button onclick="copyText(event,'groom-account')">계좌번호 복사</button>
+      </div>
 
-    <div class="toggle-header" onclick="toggleBox(this)">신부 계좌</div>
-    <div class="toggle-content">
-      <p id="bride-account">김가람<br>카카오뱅크</p>
-      <button onclick="copyText(event,'bride-account')">계좌번호 복사</button>
-    </div>
-  </section>
+      <!-- 신부 계좌 -->
+      <div class="toggle-header" onclick="toggleBox(this)">신부 계좌</div>
+      <div class="toggle-content">
+        <p id="bride-account">김가람<br>카카오뱅크</p>
+        <button onclick="copyText(event,'bride-account')">계좌번호 복사</button>
+      </div>
+    </section>
 
-</div>
+  </div>
 
-<script>
-  function toggleBox(header){
-    const content = header.nextElementSibling;
-    content.style.height = (content.style.height && content.style.height !== "0px") ? "0px" : content.scrollHeight + "px";
-  }
+  <script>
+    function toggleBox(header) {
+      const content = header.nextElementSibling;
+      content.style.height = (content.style.height && content.style.height !== "0px") ? "0px" : content.scrollHeight + "px";
+    }
 
-  function copyText(e, id){
-    e.stopPropagation();
-    navigator.clipboard.writeText(document.getElementById(id).innerText)
-      .then(()=>alert("계좌번호가 복사되었습니다"));
-  }
-</script>
+    function copyText(e, id) {
+      e.stopPropagation();
+      navigator.clipboard.writeText(document.getElementById(id).innerText)
+        .then(()=>alert("계좌번호가 복사되었습니다"));
+    }
+  </script>
 
 </body>
 </html>
