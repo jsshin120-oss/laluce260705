@@ -1,86 +1,77 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>모바일 청첩장</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모바일 청첩장</title>
 
-<style>
-  /* ================= 기본 ================= */
-  html, body {
-    margin:0; padding:0; height:100%;
-    font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
-    font-weight:300;
-    background:#000;
-    color:#333;
-    overflow-x:hidden;
-  }
+  <style>
+    html, body {
+      margin:0; padding:0; min-height:100%;
+      font-family:-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background:#000;
+      overflow-y:auto;
+    }
 
-  /* ================= 비디오 배경 ================= */
-  .video-bg {
-    position:fixed; inset:0; z-index:-1; overflow:hidden;
-  }
-  .video-bg video {
-    width:100%; height:100%; object-fit:cover; opacity:0.25;
-  }
-  .video-bg::after {
-    content:""; position:absolute; inset:0; background: rgba(0,0,0,0.3);
-  }
+    /* 비디오 배경 */
+    .video-bg {
+      position:fixed; inset:0; z-index:-1; overflow:hidden;
+    }
+    .video-bg video {
+      width:100%; height:100%; object-fit:cover; opacity:0.3;
+    }
+    .video-bg::after {
+      content:""; position:absolute; inset:0; background: rgba(0,0,0,0.3);
+    }
 
-  /* ================= 페이지 ================= */
-  .page {
-    max-width:420px; margin:0 auto;
-    padding:20px 12px 40px; text-align:center;
-    position:relative; z-index:10;
-    display:flex; flex-direction:column; align-items:center;
-  }
+    /* 페이지 */
+    .page {
+      max-width:420px; margin:0 auto; padding:24px 14px 60px;
+      text-align:center; position:relative; z-index:10;
+    }
 
-  /* ================= 카드 ================= */
-  .card {
-    width:100%; max-width:380px;
-    background:rgba(255,255,255,0.95);
-    padding:18px 14px;
-    margin-bottom:16px;
-    border-radius:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.12);
-    text-align:center;
-  }
-  h1 { font-size:18px; margin-bottom:8px; line-height:1.3; }
-  h2 { font-size:15px; margin-bottom:6px; line-height:1.4; }
-  .names { font-size:15px; font-weight:400; margin:8px 0; }
-  p { font-size:12.5px; line-height:1.5; margin:4px 0; }
+    /* 카드 */
+    .card {
+      background: rgba(255,255,255,0.95);
+      padding:24px 16px;
+      margin-bottom:18px;
+      border-radius:20px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.12);
+    }
+    h1 { font-size:22px; margin-bottom:12px; }
+    h2 { font-size:18px; margin-bottom:8px; }
+    .names { font-size:18px; font-weight:600; margin:12px 0; }
+    p { font-size:14px; line-height:1.7; margin:6px 0; }
 
-  /* ================= 지도 ================= */
-  .map-wrap { margin-top:10px; border-radius:16px; overflow:hidden; }
-  .map-wrap iframe { width:100%; height:180px; border:0; }
-  .map-link { display:inline-block; margin-top:6px; font-size:12px; color:#2b7de9; text-decoration:none; }
+    /* 지도 */
+    .map-wrap { margin-top:12px; border-radius:16px; overflow:hidden; }
+    .map-wrap iframe { width:100%; height:240px; border:0; }
+    .map-link { display:inline-block; margin-top:10px; font-size:14px; color:#2b7de9; text-decoration:none; }
 
-  /* ================= 토글 박스 ================= */
-  .toggle-header {
-    margin-top:10px; padding:12px;
-    background:#111; color:#fff; border-radius:14px;
-    cursor:pointer; font-size:13px; font-weight:500;
-  }
-  .toggle-content {
-    height:0; overflow:hidden; transition:height 0.3s ease;
-    background:#f5f5f5; border-radius:0 0 14px 14px;
-    text-align:center;
-  }
-  .toggle-content p { margin:8px 0; font-size:12px; line-height:1.4; }
+    /* 토글 박스 */
+    .toggle-header {
+      margin-top:14px; padding:14px;
+      background:#111; color:#fff; border-radius:14px;
+      cursor:pointer; font-size:15px; font-weight:600;
+    }
+    .toggle-content {
+      height:0; overflow:hidden; transition:height 0.3s ease;
+      background:#f5f5f5; border-radius:0 0 14px 14px;
+    }
+    .toggle-content p { margin:12px 0; font-size:13px; line-height:1.8; }
 
-  /* ================= 구글폼 ================= */
-  .form-iframe {
-    width:100%; height:280px; /* 모바일 최적화 */
-    border:none; border-radius:14px; margin-top:10px;
-  }
+    /* 구글폼 iframe */
+    .form-iframe {
+      width:100%; height:300px; /* 더 작게 */
+      border:none; border-radius:14px; margin-top:14px;
+    }
 
-  /* ================= 버튼 ================= */
-  button {
-    margin:6px 0; padding:8px 16px;
-    border:none; border-radius:18px; background:#000; color:#fff;
-    font-size:12.5px; cursor:pointer;
-  }
-</style>
+    button {
+      margin-bottom:14px; padding:10px 18px;
+      border:none; border-radius:20px; background:#000; color:#fff;
+      font-size:14px; cursor:pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -110,7 +101,7 @@
       <a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">네이버지도에서 보기</a>
 
       <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-      <div class="toggle-content"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div>
+      <div class="toggle-content"><p>4호선 <strong>명동역 3번 출구</strong><br>도보 60m</p></div>
 
       <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
       <div class="toggle-content"><p>104, 105, 421, 463, 507, 604</p></div>
@@ -119,28 +110,30 @@
     <!-- 참석 여부 -->
     <section class="card">
       <h2>참석 여부 회신</h2>
-      <p style="font-size:12.5px; line-height:1.4; opacity:0.8;">
-        원활한 예식 준비를 위해 참석 여부를 알려주세요
+      <p style="font-size:14px; line-height:1.6; opacity:0.8;">
+        원활한 예식 준비를 위해<br>참석 여부를 알려주세요
       </p>
       <iframe class="form-iframe"
         src="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?embedded=true">
       </iframe>
     </section>
 
-    <!-- 계좌 -->
+    <!-- 계좌 카드 -->
     <section class="card">
       <h2>마음 전하실 곳</h2>
-      <p style="font-size:12.5px; line-height:1.4; opacity:0.8;">축하의 마음만으로도 감사합니다</p>
+      <p style="font-size:14px; line-height:1.6; opacity:0.8;">축하의 마음만으로도 감사합니다</p>
 
+      <!-- 신랑 계좌 -->
       <div class="toggle-header" onclick="toggleBox(this)">신랑 계좌</div>
       <div class="toggle-content">
         <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
         <button onclick="copyText(event,'groom-account')">계좌번호 복사</button>
       </div>
 
+      <!-- 신부 계좌 -->
       <div class="toggle-header" onclick="toggleBox(this)">신부 계좌</div>
       <div class="toggle-content">
-        <p id="bride-account">김가람<br>카카오뱅크 3333-12-3456789</p>
+        <p id="bride-account">김가람<br>카카오뱅크</p>
         <button onclick="copyText(event,'bride-account')">계좌번호 복사</button>
       </div>
     </section>
@@ -150,9 +143,7 @@
   <script>
     function toggleBox(header) {
       const content = header.nextElementSibling;
-      const isOpen = content.style.height && content.style.height !== "0px";
-      content.style.height = isOpen ? "0px" : content.scrollHeight + "px";
-      if (!isOpen) content.scrollIntoView({behavior:'smooth', block:'start'});
+      content.style.height = (content.style.height && content.style.height !== "0px") ? "0px" : content.scrollHeight + "px";
     }
 
     function copyText(e, id) {
