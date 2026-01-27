@@ -6,11 +6,12 @@
   <title>모바일 청첩장</title>
 
   <style>
-    /* 기본 스타일 */
+    /* 전체 글씨체 얇고 깔끔하게 */
     html, body {
       margin:0; padding:0; min-height:100%;
-      font-family: "Noto Sans KR", "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 300;
+      font-size: 14px;
       background:#000;
       overflow-y:auto;
       text-align:center;
@@ -27,56 +28,66 @@
       content:""; position:absolute; inset:0; background: rgba(0,0,0,0.3);
     }
 
-    /* 페이지 래퍼 */
+    /* 페이지 */
     .page {
-      max-width:420px; margin:0 auto; padding:20px 14px 60px;
+      max-width:420px; margin:0 auto; padding:24px 14px 60px;
       position:relative; z-index:10;
     }
 
     /* 카드 */
     .card {
       background: rgba(255,255,255,0.95);
-      padding:18px 14px;
-      margin-bottom:16px;
-      border-radius:18px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.12);
+      padding:20px 16px;
+      margin-bottom:18px;
+      border-radius:20px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.12);
       text-align:center;
     }
-    h1 { font-size:18px; margin-bottom:8px; font-weight:300; }
-    h2 { font-size:15px; margin-bottom:6px; font-weight:300; }
-    .names { font-size:15px; font-weight:400; margin:8px 0; }
-    p { font-size:12px; line-height:1.4; margin:4px 0; }
+    h1 { font-size:20px; margin-bottom:10px; font-weight:400; }
+    h2 { font-size:16px; margin-bottom:8px; font-weight:400; }
+    .names { font-size:16px; font-weight:500; margin:10px 0; }
+    p { font-size:13px; line-height:1.6; margin:4px 0; }
 
     /* 지도 */
-    .map-wrap { margin-top:10px; border-radius:14px; overflow:hidden; }
-    .map-wrap iframe { width:100%; height:180px; border:0; }
-    .map-link { display:inline-block; margin-top:6px; font-size:12px; color:#2b7de9; text-decoration:none; }
+    .map-wrap { margin-top:10px; border-radius:16px; overflow:hidden; }
+    .map-wrap iframe { width:100%; height:220px; border:0; border-radius:14px; }
+    .map-link {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:8px;
+      font-size:13px;
+      color:#2b7de9;
+      text-decoration:none;
+    }
+    .map-link img {
+      width:16px; height:16px; margin-right:6px;
+    }
 
     /* 토글 박스 */
     .toggle-header {
-      margin-top:10px; padding:12px;
+      margin-top:12px; padding:12px;
       background:#111; color:#fff; border-radius:14px;
-      cursor:pointer; font-size:13px; font-weight:300;
+      cursor:pointer; font-size:14px; font-weight:500;
     }
     .toggle-content {
       height:0; overflow:hidden; transition:height 0.3s ease;
       background:#f5f5f5; border-radius:0 0 14px 14px;
-      text-align:center;
     }
-    .toggle-content p { margin:8px 0; font-size:12px; line-height:1.4; }
+    .toggle-content p { margin:10px 0; font-size:13px; line-height:1.6; }
 
-    /* 구글폼 iframe */
+    /* 구글폼 */
     .form-iframe {
-      width:100%; height:260px;
-      border:none; border-radius:14px; margin-top:10px;
+      width:100%; height:280px; /* 더 작게 */
+      border:none; border-radius:14px; margin-top:12px;
     }
 
     button {
-      margin:6px 0;
-      padding:6px 14px;
-      border:none; border-radius:18px;
+      margin:8px 0 12px;
+      padding:10px 18px;
+      border:none; border-radius:20px;
       background:#000; color:#fff;
-      font-size:12px; cursor:pointer;
+      font-size:13px; cursor:pointer;
     }
   </style>
 </head>
@@ -105,42 +116,30 @@
       <div class="map-wrap">
         <iframe src="https://www.google.com/maps?q=라루체%20명동&output=embed" loading="lazy"></iframe>
       </div>
-     <!-- 네이버지도 보기 버튼 -->
-<a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Naver_Map_logo.svg" 
-       alt="네이버 지도" style="width:16px; height:16px; vertical-align:middle; margin-right:6px;">
-  네이버지도에서 보기
-</a>
+      <a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Naver_Map_logo.svg/32px-Naver_Map_logo.svg.png" alt="네이버 지도">네이버지도에서 보기
+      </a>
 
       <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-      <div class="toggle-content">
-        <p>4호선 <strong>명동역 3번 출구</strong><br>(퍼시픽 호텔 우측길 도보 60M)</p>
-      </div>
+      <div class="toggle-content"><p>4호선 <strong>명동역 3번 출구</strong><br>(퍼시픽 호텔 우측길로 도보 60m)</p></div>
 
       <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
       <div class="toggle-content">
-        <p>
-          퇴계로2가. 명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>
-          명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05
-        </p>
+        <p>퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05</p>
       </div>
     </section>
 
     <!-- 참석 여부 -->
     <section class="card">
-      <h2>참석 여부</h2>
-      <p style="font-size:12px; line-height:1.4; opacity:0.8;">
-        원활한 예식 준비를 위해 참석 여부를 알려주세요
-      </p>
-      <iframe class="form-iframe"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?embedded=true">
-      </iframe>
+      <h2>참석 여부 회신</h2>
+      <p style="opacity:0.8;">원활한 예식 준비를 위해 참석 여부를 알려주세요</p>
+      <iframe class="form-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?embedded=true"></iframe>
     </section>
 
-    <!-- 계좌 -->
+    <!-- 계좌 카드 -->
     <section class="card">
       <h2>마음 전하실 곳</h2>
-      <p style="font-size:12px; line-height:1.4; opacity:0.8;">축하의 마음만으로도 감사합니다</p>
+      <p style="opacity:0.8;">축하의 마음만으로도 감사합니다</p>
 
       <!-- 신랑 계좌 -->
       <div class="toggle-header" onclick="toggleBox(this)">신랑 계좌</div>
