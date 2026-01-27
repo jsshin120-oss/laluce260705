@@ -9,7 +9,7 @@
       margin:0; padding:0; min-height:100%;
       font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
       background:transparent; overflow-y:auto;
-      font-weight:300; /* 글씨 가늘게 */
+      font-weight:300;
     }
 
     /* 비디오 배경 */
@@ -59,7 +59,10 @@
       text-decoration:none;
       gap:6px;
     }
-    .map-link img { width:18px; height:18px; vertical-align:middle; }
+    .map-link::before {
+      content: "📍"; /* 위치 표시 핀 */
+      font-size:16px;
+    }
 
     /* 토글 박스 */
     .toggle-header {
@@ -112,7 +115,6 @@
         <iframe src="https://www.google.com/maps?q=라루체%20명동&output=embed" loading="lazy"></iframe>
       </div>
       <a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABvUlEQVQ4T6WTv0tUYRSGn3fTPVygbSwhAiCgYgk0QozKxiFxdTSxAhE8giUJgYKyNlZ2/gD2AQkpC6WiAkgxKn7GznrmT1Xc/8xZ46e7p7/c5znnPP8+f/SOTw7tz7DAw8D1f4DFU8nYmAVEXOw6Hmi3pYQjI3zqlUqa57jAfU4ozxKQmF7hXj8AFtMKiLqA4sBpE+2M+c/5ROStC6RAx6j2wnRKK1poa0bOWeVtDlyNGE3h1T9v0zH+ITPTWnKauCsDjO2y5i6Fv+uH6OplEDqGJmF/ELAJMVsIYoFoylQXgYpT4IrQDh9wl5o1MVS8sLRW3thDeH/cnRjUvJipjQx3HBK22dQdQDDKnAd0iG0bkC17CX4xQH5xUCL+IGt7GxZxGI0LdrnFx+o1tq9P8Bm9TJc+HcLtMk9Clh2XlmwJS+6hQSevOQUepKpRWUuAmxkL2n0YldM25+8cRVxeDN4bXHmrkEj2s6PPO0nt7I8eQ+qXc0LrG3q7wS0qG5Hh6C6yLvXewkJnm2k62vZ8Ag6IuUO2BvsL9sAAAAASUVORK5CYII=" alt="Naver Map Icon">
         네이버지도에서 보기
       </a>
 
