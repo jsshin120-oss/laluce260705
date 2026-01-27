@@ -4,17 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>모바일 청첩장</title>
-
   <style>
-    /* ================= 기본 ================= */
     html, body {
       margin:0; padding:0; min-height:100%;
-      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
-      background: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      background:transparent;
       overflow-y:auto;
     }
 
-    /* ================= 비디오 배경 ================= */
+    /* 비디오 배경 */
     .video-bg {
       position:fixed; inset:0; z-index:-1; overflow:hidden;
     }
@@ -25,13 +23,13 @@
       content:""; position:absolute; inset:0; background: rgba(0,0,0,0.1);
     }
 
-    /* ================= 페이지 ================= */
+    /* 페이지 */
     .page {
       max-width:420px; margin:0 auto; padding:24px 14px 60px;
       text-align:center; position:relative; z-index:10;
     }
 
-    /* ================= 카드 ================= */
+    /* 카드 */
     .card {
       background: rgba(255,255,255,0.95);
       padding:20px 16px;
@@ -39,16 +37,16 @@
       border-radius:20px;
       box-shadow:0 10px 24px rgba(0,0,0,0.12);
     }
-    h1 { font-size:20px; margin-bottom:10px; font-weight:500; }
-    h2 { font-size:16px; margin-bottom:6px; font-weight:500; }
-    .names { font-size:16px; font-weight:400; margin:10px 0; }
+    h1 { font-size:20px; margin-bottom:10px; font-weight:400; }
+    h2 { font-size:16px; margin-bottom:6px; font-weight:400; }
+    .names { font-size:16px; font-weight:300; margin:10px 0; }
     p { font-size:13px; line-height:1.5; margin:4px 0; }
 
-    /* ================= 지도 ================= */
+    /* 지도 */
     .map-wrap { margin-top:10px; border-radius:16px; overflow:hidden; }
     .map-wrap iframe { width:100%; height:220px; border:0; }
 
-    /* ================= 네이버 링크 ================= */
+    /* 네이버 링크 */
     .map-link {
       display:flex; align-items:center; justify-content:center;
       background:#e0f2e9; color:#03C75A; text-decoration:none;
@@ -56,7 +54,7 @@
     }
     .map-link img { width:20px; height:20px; margin-right:6px; }
 
-    /* ================= 토글 박스 ================= */
+    /* 토글 박스 */
     .toggle-header {
       margin-top:12px; padding:12px;
       background:#111; color:#fff; border-radius:14px;
@@ -69,7 +67,7 @@
     }
     .toggle-content p { margin:10px 0; font-size:12px; line-height:1.6; }
 
-    /* ================= 구글폼 ================= */
+    /* 구글폼 */
     .form-iframe { width:100%; height:300px; border:none; border-radius:14px; margin-top:10px; }
 
     button {
@@ -104,25 +102,19 @@
       <div class="map-wrap">
         <iframe src="https://www.google.com/maps?q=라루체%20명동&output=embed" loading="lazy"></iframe>
       </div>
-<a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAs0lEQVQ4T+3UQQrCQBSE4U9mDwh6SrgH0B2iG7AC2gRk6i6j0cC20C7EE4v9p2wZ3dMgm2q5+RO4Bz7iCmIkQIfQB6JLEOZKfE5O7uQqF4rQIY6r7dD8DCAn+xYwOkP0PwNdcMwGZzGUAz0A5qkPdO2Aj1MG6nn5kPngAiPjz9uNN8C8Aatv+Yeh6+b9TPePukgAAAABJRU5ErkJggg==" 
-       alt="위치 핀" style="width:20px; height:20px; margin-right:6px;">
-  네이버지도에서 보기
-</a>
-      <!-- 지하철 안내 -->
-      <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-      <div class="toggle-content">
-        <p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAvUlEQVQ4T+2UsQ2AMAgET+Z9k6tBKUyVBLBzsBFqY7yq8Xqg+R7J70l0JMAgnwM7F1p5PGyBGnAL+G6iIThK4Sng5gIDh7x2GL+zQlH2k9hRfkt4RgBs7Y1yx8ZBq0CQAV+BRvX3nDQC2t2UjAN1kLYkVtwDXwDYNwP4ABtNjZ7XCh0D1K3kCIVdzfHbfxMbYzY3DQG0l7CMgHZl8P9A/+0MMW5NBu0AAAAASUVORK5CYII=" alt="위치 핀">
+        네이버지도에서 보기
+      </a>
 
-      <!-- 버스 안내 -->
+      <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
+      <div class="toggle-content"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div>
+
       <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
-      <div class="toggle-content">
-        <p>
-          퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>
-          명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05
-        </p>
-      </div>
+      <div class="toggle-content"><p>
+        퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>
+        명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05
+      </p></div>
     </section>
 
     <!-- 참석 여부 -->
@@ -157,7 +149,6 @@
       const content = header.nextElementSibling;
       content.style.height = (content.style.height && content.style.height !== "0px") ? "0px" : content.scrollHeight + "px";
     }
-
     function copyText(e, id) {
       e.stopPropagation();
       navigator.clipboard.writeText(document.getElementById(id).innerText)
