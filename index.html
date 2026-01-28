@@ -118,11 +118,10 @@
       border: 1px solid rgba(255,255,255,0.2);
     }
 
-    /* ================= 네이버 약도(지도 미리보기) ================= */
+    /* ================= 약도 이미지 박스 ================= */
     .map-box {
       width: 100%;
       max-width: 360px;
-      height: 240px;
       margin: 14px auto 0;
       border-radius: 18px;
       overflow: hidden;
@@ -132,10 +131,10 @@
       backdrop-filter: blur(6px);
     }
 
-    .map-box iframe {
+    .map-box img {
       width: 100%;
-      height: 100%;
-      border: 0;
+      height: auto;
+      display: block;
     }
 
     /* ================= 토글 ================= */
@@ -221,6 +220,7 @@
 
       cursor: pointer;
       z-index: 99999;
+
       outline: none;
     }
 
@@ -264,18 +264,14 @@
       <h2>오시는 길</h2>
       <p>서울특별시 중구 퇴계로18길 46</p>
 
+      <!-- ✅ 약도 이미지 (버튼 위로 이동 완료) -->
+      <div class="map-box">
+        <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="라루체 명동 약도">
+      </div>
+
       <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
         네이버지도에서 보기
       </a>
-
-      <!-- 네이버 약도(지도 미리보기) -->
-      <div class="map-box">
-        <iframe
-          src="https://map.naver.com/v5/search/라루체명동"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
 
       <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
       <div class="toggle-content">
