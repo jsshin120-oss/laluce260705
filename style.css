@@ -36,7 +36,7 @@ html, body {
 .page {
   max-width: 420px;
   margin: 0 auto;
-  padding: 26px 16px 90px; /* 공유 버튼 공간 */
+  padding: 26px 16px 120px; /* 공유 버튼 공간 */
   text-align: center;
   position: relative;
   z-index: 5;
@@ -110,16 +110,18 @@ p {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* ================= 약도(지도 미리보기) ================= */
+/* ================= 네이버 약도(지도 미리보기) ================= */
 .map-box {
   width: 100%;
   max-width: 360px;
-  height: 220px;
+  height: 240px;
   margin: 14px auto 0;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.18);
   box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
 }
 
 .map-box iframe {
@@ -182,33 +184,21 @@ p {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
-.copy-btn:active {
-  transform: scale(0.99);
-}
-
-/* ================= 하트 완전 제거(강제) ================= */
-.heart,
-.hearts,
-.heart-icon,
-.floating-hearts,
-.floating-heart {
+/* ================= 하트 강제 제거 ================= */
+.heart, .hearts, .heart-icon, .floating-hearts {
   display: none !important;
 }
-
-.heart::before,
-.heart::after,
-.hearts::before,
-.hearts::after {
+.heart::before, .heart::after,
+.hearts::before, .hearts::after {
   content: none !important;
 }
 
-/* ================= 공유하기 원형 버튼 ================= */
+/* ================= 공유하기 원형 버튼 (아래 가운데) ================= */
 .share-fab {
   position: fixed;
   left: 50%;
   bottom: 16px;
   transform: translateX(-50%);
-
   width: 56px;
   height: 56px;
   border-radius: 999px;
@@ -223,6 +213,7 @@ p {
 
   cursor: pointer;
   z-index: 99999;
+
   outline: none;
 }
 
