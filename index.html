@@ -21,14 +21,15 @@
       width: 100%; height: 100%; object-fit: cover; opacity: 0.78; transform: scale(1.03);
     }
 
-    .page {
-      position: relative; z-index: 1; padding: 26px 16px 120px;
-    }
+    .page { position: relative; z-index: 1; padding: 26px 16px 120px; }
 
+    /* 섹션별 굵은 앤틱 하얀선 */
     .section {
       padding: 18px 0;
       margin-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 4px solid #fff; /* 굵은 흰색 */
+      border-radius: 2px;
+      opacity: 0.85;
     }
     .section:last-child { border-bottom: none; margin-bottom:0; }
 
@@ -80,7 +81,7 @@
 </head>
 
 <body>
-  <!-- 비디오 배경 -->
+  <!-- 배경 영상 -->
   <div class="video-bg">
     <video autoplay muted loop playsinline preload="auto">
       <source src="./bg.mp4" type="video/mp4">
@@ -88,11 +89,10 @@
   </div>
 
   <div class="page">
-    <div class="top-space"></div>
 
     <!-- 상단 이미지 -->
     <div class="section">
-      <img src="/mnt/data/A_wedding_invitation_card_for_a_July_5th_wedding_i.png" alt="청첩장 이미지" style="width:100%; border-radius:12px;">
+      <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; border-radius:12px;">
     </div>
 
     <!-- 메인 정보 -->
@@ -177,7 +177,6 @@
     function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
   </script>
 
-  <!-- 약도 확대 모달 -->
   <div class="modal" id="mapModal" onclick="closeMapModal()">
     <div>
       <div class="modal-inner" onclick="event.stopPropagation()">
