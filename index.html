@@ -40,6 +40,7 @@
       height: 100%;
       object-fit: cover;
       transform: scale(1.03);
+      opacity: 0.78;
     }
 
     /* ================= 페이지 ================= */
@@ -57,7 +58,7 @@
     /* ================= 섹션 ================= */
     .section {
       position: relative;
-      padding: 18px 0;
+      padding: 24px 0;
       margin-bottom: 24px;
     }
 
@@ -69,25 +70,23 @@
       max-width: 300px;
       height: 3px;
       background: #fff;
-      margin: 12px auto 0;
+      margin: 20px auto 0;
       border-radius: 2px;
       opacity: 0.85;
     }
 
-    .card {
-      text-align: center;
-    }
+    .section:last-child::after { display:none; } /* 맨 아래 구분선 제거 */
 
-    h1 { font-size: 22px; margin:0 0 12px; font-weight:600; letter-spacing:-0.3px; }
-    h2 { font-size:16px; margin:0 0 10px; font-weight:700; opacity:0.98; letter-spacing:-0.2px; }
+    h1 { font-size: 22px; margin:0 0 16px; font-weight:600; letter-spacing:-0.3px; }
+    h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.98; letter-spacing:-0.2px; }
 
     .names { font-size:18px; margin:12px 0 12px; font-weight:700; line-height:1.5; }
     .subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.92; letter-spacing:-0.1px; }
-    p { font-size:14px; line-height:1.75; margin:6px 0; opacity:0.95; }
+    p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
     .muted { opacity:0.85; font-size:13px; }
 
     .btn {
-      display:block; margin:12px auto 0; padding:14px 16px;
+      display:block; margin:16px auto 0; padding:14px 16px;
       width:100%; max-width:360px; border-radius:18px;
       background: rgba(0,0,0,0.60); color:#fff; text-decoration:none;
       font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.16);
@@ -117,15 +116,28 @@
 
     .copy-btn { margin-top:10px; padding:10px 16px; border:none; border-radius:18px; background: rgba(255,255,255,0.14); color:#fff; font-size:13px; cursor:pointer; border:1px solid rgba(255,255,255,0.18); }
 
-    .share-fab {
-      position:fixed; left:50%; bottom:16px; transform:translateX(-50%);
-      width:56px; height:56px; border-radius:999px; display:grid; place-items:center;
-      background: rgba(0,0,0,0.72); border:1px solid rgba(255,255,255,0.20); backdrop-filter:blur(10px);
-      box-shadow:0 12px 30px rgba(0,0,0,0.42); cursor:pointer; z-index:99999; outline:none;
+    /* 공유 버튼 */
+    .share-fab, .scroll-top-fab {
+      position: fixed;
+      bottom: 16px;
+      width: 56px; height: 56px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,0.72);
+      border: 1px solid rgba(255,255,255,0.20);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.42);
+      cursor: pointer;
+      z-index: 99999;
     }
-    .share-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
-    .share-fab:active { transform:translateX(-50%) scale(0.96); }
+    .share-fab { left: 40%; transform: translateX(-50%); }
+    .scroll-top-fab { left: 60%; transform: translateX(-50%); }
 
+    .share-fab svg, .scroll-top-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
+    .share-fab:active, .scroll-top-fab:active { transform: translateX(-50%) scale(0.96); }
+
+    /* 모달 */
     .modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
     .modal.show { display:flex; }
     .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); backdrop-filter:blur(10px); text-align:center; }
@@ -161,27 +173,18 @@
         신부 김가람<br>
         <span class="subline">한내엽의 딸</span>
       </p>
-      
-<div class="divider"></div>
+    </div>
 
+    <!-- 날짜 & 시간 -->
+    <div class="section reveal">
+      <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
+      <p id="countdown" class="muted">계산 중...</p>
+    </div>
 
-<!-- 날짜 & 시간 -->
-<div class="section">
-<p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
-<p id="countdown" class="muted">계산 중...</p>
-</div>
-
-
-<div class="divider"></div>
-
-
-<!-- 장소 -->
-<div class="section">
-<p>라루체 명동<br>5층 그레이스홀</p>
-</div>
-
-
-<div class="divider"></div>
+    <!-- 장소 -->
+    <div class="section reveal">
+      <p>라루체 명동<br>5층 그레이스홀</p>
+    </div>
 
     <!-- 오시는 길 -->
     <div class="section reveal">
@@ -234,10 +237,16 @@
     </div>
   </div>
 
-  <!-- 공유하기 원형 버튼 -->
+  <!-- 공유 / 맨 위로 버튼 -->
   <button class="share-fab" type="button" onclick="shareInvite()" aria-label="청첩장 공유하기">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
+    </svg>
+  </button>
+
+  <button class="scroll-top-fab" type="button" onclick="scrollToTop()" aria-label="맨 위로 이동">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 12l1.41 1.41L11 7.83v12.34h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/>
     </svg>
   </button>
 
@@ -273,6 +282,7 @@
     function shareInvite(){const title="모바일 청첩장",text="우리 결혼식에 초대합니다 🙂",url=window.location.href;if(navigator.share){navigator.share({title,text,url});}else{navigator.clipboard.writeText(url).then(()=>alert("PC에서는 공유 대신 링크를 복사했어요!")).catch(()=>alert("복사 실패! 주소창 링크를 복사해주세요."));}}
     function openMapModal(){document.getElementById("mapModal").classList.add("show");}
     function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
+    function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
 
     // 스크롤 애니메이션
     const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});},{threshold:0.15});
