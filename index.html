@@ -23,19 +23,26 @@
 
     .page { position: relative; z-index: 1; padding: 26px 16px 120px; }
 
-    /* 섹션별 굵은 앤틱 하얀선 */
+    /* 섹션 스타일 */
     .section {
       padding: 18px 0;
       margin-bottom: 12px;
-      border-bottom: 4px solid #fff; /* 굵은 흰색 */
+      border-bottom: 4px solid #fff;
       border-radius: 2px;
       opacity: 0.85;
     }
     .section:last-child { border-bottom: none; margin-bottom:0; }
 
+    /* 이미지 항상 폭 맞춤, 선명하게 */
+    .section img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      opacity: 1; /* 선명하게 */
+    }
+
     h1 { font-size: 22px; margin:0 0 12px; font-weight:600; }
     h2 { font-size:16px; margin:0 0 10px; font-weight:700; opacity:0.98; }
-
     .names { font-size:18px; margin:12px 0 12px; font-weight:700; line-height:1.5; }
     .subline { display:block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.92; }
     p { font-size:14px; line-height:1.75; margin:6px 0; opacity:0.95; }
@@ -77,6 +84,10 @@
     .modal-inner img { display:block; width:100%; height:auto; }
     .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; border-radius:18px; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
 
+    @media (min-width: 768px) {
+      .section { border-bottom: 2px solid #fff; padding: 16px 0; margin-bottom: 12px; }
+      .section img { max-width: 420px; margin: 0 auto; height: auto; display: block; }
+    }
   </style>
 </head>
 
@@ -92,7 +103,7 @@
 
     <!-- 상단 이미지 -->
     <div class="section">
-      <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; border-radius:12px;">
+      <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지">
     </div>
 
     <!-- 메인 정보 -->
