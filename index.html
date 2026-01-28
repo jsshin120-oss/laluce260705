@@ -4,92 +4,555 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>모바일 청첩장</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ================= 기본 설정 ================= */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+        "Noto Sans KR", sans-serif;
+      color: #fff;
+      background: #000;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ================= 비디오 배경 ================= */
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+
+    .video-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 1;
+    }
+
+    /* ================= 페이지 래퍼 ================= */
+    .page {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 26px 18px 70px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ================= 섹션 ================= */
+    .section {
+      margin-top: 38px;
+      padding-bottom: 34px;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      padding-top: 18px;
+    }
+
+    .mini-title {
+      font-size: 12px;
+      letter-spacing: 2px;
+      opacity: 0.75;
+      margin: 0 0 12px;
+    }
+
+    .main-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 18px;
+      letter-spacing: -0.2px;
+      line-height: 1.35;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    }
+
+    /* ================= 이름/가족관계 ================= */
+    .names {
+      margin: 16px 0 14px;
+      font-size: 18px;
+      font-weight: 650;
+      line-height: 1.6;
+      letter-spacing: -0.2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    }
+
+    .names .role {
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0.8;
+      letter-spacing: 1.5px;
+      margin-right: 6px;
+    }
+
+    .names .family {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .date-place {
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: 0.9;
+      margin: 14px 0 0;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    }
+
+    /* ================= 본문 텍스트 ================= */
+    .text {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.92;
+      margin: 0;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    }
+
+    /* ================= 버튼 ================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      margin-top: 14px;
+      padding: 14px 18px;
+
+      border-radius: 999px;
+      text-decoration: none;
+
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-naver {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+    }
+
+    /* ================= 약도 (모바일 최적화 + 클릭 확대) ================= */
+    .map-img {
+      margin-top: 14px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
+
+      /* 클릭 가능 표시 */
+      cursor: zoom-in;
+    }
+
+    .map-img img {
+      width: 100%;
+      height: auto;     /* 🔥 모바일 최적화 */
+      display: block;
+    }
+
+    /* ================= 약도 확대 모달 ================= */
+    .map-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      z-index: 999999;
+      display: none; /* 기본 숨김 */
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .map-modal.open {
+      display: flex;
+    }
+
+    .map-modal-inner {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+
+    .map-modal-inner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-out;
+    }
+
+    /* 닫기 버튼 */
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ================= 토글 ================= */
+    .toggle-header {
+      margin: 14px auto 0;
+      padding: 14px 16px;
+      width: 100%;
+      max-width: 360px;
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      border-radius: 18px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(6px);
+      user-select: none;
+    }
+
+    .toggle-content {
+      height: 0;
+      overflow: hidden;
+      transition: height 0.25s ease;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .toggle-content .inner {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.30);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+    }
+
+    .toggle-content .inner p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    /* ================= 구글폼 iframe ================= */
+    .form-box {
+      margin-top: 14px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .form-box iframe {
+      width: 100%;
+      height: 780px;
+      border: 0;
+    }
+
+    /* ================= 복사 버튼 ================= */
+    .copy-btn {
+      margin-top: 10px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    /* ================= 공유하기 ================= */
+    .share-wrap {
+      margin-top: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .share-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .share-btn:active {
+      transform: scale(0.96);
+    }
+
+    .share-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      opacity: 0.95;
+    }
+
+    .share-text {
+      margin-top: 10px;
+      font-size: 13px;
+      opacity: 0.85;
+      letter-spacing: -0.2px;
+    }
+
+    /* ================= 반응형 ================= */
+    @media (max-width: 420px) {
+      .page {
+        padding: 22px 16px 70px;
+      }
+
+      .main-title {
+        font-size: 21px;
+      }
+
+      .names {
+        font-size: 17px;
+      }
+
+      .text {
+        font-size: 13.5px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+
   <!-- 비디오 배경 -->
   <div class="video-bg">
-    <video autoplay muted loop playsinline>
-      <source src="bg.mp4" type="video/mp4" />
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="./bg.mp4" type="video/mp4">
     </video>
   </div>
 
-  <main class="page">
+  <div class="page">
 
-    <!-- 타이틀 -->
-    <section class="hero">
+    <!-- 메인 -->
+    <div class="section hero">
       <p class="mini-title">WEDDING INVITATION</p>
-      <h1 class="main-title">소중한 분들을 초대합니다</h1>
+      <h1 class="main-title">우리 드디어 결혼해요</h1>
 
       <p class="names">
-        <span class="role">신랑</span> 신준섭<br>
+        <span class="role">GROOM</span> 신랑 신준섭<br>
         <span class="family">신광재 · 이동자의 아들</span>
 
         <br><br>
 
-        <span class="role">신부</span> 김가람<br>
+        <span class="role">BRIDE</span> 신부 김가람<br>
         <span class="family">한내엽의 딸</span>
       </p>
 
       <p class="date-place">
-        2026년 7월 00일 (토) 오후 0시 00분<br>
-        라루체 명동
+        2026년 7월 5일 일요일<br>
+        오후 1시 30분<br>
+        라루체 명동 5층 그레이스홀
       </p>
-    </section>
+    </div>
 
-    <!-- 초대 문구 -->
-    <section class="section">
-      <p class="mini-title">INVITATION</p>
-      <p class="text">
-        서로가 마주 보며 다져온 사랑을<br>
-        이제 함께 같은 곳을 바라보며 걸어가려 합니다.<br>
-        귀한 걸음 하시어 축복해 주시면 감사하겠습니다.
-      </p>
-    </section>
+    <!-- 오시는 길 -->
+    <div class="section">
+      <h2 style="margin:0 0 8px; font-size:17px; font-weight:700;">오시는 길</h2>
+      <p class="text" style="opacity:0.88;">서울특별시 중구 퇴계로18길 46</p>
 
-    <!-- 약도 -->
-    <section class="section">
-      <p class="mini-title">LOCATION</p>
-
-      <div class="map-img">
-        <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="오시는 길 약도">
+      <!-- 약도 이미지 (버튼 위로 위치) -->
+      <div class="map-img" onclick="openMapModal()">
+        <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
       </div>
 
       <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
         네이버지도에서 보기
       </a>
-    </section>
+
+      <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
+      <div class="toggle-content">
+        <div class="inner">
+          <p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p>
+        </div>
+      </div>
+
+      <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
+      <div class="toggle-content">
+        <div class="inner">
+          <p>
+            퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>
+            명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 참석 여부 (폼 포함) -->
+    <div class="section">
+      <h2 style="margin:0 0 8px; font-size:17px; font-weight:700;">참석 여부 회신</h2>
+      <p class="text" style="opacity:0.85;">원활한 예식 준비를 위해 참석 여부를 알려주세요</p>
+
+      <div class="form-box">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?embedded=true"
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <a class="btn btn-naver"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform"
+         target="_blank">
+        폼이 안보이면 여기를 눌러주세요
+      </a>
+    </div>
+
+    <!-- 마음 전하실 곳 -->
+    <div class="section">
+      <h2 style="margin:0 0 8px; font-size:17px; font-weight:700;">마음 전하실 곳</h2>
+      <p class="text" style="opacity:0.85;">축하의 마음만으로도 감사합니다</p>
+
+      <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
+      <div class="toggle-content">
+        <div class="inner">
+          <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
+          <button class="copy-btn" onclick="copyText(event,'groom-account')">계좌번호 복사</button>
+        </div>
+      </div>
+
+      <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
+      <div class="toggle-content">
+        <div class="inner">
+          <p id="bride-account">김가람<br>카카오뱅크</p>
+          <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
+        </div>
+      </div>
+    </div>
 
     <!-- 공유하기 -->
-    <section class="section share-wrap">
-      <button class="share-btn" onclick="shareInvite()" aria-label="청첩장 공유하기">
-        <!-- 공유 아이콘 (SVG) -->
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M16 8a3 3 0 1 0-2.83-4H13a3 3 0 0 0 3 4ZM6 14a3 3 0 1 0 2.83 4H9a3 3 0 0 0-3-4Zm10-1a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM8.59 15.51l6.83-3.7M15.42 12.19l-6.83-3.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <div class="share-wrap">
+      <button class="share-btn" type="button" onclick="shareInvite()" aria-label="청첩장 공유하기">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
         </svg>
       </button>
-      <p class="share-text">청첩장 공유하기</p>
-    </section>
+      <div class="share-text">청첩장 공유하기</div>
+    </div>
 
-  </main>
+  </div>
+
+  <!-- 약도 확대 모달 -->
+  <div class="map-modal" id="mapModal" onclick="closeMapModal()">
+    <div class="map-modal-inner" onclick="event.stopPropagation()">
+      <button class="modal-close" type="button" onclick="closeMapModal()" aria-label="닫기">✕</button>
+      <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도 확대" onclick="closeMapModal()">
+    </div>
+  </div>
 
   <script>
-    function shareInvite() {
-      const url = window.location.href;
-      const title = "모바일 청첩장";
-      const text = "청첩장 링크를 공유합니다.";
+    function toggleBox(header) {
+      const content = header.nextElementSibling;
+      const isOpen = content.style.height && content.style.height !== "0px";
 
-      // 모바일에서만 Web Share API 동작
+      if (isOpen) {
+        content.style.height = "0px";
+      } else {
+        content.style.height = content.scrollHeight + "px";
+      }
+    }
+
+    function copyText(e, id) {
+      e.stopPropagation();
+      const text = document.getElementById(id).innerText;
+
+      navigator.clipboard.writeText(text)
+        .then(() => alert("계좌번호가 복사되었습니다"))
+        .catch(() => alert("복사 실패! 브라우저에서 직접 복사해주세요."));
+    }
+
+    function shareInvite() {
+      const title = "모바일 청첩장";
+      const text = "우리 결혼식에 초대합니다 🙂";
+      const url = window.location.href;
+
       if (navigator.share) {
         navigator.share({ title, text, url });
       } else {
-        // PC에서는 복사로 대체
-        navigator.clipboard.writeText(url).then(() => {
-          alert("링크가 복사되었습니다! 원하는 곳에 붙여넣기 해주세요.");
-        });
+        navigator.clipboard.writeText(url)
+          .then(() => alert("PC에서는 공유 대신 링크가 복사되었습니다!"))
+          .catch(() => alert("복사 실패! 주소창 링크를 복사해주세요."));
       }
     }
+
+    function openMapModal() {
+      document.getElementById("mapModal").classList.add("open");
+      document.body.style.overflow = "hidden"; // 모달 열리면 스크롤 잠금
+    }
+
+    function closeMapModal() {
+      document.getElementById("mapModal").classList.remove("open");
+      document.body.style.overflow = ""; // 스크롤 복구
+    }
+
+    // ESC로 닫기
+    window.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") closeMapModal();
+    });
   </script>
+
 </body>
 </html>
