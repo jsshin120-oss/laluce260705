@@ -20,7 +20,7 @@
     .video-bg {
       position: fixed;
       inset: 0;
-      z-index: -3;
+      z-index: -2;
       overflow: hidden;
       background: #000;
     }
@@ -29,77 +29,48 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.35;
+      opacity: 0.35; /* 영상 투명도 */
     }
 
     .video-bg::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.28);
+      background: rgba(0, 0, 0, 0.25);
       z-index: 1;
-    }
-
-    /* 하트 배경 레이어 */
-    .hearts {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .heart {
-      position: absolute;
-      font-size: 18px;
-      opacity: 0.25;
-      animation: floatUp linear infinite;
-      filter: blur(0.2px);
-    }
-
-    @keyframes floatUp {
-      0%   { transform: translateY(20vh) scale(1); opacity: 0; }
-      10%  { opacity: 0.22; }
-      100% { transform: translateY(-120vh) scale(1.25); opacity: 0; }
     }
 
     /* ================= 페이지 ================= */
     .page {
       max-width: 420px;
       margin: 0 auto;
-      padding: 26px 16px 90px;
+      padding: 26px 16px 90px; /* 공유 버튼 공간 */
       text-align: center;
       position: relative;
       z-index: 5;
       color: #fff;
       text-shadow: 0 2px 10px rgba(0,0,0,0.65);
-      animation: fadeIn 1.1s ease both;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ================= 텍스트 ================= */
     h1 {
       font-size: 22px;
       margin: 0 0 14px;
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: -0.2px;
     }
 
     h2 {
       font-size: 17px;
       margin: 0 0 10px;
-      font-weight: 600;
+      font-weight: 500;
       opacity: 0.95;
     }
 
     .names {
       font-size: 18px;
       margin: 12px 0 10px;
-      font-weight: 700;
+      font-weight: 600;
       line-height: 1.4;
     }
 
@@ -110,17 +81,15 @@
       opacity: 0.95;
     }
 
-    .small {
-      opacity: 0.85;
-      font-size: 13px;
-    }
-
-    /* ================= 섹션 ================= */
+    /* ================= 섹션 간격 ================= */
     .section {
       padding: 18px 0;
       border-bottom: 1px solid rgba(255,255,255,0.18);
     }
-    .section:last-child { border-bottom: none; }
+
+    .section:last-child {
+      border-bottom: none;
+    }
 
     /* ================= 버튼 ================= */
     .btn {
@@ -134,34 +103,19 @@
       color: #fff;
       text-decoration: none;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 600;
       border: 1px solid rgba(255,255,255,0.18);
       backdrop-filter: blur(6px);
     }
-    .btn:active { transform: scale(0.99); }
 
-    .btn-naver {
-      background: rgba(3, 199, 90, 0.88);
-      border: 1px solid rgba(255,255,255,0.2);
+    .btn:active {
+      transform: scale(0.99);
     }
 
-    .btn-share {
-      position: fixed;
-      left: 50%;
-      bottom: 16px;
-      transform: translateX(-50%);
-      z-index: 50;
-      width: calc(100% - 28px);
-      max-width: 420px;
-      border-radius: 22px;
-      padding: 14px 16px;
-      background: rgba(0,0,0,0.82);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.18);
-      backdrop-filter: blur(8px);
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
+    /* 네이버 지도 버튼 느낌 */
+    .btn-naver {
+      background: rgba(3, 199, 90, 0.85);
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     /* ================= 토글 ================= */
@@ -175,7 +129,7 @@
       border-radius: 18px;
       cursor: pointer;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 700;
       border: 1px solid rgba(255,255,255,0.18);
       backdrop-filter: blur(6px);
       user-select: none;
@@ -216,65 +170,50 @@
       font-size: 13px;
       cursor: pointer;
       border: 1px solid rgba(255,255,255,0.2);
-      font-weight: 700;
     }
 
-    /* ================= D-day ================= */
-    .dday {
-      margin: 12px auto 0;
-      width: 100%;
-      max-width: 360px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(6px);
-      font-weight: 800;
-      letter-spacing: 0.2px;
+    /* ================= 하트 강제 제거 ================= */
+    .heart, .hearts, .heart-icon, .floating-hearts {
+      display: none !important;
     }
-    .dday span { opacity: 0.9; font-weight: 700; }
-
-    /* ================= 갤러리 ================= */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      max-width: 360px;
-      margin: 14px auto 0;
+    .heart::before, .heart::after,
+    .hearts::before, .hearts::after {
+      content: none !important;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.18);
-      cursor: pointer;
-    }
-
-    /* 라이트박스 */
-    .lightbox {
+    /* ================= 공유하기 원형 버튼 ================= */
+    .share-fab {
       position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: rgba(0,0,0,0.88);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
+      right: 16px;
+      bottom: 16px;
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+
+      display: grid;
+      place-items: center;
+
+      background: rgba(0,0,0,0.75);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+
+      cursor: pointer;
+      z-index: 99999;
+
+      outline: none;
     }
 
-    .lightbox img {
-      width: 100%;
-      max-width: 520px;
-      max-height: 80vh;
-      object-fit: contain;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.18);
+    .share-fab svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      opacity: 0.95;
     }
 
-    .lightbox.show { display: flex; }
-
+    .share-fab:active {
+      transform: scale(0.96);
+    }
   </style>
 </head>
 
@@ -287,9 +226,6 @@
     </video>
   </div>
 
-  <!-- 하트 배경 -->
-  <div class="hearts" id="hearts"></div>
-
   <div class="page">
 
     <!-- 메인 -->
@@ -301,24 +237,6 @@
         오후 1시 30분<br>
         라루체 명동 5층 그레이스홀
       </p>
-
-      <div class="dday" id="ddayBox">D-Day 계산중...</div>
-    </div>
-
-    <!-- 갤러리 -->
-    <div class="section">
-      <h2>우리의 순간</h2>
-      <p class="small">사진을 누르면 크게 볼 수 있어요</p>
-
-      <!-- ✅ photo1.jpg ~ photo6.jpg 파일을 업로드하면 됨 -->
-      <div class="gallery">
-        <img src="./photo1.jpg" alt="사진1" onclick="openLightbox(this.src)">
-        <img src="./photo2.jpg" alt="사진2" onclick="openLightbox(this.src)">
-        <img src="./photo3.jpg" alt="사진3" onclick="openLightbox(this.src)">
-        <img src="./photo4.jpg" alt="사진4" onclick="openLightbox(this.src)">
-        <img src="./photo5.jpg" alt="사진5" onclick="openLightbox(this.src)">
-        <img src="./photo6.jpg" alt="사진6" onclick="openLightbox(this.src)">
-      </div>
     </div>
 
     <!-- 오시는 길 -->
@@ -326,22 +244,13 @@
       <h2>오시는 길</h2>
       <p>서울특별시 중구 퇴계로18길 46</p>
 
-      
-  <!-- 약도(지도) 미리보기 -->
-  <div class="map-wrap">
-    <iframe
-      src="https://www.google.com/maps?q=라루체%20명동&output=embed"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-      
       <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank">
         네이버지도에서 보기
       </a>
 
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=라루체%20명동" target="_blank">
+        구글지도에서 보기
+      </a>
 
       <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
       <div class="toggle-content">
@@ -364,7 +273,7 @@
     <!-- 참석 여부 -->
     <div class="section">
       <h2>참석 여부 회신</h2>
-      <p class="small">원활한 예식 준비를 위해 참석 여부를 알려주세요</p>
+      <p style="opacity:0.85;">원활한 예식 준비를 위해 참석 여부를 알려주세요</p>
 
       <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform"
          target="_blank">
@@ -375,7 +284,7 @@
     <!-- 마음 전하실 곳 -->
     <div class="section">
       <h2>마음 전하실 곳</h2>
-      <p class="small">축하의 마음만으로도 감사합니다</p>
+      <p style="opacity:0.85;">축하의 마음만으로도 감사합니다</p>
 
       <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
       <div class="toggle-content">
@@ -396,25 +305,25 @@
 
   </div>
 
-  
-<!-- 공유하기 버튼 -->
-<div class="share-fab" onclick="shareInvite()">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
-  </svg>
-</div>
-  
+  <!-- 공유하기 원형 버튼 -->
+  <button class="share-fab" type="button" onclick="shareInvite()" aria-label="청첩장 공유하기">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
+    </svg>
+  </button>
+
   <script>
-    /* 토글 */
     function toggleBox(header) {
       const content = header.nextElementSibling;
       const isOpen = content.style.height && content.style.height !== "0px";
 
-      if (isOpen) content.style.height = "0px";
-      else content.style.height = content.scrollHeight + "px";
+      if (isOpen) {
+        content.style.height = "0px";
+      } else {
+        content.style.height = content.scrollHeight + "px";
+      }
     }
 
-    /* 복사 */
     function copyText(e, id) {
       e.stopPropagation();
       const text = document.getElementById(id).innerText;
@@ -424,61 +333,17 @@
         .catch(() => alert("복사 실패! 브라우저에서 직접 복사해주세요."));
     }
 
-    /* D-day */
-    function updateDday() {
-      // 2026-07-05 13:30 (KST)
-      const target = new Date("2026-07-05T13:30:00+09:00");
-      const now = new Date();
-      const diff = target - now;
-
-      const box = document.getElementById("ddayBox");
-
-      if (diff <= 0) {
-        box.innerHTML = "💛 오늘 결혼식 날이에요 💛";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const mins = Math.floor((diff / (1000 * 60)) % 60);
-
-      box.innerHTML = `D-${days} <span>(남은시간 ${hours}시간 ${mins}분)</span>`;
-    }
-    updateDday();
-    setInterval(updateDday, 60000);
-
-   
-    /* 라이트박스 */
-    function openLightbox(src) {
-      const lb = document.getElementById("lightbox");
-      const img = document.getElementById("lightboxImg");
-      img.src = src;
-      lb.classList.add("show");
-    }
-
-    function closeLightbox() {
-      document.getElementById("lightbox").classList.remove("show");
-    }
-
-    /* 공유하기 */
-    async function shareInvite() {
-      const shareData = {
-        title: "모바일 청첩장",
-        text: "신준섭 ♥ 김가람 결혼식에 초대합니다",
-        url: window.location.href
-      };
+    function shareInvite() {
+      const title = "모바일 청첩장";
+      const text = "우리 결혼식에 초대합니다 🙂";
+      const url = window.location.href;
 
       if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-        } catch (e) {}
+        navigator.share({ title, text, url });
       } else {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-          alert("링크가 복사되었습니다!");
-        } catch (e) {
-          alert("공유 기능이 지원되지 않습니다. 주소를 직접 복사해주세요.");
-        }
+        navigator.clipboard.writeText(url)
+          .then(() => alert("링크가 복사되었습니다!"))
+          .catch(() => alert("복사 실패! 주소창 링크를 복사해주세요."));
       }
     }
   </script>
