@@ -73,3 +73,27 @@ p {
   line-height: 1.7;
   margin: 6px 0;
 }
+
+
+/* ================= 하얀박스 강제 제거 ================= */
+
+/* 카드/토글/iframe 전부 투명 처리 */
+.card,
+.toggle-content,
+.map-wrap,
+.form-iframe,
+iframe {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 토글 내용 펼쳐지는 영역 (회색 박스 제거) */
+.toggle-content {
+  padding: 0 !important;
+}
+
+/* 구글폼 iframe은 기본 흰색이 강제라 완전 투명 안될 수 있음 */
+.form-iframe {
+  border-radius: 0 !important;
+}
