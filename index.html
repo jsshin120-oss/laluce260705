@@ -32,14 +32,14 @@
       inset: 0;
       z-index: -2;
       overflow: hidden;
-      background: transparent; /* 검정 제거 */
+      background: transparent;
     }
 
     .video-bg video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.72; /* 🔥 사용자가 확정한 값 */
+      opacity: 0.78;
       transform: scale(1.03);
     }
 
@@ -47,7 +47,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.16); /* 🔥 사용자가 확정한 값 */
+      background: rgba(0, 0, 0, 0.10);
       z-index: 1;
     }
 
@@ -56,7 +56,7 @@
       width: 100%;
       max-width: 420px;
       margin: 0 auto;
-      padding: 26px 16px 120px; /* 공유 버튼 공간 */
+      padding: 26px 16px 120px;
       text-align: center;
       position: relative;
       z-index: 5;
@@ -64,12 +64,10 @@
       text-shadow: var(--text-shadow);
     }
 
-    /* 상단 여백/고급 느낌 */
     .top-space{
       height: 12px;
     }
 
-    /* ================= 공통 카드 ================= */
     .section {
       padding: 18px 0;
       border-bottom: 1px solid rgba(255,255,255,0.14);
@@ -87,264 +85,64 @@
       box-shadow: 0 12px 28px rgba(0,0,0,0.35);
     }
 
-    /* ================= 텍스트 ================= */
-    h1 {
-      font-size: 22px;
-      margin: 0 0 12px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-    }
+    h1 { font-size: 22px; margin:0 0 12px; font-weight:600; letter-spacing:-0.3px; }
+    h2 { font-size:16px; margin:0 0 10px; font-weight:700; opacity:0.98; letter-spacing:-0.2px; }
 
-    h2 {
-      font-size: 16px;
-      margin: 0 0 10px;
-      font-weight: 700;
-      opacity: 0.98;
-      letter-spacing: -0.2px;
-    }
+    .names { font-size:18px; margin:12px 0 12px; font-weight:700; line-height:1.5; }
+    .subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.92; letter-spacing:-0.1px; }
+    p { font-size:14px; line-height:1.75; margin:6px 0; opacity:0.95; }
+    .muted { opacity:0.85; font-size:13px; }
 
-    .names {
-      font-size: 18px;
-      margin: 12px 0 12px;
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
-    .subline {
-      display: inline-block;
-      margin-top: 4px;
-      font-size: 13px;
-      font-weight: 400;
-      opacity: 0.92;
-      letter-spacing: -0.1px;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 1.75;
-      margin: 6px 0;
-      opacity: 0.95;
-    }
-
-    .muted {
-      opacity: 0.85;
-      font-size: 13px;
-    }
-
-    /* ================= 버튼 ================= */
     .btn {
-      display: block;
-      margin: 12px auto 0;
-      padding: 14px 16px;
-      width: 100%;
-      max-width: 360px;
-      border-radius: 18px;
-      background: rgba(0,0,0,0.60);
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      border: 1px solid rgba(255,255,255,0.16);
-      backdrop-filter: blur(8px);
-      transition: transform 0.08s ease;
+      display:block; margin:12px auto 0; padding:14px 16px;
+      width:100%; max-width:360px; border-radius:18px;
+      background: rgba(0,0,0,0.60); color:#fff; text-decoration:none;
+      font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(8px); transition: transform 0.08s ease;
     }
-
     .btn:active { transform: scale(0.99); }
+    .btn-naver { background: rgba(3,199,90,0.88); border:1px solid rgba(255,255,255,0.18); }
 
-    .btn-naver {
-      background: rgba(3, 199, 90, 0.88);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-
-    /* ================= 약도 (이미지) ================= */
     .map-thumb {
-      width: 100%;
-      max-width: 360px;
-      margin: 12px auto 0;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
-      background: rgba(0,0,0,0.25);
-      cursor: zoom-in;
+      width:100%; max-width:360px; margin:12px auto 0;
+      border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.16);
+      box-shadow:0 10px 24px rgba(0,0,0,0.35); background:rgba(0,0,0,0.25); cursor:zoom-in;
     }
+    .map-thumb img { display:block; width:100%; height:auto; }
+    .map-hint { margin-top:8px; font-size:12px; opacity:0.8; }
 
-    .map-thumb img{
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .map-hint{
-      margin-top: 8px;
-      font-size: 12px;
-      opacity: 0.8;
-    }
-
-    /* ================= 토글 ================= */
     .toggle-header {
-      margin: 12px auto 0;
-      padding: 14px 16px;
-      width: 100%;
-      max-width: 360px;
-      background: rgba(0,0,0,0.50);
-      color: #fff;
-      border-radius: 18px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 800;
-      border: 1px solid rgba(255,255,255,0.16);
-      backdrop-filter: blur(8px);
-      user-select: none;
+      margin:12px auto 0; padding:14px 16px; width:100%; max-width:360px;
+      background: rgba(0,0,0,0.50); color:#fff; border-radius:18px; cursor:pointer;
+      font-size:14px; font-weight:800; border:1px solid rgba(255,255,255,0.16); backdrop-filter: blur(8px);
+      user-select:none;
     }
+    .toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
+    .toggle-content .inner { margin-top:10px; padding:12px 14px; border-radius:18px; background: rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.14); backdrop-filter: blur(8px); }
+    .toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
 
-    .toggle-content {
-      height: 0;
-      overflow: hidden;
-      transition: height 0.25s ease;
-      max-width: 360px;
-      margin: 0 auto;
-    }
+    .copy-btn { margin-top:10px; padding:10px 16px; border:none; border-radius:18px; background: rgba(255,255,255,0.14); color:#fff; font-size:13px; cursor:pointer; border:1px solid rgba(255,255,255,0.18); }
 
-    .toggle-content .inner {
-      margin-top: 10px;
-      padding: 12px 14px;
-      border-radius: 18px;
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(8px);
-    }
+    .heart, .hearts, .heart-icon, .floating-hearts { display:none !important; }
+    .heart::before, .heart::after, .hearts::before, .hearts::after { content:none !important; }
 
-    .toggle-content .inner p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.6;
-      opacity: 0.95;
-    }
-
-    /* ================= 복사 버튼 ================= */
-    .copy-btn {
-      margin-top: 10px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.14);
-      color: #fff;
-      font-size: 13px;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-
-    /* ================= 하트 강제 제거 ================= */
-    .heart, .hearts, .heart-icon, .floating-hearts {
-      display: none !important;
-    }
-    .heart::before, .heart::after,
-    .hearts::before, .hearts::after {
-      content: none !important;
-    }
-
-    /* ================= 공유하기 원형 버튼 (아래 가운데) ================= */
     .share-fab {
-      position: fixed;
-      left: 50%;
-      bottom: 16px;
-      transform: translateX(-50%);
-      width: 56px;
-      height: 56px;
-      border-radius: 999px;
-
-      display: grid;
-      place-items: center;
-
-      background: rgba(0,0,0,0.72);
-      border: 1px solid rgba(255,255,255,0.20);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.42);
-
-      cursor: pointer;
-      z-index: 99999;
-
-      outline: none;
+      position:fixed; left:50%; bottom:16px; transform:translateX(-50%);
+      width:56px; height:56px; border-radius:999px; display:grid; place-items:center;
+      background: rgba(0,0,0,0.72); border:1px solid rgba(255,255,255,0.20); backdrop-filter:blur(10px);
+      box-shadow:0 12px 30px rgba(0,0,0,0.42); cursor:pointer; z-index:99999; outline:none;
     }
+    .share-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
+    .share-fab:active { transform:translateX(-50%) scale(0.96); }
 
-    .share-fab svg {
-      width: 24px;
-      height: 24px;
-      fill: #fff;
-      opacity: 0.95;
-    }
+    .reveal { opacity:0; transform:translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; will-change: opacity, transform; }
+    .reveal.show { opacity:1; transform:translateY(0); }
 
-    .share-fab:active {
-      transform: translateX(-50%) scale(0.96);
-    }
-
-    /* ================= 스크롤 애니메이션 (살롱드레터 느낌 업그레이드) ================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px) scale(0.98);
-      filter: blur(6px);
-      transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
-      will-change: opacity, transform, filter;
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
-
-    /* 섹션이 하나씩 딜레이 주면서 뜨게 */
-    .section.reveal:nth-of-type(1) { transition-delay: 0.05s; }
-    .section.reveal:nth-of-type(2) { transition-delay: 0.12s; }
-    .section.reveal:nth-of-type(3) { transition-delay: 0.18s; }
-    .section.reveal:nth-of-type(4) { transition-delay: 0.24s; }
-    .section.reveal:nth-of-type(5) { transition-delay: 0.30s; }
-
-    /* 약도 확대 모달 */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999999;
-      padding: 18px;
-    }
-
-    .modal.show { display: flex; }
-
-    .modal-inner {
-      width: 100%;
-      max-width: 520px;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.55);
-      background: rgba(0,0,0,0.25);
-      backdrop-filter: blur(10px);
-    }
-
-    .modal-inner img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .modal-close {
-      margin-top: 10px;
-      width: 100%;
-      max-width: 520px;
-      border: 0;
-      border-radius: 18px;
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.16);
-    }
+    .modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
+    .modal.show { display:flex; }
+    .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); backdrop-filter:blur(10px); }
+    .modal-inner img { display:block; width:100%; height:auto; }
+    .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; border-radius:18px; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
   </style>
 </head>
 
@@ -360,6 +158,13 @@
   <div class="page">
     <div class="top-space"></div>
 
+    <!-- 상단 이미지 -->
+    <div class="section reveal">
+      <div class="card" style="padding:0; background:transparent; box-shadow:none; border:none;">
+        <img src="/mnt/data/A_wedding_invitation_card_for_a_July_5th_wedding_i.png" alt="청첩장 이미지" style="width:100%; border-radius:22px;">
+      </div>
+    </div>
+
     <!-- 메인 -->
     <div class="section reveal">
       <div class="card">
@@ -368,9 +173,7 @@
         <p class="names">
           신랑 신준섭<br>
           <span class="subline">신광재 · 이동자의 아들</span>
-
           <br><br>
-
           신부 김가람<br>
           <span class="subline">한내엽의 딸</span>
         </p>
@@ -389,33 +192,20 @@
         <h2>오시는 길</h2>
         <p>서울특별시 중구 퇴계로18길 46</p>
 
-        <!-- 약도 먼저 -->
         <div class="map-thumb" onclick="openMapModal()">
           <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
         </div>
         <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
 
-        <!-- 네이버 지도 버튼은 약도 아래 -->
         <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">
           네이버지도에서 보기
         </a>
 
         <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-        <div class="toggle-content">
-          <div class="inner">
-            <p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p>
-          </div>
-        </div>
+        <div class="toggle-content"><div class="inner"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
 
         <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
-        <div class="toggle-content">
-          <div class="inner">
-            <p>
-              퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>
-              명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05
-            </p>
-          </div>
-        </div>
+        <div class="toggle-content"><div class="inner"><p>퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05</p></div></div>
       </div>
     </div>
 
@@ -439,20 +229,16 @@
         <p class="muted">축하의 마음만으로도 감사합니다</p>
 
         <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
-        <div class="toggle-content">
-          <div class="inner">
-            <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
-            <button class="copy-btn" onclick="copyText(event,'groom-account')">계좌번호 복사</button>
-          </div>
-        </div>
+        <div class="toggle-content"><div class="inner">
+          <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
+          <button class="copy-btn" onclick="copyText(event,'groom-account')">계좌번호 복사</button>
+        </div></div>
 
         <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
-        <div class="toggle-content">
-          <div class="inner">
-            <p id="bride-account">김가람<br>카카오뱅크</p>
-            <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
-          </div>
-        </div>
+        <div class="toggle-content"><div class="inner">
+          <p id="bride-account">김가람<br>카카오뱅크</p>
+          <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
+        </div></div>
       </div>
     </div>
   </div>
@@ -475,65 +261,31 @@
   </div>
 
   <script>
-    // 토글 열기/닫기
     function toggleBox(header) {
       const content = header.nextElementSibling;
       const isOpen = content.style.height && content.style.height !== "0px";
-
-      if (isOpen) {
-        content.style.height = "0px";
-      } else {
-        content.style.height = content.scrollHeight + "px";
-      }
+      content.style.height = isOpen ? "0px" : content.scrollHeight + "px";
     }
 
-    // 계좌 복사
     function copyText(e, id) {
       e.stopPropagation();
       const text = document.getElementById(id).innerText;
-
       navigator.clipboard.writeText(text)
         .then(() => alert("계좌번호가 복사되었습니다"))
         .catch(() => alert("복사 실패! 브라우저에서 직접 복사해주세요."));
     }
 
-    // 공유하기 (PC는 Web Share API가 거의 안됨 → 링크 복사로 처리)
     function shareInvite() {
-      const title = "모바일 청첩장";
-      const text = "우리 결혼식에 초대합니다 🙂";
-      const url = window.location.href;
-
-      if (navigator.share) {
-        navigator.share({ title, text, url });
-      } else {
-        navigator.clipboard.writeText(url)
-          .then(() => alert("PC에서는 공유 대신 링크를 복사했어요!"))
-          .catch(() => alert("복사 실패! 주소창 링크를 복사해주세요."));
-      }
+      const title="모바일 청첩장", text="우리 결혼식에 초대합니다 🙂", url=window.location.href;
+      if(navigator.share){ navigator.share({title,text,url}); }
+      else{ navigator.clipboard.writeText(url).then(()=>alert("PC에서는 공유 대신 링크를 복사했어요!")).catch(()=>alert("복사 실패! 주소창 링크를 복사해주세요.")); }
     }
 
-    // 약도 확대
-    function openMapModal() {
-      document.getElementById("mapModal").classList.add("show");
-    }
-    function closeMapModal() {
-      document.getElementById("mapModal").classList.remove("show");
-    }
+    function openMapModal(){ document.getElementById("mapModal").classList.add("show"); }
+    function closeMapModal(){ document.getElementById("mapModal").classList.remove("show"); }
 
-    // 스크롤 애니메이션 (더 자연스럽게 + 한번만 실행)
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-          observer.unobserve(entry.target); // 한번만 실행되게
-        }
-      });
-    }, {
-      threshold: 0.12,
-      rootMargin: "0px 0px -10% 0px"
-    });
-
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    const observer = new IntersectionObserver((entries)=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add("show"); } }); },{ threshold:0.15 });
+    document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
   </script>
 
 </body>
