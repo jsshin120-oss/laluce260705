@@ -396,14 +396,14 @@
 
   </div>
 
-  <!-- 라이트박스 -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightboxImg" src="" alt="확대사진">
-  </div>
-
-  <!-- 공유 버튼 -->
-  <button class="btn-share" onclick="shareInvite()">💌 청첩장 공유하기</button>
-
+  
+<!-- 공유하기 버튼 -->
+<div class="share-fab" onclick="shareInvite()">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
+  </svg>
+</div>
+  
   <script>
     /* 토글 */
     function toggleBox(header) {
@@ -447,30 +447,7 @@
     updateDday();
     setInterval(updateDday, 60000);
 
-    /* 하트 생성 */
-    const hearts = document.getElementById("hearts");
-    function spawnHeart() {
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.innerText = "💛";
-
-      const left = Math.random() * 100;
-      const size = 14 + Math.random() * 16;
-      const duration = 10 + Math.random() * 10;
-
-      h.style.left = left + "vw";
-      h.style.bottom = "-10vh";
-      h.style.fontSize = size + "px";
-      h.style.animationDuration = duration + "s";
-
-      hearts.appendChild(h);
-
-      setTimeout(() => {
-        h.remove();
-      }, duration * 1000);
-    }
-    setInterval(spawnHeart, 900);
-
+   
     /* 라이트박스 */
     function openLightbox(src) {
       const lb = document.getElementById("lightbox");
