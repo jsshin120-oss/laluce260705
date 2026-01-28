@@ -39,7 +39,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.78; /* 영상 잘 보이게 */
+      opacity: 0.72; /* 🔥 사용자가 확정한 값 */
       transform: scale(1.03);
     }
 
@@ -47,7 +47,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.10); /* 살짝만 덮기 */
+      background: rgba(0,0,0,0.16); /* 🔥 사용자가 확정한 값 */
       z-index: 1;
     }
 
@@ -279,18 +279,27 @@
       transform: translateX(-50%) scale(0.96);
     }
 
-    /* ================= 스크롤 애니메이션 (살롱드레터 느낌) ================= */
+    /* ================= 스크롤 애니메이션 (살롱드레터 느낌 업그레이드) ================= */
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-      will-change: opacity, transform;
+      transform: translateY(24px) scale(0.98);
+      filter: blur(6px);
+      transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
+      will-change: opacity, transform, filter;
     }
 
     .reveal.show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
+
+    /* 섹션이 하나씩 딜레이 주면서 뜨게 */
+    .section.reveal:nth-of-type(1) { transition-delay: 0.05s; }
+    .section.reveal:nth-of-type(2) { transition-delay: 0.12s; }
+    .section.reveal:nth-of-type(3) { transition-delay: 0.18s; }
+    .section.reveal:nth-of-type(4) { transition-delay: 0.24s; }
+    .section.reveal:nth-of-type(5) { transition-delay: 0.30s; }
 
     /* 약도 확대 모달 */
     .modal {
@@ -511,14 +520,18 @@
       document.getElementById("mapModal").classList.remove("show");
     }
 
-    // 스크롤 애니메이션 (살롱드레터 같은 느낌)
+    // 스크롤 애니메이션 (더 자연스럽게 + 한번만 실행)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("show");
+          observer.unobserve(entry.target); // 한번만 실행되게
         }
       });
-    }, { threshold: 0.15 });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -10% 0px"
+    });
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
   </script>
