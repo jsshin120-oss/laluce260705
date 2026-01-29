@@ -82,7 +82,7 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
 .muted { opacity:0.8; font-size:13px; }
 
 /* ================= 버튼 ================= */
-.btn, .copy-btn, .btn-naver, .text-input {
+.btn, .copy-btn, .btn-naver, .text-input, .submit-btn {
   display:block;
   width:100%;
   max-width:360px;
@@ -97,10 +97,11 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
   text-align:center;
   transition: background 0.2s;
 }
-.btn:hover, .btn-naver:hover, .copy-btn:hover { background: rgba(255,255,255,0.18); }
+.btn:hover, .btn-naver:hover, .copy-btn:hover, .submit-btn:hover { background: rgba(255,255,255,0.18); }
 .btn-naver { background: #03c75a; border:none; color:#fff; }
 .copy-btn { background: rgba(255,255,255,0.12); border:none; cursor:pointer; }
-.text-input { background: rgba(255,255,255,0.08); color:#fff; border:none; text-align:left; }
+.text-input { background: rgba(255,255,255,0.08); color:#fff; border:none; text-align:left; margin-top:8px; }
+.submit-btn { background: #03c75a; border:none; }
 
 /* ================= 기타 ================= */
 .map-thumb { width:100%; max-width:360px; margin:12px auto 0; overflow:hidden; cursor:zoom-in; }
@@ -115,7 +116,7 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
 }
 .toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
 .toggle-content .inner { margin-top:10px; padding:12px 14px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); }
-.toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
+.toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; margin-bottom:8px; }
 
 /* 공유 / 맨 위 버튼 */
 .share-fab, .scroll-top-fab {
@@ -138,6 +139,8 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
 .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
 .modal-inner img { display:block; width:100%; height:auto; }
 .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
+
+.hidden { display:none; }
 </style>
 </head>
 
@@ -209,7 +212,14 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
     아래 "참석해요" 버튼을 누르신 후<br>
     성함과 연락처를 기재하여 제출해주시면 감사하겠습니다.
   </p>
-  <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomgftVaL66ABfMRHbwTpA/viewform" target="_blank" rel="noopener">참석해요</a>
+  <button class="btn" id="rsvpBtn">참석해요</button>
+
+  <!-- 성함 / 연락처 입력폼 -->
+  <div id="rsvpForm" class="hidden">
+    <input type="text" class="text-input" placeholder="성함">
+    <input type="text" class="text-input" placeholder="연락처">
+    <a class="submit-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomgftVaL66ABfMRHbwTpA/viewform" target="_blank" rel="noopener">제출하기</a>
+  </div>
 </div>
 
 <!-- 마음 전하실 곳 -->
@@ -222,10 +232,10 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
   <div class="toggle-content"><div class="inner">
     <p id="groom-account-1">신준섭<br>기업은행 588-018494-01-019</p>
     <button class="copy-btn" onclick="copyText(event,'groom-account-1')">계좌번호 복사</button>
-
+    <br>
     <p id="groom-account-2">신광재<br>우리은행</p>
     <button class="copy-btn" onclick="copyText(event,'groom-account-2')">계좌번호 복사</button>
-
+    <br>
     <p id="groom-account-3">이동자<br>우리은행</p>
     <button class="copy-btn" onclick="copyText(event,'groom-account-3')">계좌번호 복사</button>
   </div></div>
@@ -235,9 +245,6 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
   <div class="toggle-content"><div class="inner">
     <p id="bride-account-1">김가람<br>카카오뱅크</p>
     <button class="copy-btn" onclick="copyText(event,'bride-account-1')">계좌번호 복사</button>
-
-    <p id="bride-account-2">한내엽<br>카카오뱅크</p>
-    <button class="copy-btn" onclick="copyText(event,'bride-account-2')">계좌번호 복사</button>
   </div></div>
 </div>
 
@@ -281,6 +288,11 @@ function updateCountdown() {
 }
 const countdownInterval=setInterval(updateCountdown,1000);
 updateCountdown();
+
+// RSVP 버튼 클릭 -> 입력폼 표시
+document.getElementById('rsvpBtn').addEventListener('click', function() {
+  document.getElementById('rsvpForm').classList.remove('hidden');
+});
 
 // 토글, 복사, 공유, 모달
 function toggleBox(header){const content=header.nextElementSibling;const isOpen=content.style.height&&content.style.height!=="0px";content.style.height=isOpen?"0px":content.scrollHeight+"px";}
