@@ -1,167 +1,249 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>모바일 청첩장</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
 <style>
-body,html{margin:0;padding:0;font-family:'Nanum Gothic',sans-serif;color:#fff;text-align:center;background:#000;overflow-x:hidden;}
+:root{--text-shadow:0 2px 10px rgba(0,0,0,0.45);}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;min-height:100%;font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:transparent;overflow-x:hidden;text-align:center;color:#fff;text-shadow:var(--text-shadow);scroll-behavior:smooth;}
 .video-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;}
-.video-bg video{width:100%;height:100%;object-fit:cover;}
-.page{max-width:420px;margin:0 auto;padding:20px 16px 120px;position:relative;z-index:1;}
-.section{margin-bottom:20px;opacity:0;transform:translateY(20px);transition:opacity 0.8s, transform 0.8s;}
+.video-bg video{width:100%;height:100%;object-fit:cover;transform:scale(1.03);opacity:0.78;}
+.page{width:100%;max-width:420px;margin:0 auto;padding:26px 16px 120px;position:relative;z-index:5;}
+.top-space{height:12px;}
+.section{position:relative;padding:24px 0;margin-bottom:24px;opacity:0;transform:translateY(30px);transition:opacity 0.8s ease-out, transform 0.8s ease-out;}
 .section.show{opacity:1;transform:translateY(0);}
-.names{margin:10px 0;}
+.section::after{content:"";display:block;width:60%;max-width:300px;height:3px;background:#fff;margin:20px auto 0;border-radius:2px;opacity:0.85;}
+.section:last-child::after{display:none;}
+h1,.names{font-family:'Nanum Pen Script', cursive;}
+h1{font-size:28px;margin:0 0 16px;font-weight:400;}
+h2{font-size:16px;margin:0 0 12px;font-weight:700;opacity:0.95;letter-spacing:-0.2px;}
+.names{font-size:20px;margin:12px 0 12px;font-weight:400;line-height:1.6;}
+.subline{display:inline-block;margin-top:4px;font-size:13px;font-weight:400;opacity:0.85;letter-spacing:-0.1px;}
+p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 .muted{opacity:0.8;font-size:13px;}
-.btn,.copy-btn{display:block;width:100%;margin:10px auto;padding:10px;background:rgba(255,255,255,0.1);color:#fff;border:none;border-radius:6px;text-decoration:none;}
-.bgm-toggle{position:fixed;top:16px;right:16px;background:rgba(255,255,255,0.2);padding:10px 14px;border-radius:8px;cursor:pointer;z-index:1000;}
-.fade-msg{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.4);padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;transition:opacity 0.5s;z-index:1001;}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:9999;}
-.modal img{max-width:95%;max-height:80%;cursor:pointer;}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:32px;color:#fff;background:rgba(0,0,0,0.3);width:40px;height:60px;line-height:60px;text-align:center;border-radius:8px;cursor:pointer;user-select:none;}
-.arrow-left{left:10px;}
-.arrow-right{right:10px;}
-.toggle-header{margin:8px 0;padding:10px;background:rgba(255,255,255,0.1);cursor:pointer;}
-.toggle-content{height:0;overflow:hidden;transition:height 0.25s;}
-.fab{position:fixed;bottom:16px;width:56px;height:56px;display:grid;place-items:center;background:rgba(255,255,255,0.12);border-radius:50%;cursor:pointer;z-index:1000;}
-.fab svg{width:24px;height:24px;fill:#fff;}
-.fab-share{left:40%;}
-.fab-top{right:16px;}
+.btn,.copy-btn,.btn-naver{display:block;width:100%;max-width:360px;margin:16px auto 0;padding:12px 16px;font-size:14px;font-weight:700;color:#fff;text-decoration:none;background: rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);text-align:center;transition: background 0.2s;}
+.btn:hover,.btn-naver:hover,.copy-btn:hover{background: rgba(255,255,255,0.18);}
+.btn-naver{background:#03c75a;border:none;color:#fff;}
+.copy-btn{background: rgba(255,255,255,0.12);border:none;cursor:pointer;}
+.map-thumb{width:100%;max-width:360px;margin:12px auto 0;overflow:hidden;cursor:zoom-in;}
+.map-thumb img{display:block;width:100%;height:auto;}
+.map-hint{margin-top:8px;font-size:12px;opacity:0.8;}
+.toggle-header{margin:12px auto 0;padding:12px 16px;width:100%;max-width:360px;background: rgba(255,255,255,0.08);color:#fff;cursor:pointer;font-size:14px;font-weight:700;border:1px solid rgba(255,255,255,0.12);user-select:none;}
+.toggle-content{height:0;overflow:hidden;transition:height 0.25s ease;max-width:360px;margin:0 auto;}
+.toggle-content .inner{margin-top:10px;padding:12px 14px;background: rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);}
+.toggle-content .inner p{margin:0;font-size:13px;line-height:1.6;opacity:0.95;}
+.share-fab,.scroll-top-fab{position:fixed;bottom:16px;width:56px;height:56px;display:grid;place-items:center;background: rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);cursor:pointer;z-index:99999;border-radius:50%;}
+.share-fab{left:40%;}
+.scroll-top-fab{left:60%;}
+.share-fab svg,.scroll-top-fab svg{width:24px;height:24px;fill:#fff;opacity:0.95;}
+.bgm-toggle{position:fixed;top:16px;right:16px;z-index:10000;background: rgba(255,255,255,0.2);border:none;color:#fff;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;}
+.modal{position:fixed;inset:0;background: rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:999999;padding:18px;}
+.modal.show{display:flex;}
+.modal-inner{width:100%;max-width:520px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 18px 50px rgba(0,0,0,0.55);background: rgba(0,0,0,0.25);text-align:center;}
+.modal-inner img{display:block;width:100%;height:auto;}
+.modal-close{margin-top:10px;width:100%;max-width:520px;border:0;padding:14px 16px;background: rgba(255,255,255,0.12);color:#fff;font-weight:800;cursor:pointer;border:1px solid rgba(255,255,255,0.16);}
 </style>
 </head>
 <body>
 
-<div class="video-bg">
-  <video autoplay muted loop playsinline>
-    <source src="bg.mp4" type="video/mp4">
-  </video>
-</div>
-
-<button class="bgm-toggle" id="bgmToggle">BGM 켜기</button>
-<div class="fade-msg" id="bgmMsg">아내가 준비한 음악을 들어보세요</div>
-
-<div class="page">
-  <!-- 이름 -->
-  <div class="section"><h1>우리 드디어 결혼해요</h1>
-    <p class="names">신랑 신준섭<br><span class="subline">신광재·이동자의 아들</span><br><br>신부 김가람<br><span class="subline">한내엽의 딸</span></p>
-  </div>
-
-  <!-- 날짜 -->
-  <div class="section"><p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
-    <p id="countdown" class="muted">계산 중...</p>
-  </div>
-
-  <!-- 갤러리 -->
-  <div class="section">
-    <h2>갤러리</h2>
-    <img src="PHOTO1.jpg" style="width:100%;margin-bottom:8px;" onclick="openPhotoModal(0)">
-    <img src="PHOTO2.jpg" style="width:100%;margin-bottom:8px;" onclick="openPhotoModal(1)">
-    <img src="PHOTO3.jpg" style="width:100%;margin-bottom:8px;" onclick="openPhotoModal(2)">
-  </div>
-
-  <!-- 오시는 길 -->
-  <div class="section">
-    <h2>오시는 길</h2>
-    <p>서울특별시 중구 퇴계로18길 46</p>
-    <img src="map.jpg" style="width:100%;cursor:pointer;" onclick="toggleMapModal()">
-    <a class="btn" href="https://map.naver.com/v5/search/라루체명동" target="_blank">네이버 지도 보기</a>
-    <div class="toggle-header">지하철 안내</div>
-    <div class="toggle-content"><p>4호선 명동역 3번 출구 도보 60m</p></div>
-    <div class="toggle-header">버스 안내</div>
-    <div class="toggle-content"><p>퇴계로2가.명동역 104,105,421,463,507,604,N16,7011</p></div>
-  </div>
-
-  <!-- 계좌 -->
-  <div class="section">
-    <h2>마음 전하실 곳</h2>
-    <div class="toggle-header">신랑측</div>
-    <div class="toggle-content">
-      <p>신준섭<br>기업은행 588-018494-01-019</p>
-      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
-      <p>신광재<br>기업은행 123-456789-00-00</p>
-      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
-      <p>이동자<br>국민은행 987-654321-00-00</p>
-      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
-    </div>
-    <div class="toggle-header">신부측</div>
-    <div class="toggle-content">
-      <p>김가람<br>카카오뱅크 1234-5678-9012</p>
-      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
-    </div>
-  </div>
-</div>
-
-<!-- 갤러리 모달 -->
-<div class="modal" id="photoModal">
-  <span class="arrow arrow-left" onclick="prevPhoto()">&#10094;</span>
-  <img id="modalPhoto" src="" onclick="closePhotoModal()">
-  <span class="arrow arrow-right" onclick="nextPhoto()">&#10095;</span>
-</div>
-
-<!-- 약도 모달 -->
-<div class="modal" id="mapModal" onclick="toggleMapModal()">
-  <img src="map.jpg">
-</div>
-
-<!-- 하단 버튼 -->
-<div class="fab fab-share" onclick="shareInvite()">
-<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-</div>
-<div class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-<svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/></svg>
-</div>
-
 <audio id="bgm" loop>
   <source src="Si_Llego_A_Besarte.mp3" type="audio/mpeg">
 </audio>
+<button class="bgm-toggle" id="bgm-toggle">BGM 켜기</button>
+
+<div class="video-bg">
+  <video autoplay muted loop playsinline preload="auto">
+    <source src="./bg.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="page">
+  <div class="top-space"></div>
+
+  <div class="section reveal">
+    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
+  </div>
+
+  <div class="section reveal">
+    <h1>우리 드디어 결혼해요</h1>
+    <p class="names">
+      신랑 신준섭<br>
+      <span class="subline">신광재 · 이동자의 아들</span><br><br>
+      신부 김가람<br>
+      <span class="subline">한내엽의 딸</span>
+    </p>
+  </div>
+
+  <div class="section reveal">
+    <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
+    <p id="countdown" class="muted">계산 중...</p>
+  </div>
+
+  <div class="section reveal">
+    <p>라루체 명동<br>5층 그레이스홀</p>
+  </div>
+
+  <div class="section reveal">
+    <h2>오시는 길</h2>
+    <p>서울특별시 중구 퇴계로18길 46</p>
+    <div class="map-thumb" onclick="openMapModal()">
+      <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
+    </div>
+    <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
+    <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">네이버지도에서 보기</a>
+
+    <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
+    <div class="toggle-content"><div class="inner" style="text-align:center;"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
+
+    <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
+    <div class="toggle-content">
+      <div class="inner" style="text-align:center;">
+        <p><strong>퇴계로2가.명동역</strong><br>104, 105, 421, 463, 507, 604, N16, 7011</p>
+        <p><strong>명동입구</strong><br>104, 421, 463, 507, 604, N16, 7011, 05</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section reveal">
+    <h2>참석 여부 회신</h2>
+    <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank" rel="noopener">참석 유무 작성</a>
+  </div>
+
+  <div class="section reveal">
+    <h2>마음 전하실 곳</h2>
+    <p class="muted">축하의 마음만으로도 감사합니다</p>
+    <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
+    <div class="toggle-content">
+      <div class="inner">
+        <p id="groom-account-main">신준섭<br>기업은행 588-018494-01-019</p>
+        <button class="copy-btn" onclick="copyText(event,'groom-account-main')">계좌번호 복사</button>
+        <div style="margin-top:12px;">
+          <p id="groom-account-shingwangjae">신광재<br>기업은행 123-456789-00-00</p>
+          <button class="copy-btn" onclick="copyText(event,'groom-account-shingwangjae')">계좌번호 복사</button>
+        </div>
+        <div style="margin-top:12px;">
+          <p id="groom-account-ido">이동자<br>국민은행 987-654321-00-00</p>
+          <button class="copy-btn" onclick="copyText(event,'groom-account-ido')">계좌번호 복사</button>
+        </div>
+      </div>
+    </div>
+    <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
+    <div class="toggle-content">
+      <div class="inner">
+        <p id="bride-account">김가람<br>카카오뱅크 1234-5678-9012</p>
+        <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 모달 -->
+<div class="modal" id="mapModal">
+  <div class="modal-inner">
+    <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
+    <button class="modal-close" onclick="closeMapModal()">닫기</button>
+  </div>
+</div>
+
+<div class="share-fab" onclick="shareInvite()">
+  <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
+</div>
+
+<div class="scroll-top-fab" onclick="scrollToTop()">
+  <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/></svg>
+</div>
 
 <script>
-// fade-in
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');});},{threshold:0.1});
-document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+if('scrollRestoration' in history){history.scrollRestoration='manual';}
+window.scrollTo(0,0);
 
 // 카운트다운
-const weddingDate=new Date("2026-07-05T13:30:00");
+const weddingDate = new Date("2026-07-05T13:30:00");
 function updateCountdown(){
-  const diff=weddingDate-new Date();
-  if(diff<=0){document.getElementById('countdown').innerText="오늘 결혼식입니다!";return;}
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/(1000*60))%60);
-  const s=Math.floor((diff/1000)%60);
-  document.getElementById('countdown').innerText=`${d}일 ${h}시간 ${m}분 ${s}초 남았습니다`;
+  const now = new Date();
+  const diff = weddingDate - now;
+  if(diff<=0){ 
+    document.getElementById("countdown").innerText="🎉 오늘 결혼식입니다! 🎉"; 
+    clearInterval(countdownInterval); 
+    return; 
+  }
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hours=Math.floor((diff/(1000*60*60))%24);
+  const minutes=Math.floor((diff/(1000*60))%60);
+  const seconds=Math.floor((diff/1000)%60);
+  document.getElementById("countdown").innerText=`${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`;
 }
-setInterval(updateCountdown,1000);
+const countdownInterval=setInterval(updateCountdown,1000);
 updateCountdown();
 
-// BGM
-const bgm=document.getElementById('bgm');
-const bgmToggle=document.getElementById('bgmToggle');
-const bgmMsg=document.getElementById('bgmMsg');
-let isPlaying=false;
-bgmToggle.onclick=function(){
-  if(!isPlaying){bgm.play();isPlaying=true;bgmToggle.innerText="BGM 끄기";}
-  else{bgm.pause();isPlaying=false;bgmToggle.innerText="BGM 켜기";}
+// 토글박스
+function toggleBox(header){
+  const content=header.nextElementSibling;
+  const isOpen=content.style.height&&content.style.height!=="0px";
+  content.style.height=isOpen?"0px":content.scrollHeight+"px";
 }
-bgmMsg.style.opacity=1;
-setTimeout(()=>{bgmMsg.style.opacity=0;},3000);
-
-// 갤러리
-const photos=["PHOTO1.jpg","PHOTO2.jpg","PHOTO3.jpg"];
-let currentPhoto=0;
-function openPhotoModal(idx){currentPhoto=idx;document.getElementById('modalPhoto').src=photos[idx];document.getElementById('photoModal').style.display='flex';}
-function closePhotoModal(){document.getElementById('photoModal').style.display='none';}
-function prevPhoto(){currentPhoto=(currentPhoto-1+photos.length)%photos.length;document.getElementById('modalPhoto').src=photos[currentPhoto];}
-function nextPhoto(){currentPhoto=(currentPhoto+1)%photos.length;document.getElementById('modalPhoto').src=photos[currentPhoto];}
-
-// 약도
-function toggleMapModal(){const m=document.getElementById('mapModal');m.style.display=(m.style.display==='flex'?'none':'flex');}
 
 // 계좌 복사
-function copyText(btn){const text=btn.previousElementSibling.innerText;navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다"));}
+function copyText(e,id){
+  e.stopPropagation();
+  const text=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다")).catch(()=>alert("복사 실패!"));
+}
 
-// 공유
-function shareInvite(){const url=window.location.href;if(navigator.share){navigator.share({title:"모바일 청첩장",text:"우리 결혼식에 초대합니다",url});} else{navigator.clipboard.writeText(url).then(()=>alert("링크가 복사되었습니다"));}}
+// 공유 / 스크롤
+function shareInvite(){
+  const title="모바일 청첩장", text="우리 결혼식에 초대합니다 🙂", url=window.location.href;
+  if(navigator.share){navigator.share({title,text,url});}
+  else{navigator.clipboard.writeText(url).then(()=>alert("PC에서는 링크를 복사했어요!")).catch(()=>alert("복사 실패!")); }
+}
+function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
+
+// 섹션 자연스러운 fade-in
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add("show"); }
+  });
+},{threshold:0.15});
+document.querySelectorAll(".section").forEach(el=>observer.observe(el));
+
+// BGM 자동재생 (모바일/PC 호환)
+const bgm = document.getElementById('bgm');
+const bgmToggle = document.getElementById('bgm-toggle');
+let isPlaying = false;
+
+bgm.muted = true;
+bgm.play().then(()=>{
+  // 모바일 자동 재생
+  isPlaying = true;
+  bgm.muted = false;
+  bgmToggle.innerText = "BGM 끄기";
+}).catch(err=>{
+  console.log("자동 재생 실패:", err);
+  bgmToggle.innerText = "BGM 켜기";
+});
+
+bgmToggle.addEventListener('click', ()=>{
+  if(!isPlaying){
+    bgm.muted = false;
+    bgm.play();
+    bgmToggle.innerText = "BGM 끄기";
+    isPlaying = true;
+  } else {
+    bgm.pause();
+    bgmToggle.innerText = "BGM 켜기";
+    isPlaying = false;
+  }
+});
+
+// 약도 모달
+function openMapModal(){document.getElementById("mapModal").classList.add("show");}
+function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
 </script>
 
 </body>
