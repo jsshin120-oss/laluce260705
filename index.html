@@ -54,7 +54,7 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 <audio id="bgm" loop>
   <source src="Si_Llego_A_Besarte.mp3" type="audio/mpeg">
 </audio>
-<button class="bgm-toggle" id="bgm-toggle">BGM 끄기</button>
+<button class="bgm-toggle" id="bgm-toggle">BGM 켜기</button>
 
 <div class="video-bg">
   <video autoplay muted loop playsinline preload="auto">
@@ -212,15 +212,33 @@ const observer=new IntersectionObserver((entries)=>{
 },{threshold:0.15});
 document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
-// BGM 자동재생 트릭
+// BGM 자동재생 (모바일/PC 호환)
 const bgm = document.getElementById('bgm');
 const bgmToggle = document.getElementById('bgm-toggle');
-let isPlaying = true;
+let isPlaying = false;
+
 bgm.muted = true;
-bgm.play().then(()=>{ bgm.muted=false; }).catch(err=>console.log("자동 재생 실패:",err));
+bgm.play().then(()=>{
+  // 모바일 자동 재생
+  isPlaying = true;
+  bgm.muted = false;
+  bgmToggle.innerText = "BGM 끄기";
+}).catch(err=>{
+  console.log("자동 재생 실패:", err);
+  bgmToggle.innerText = "BGM 켜기";
+});
+
 bgmToggle.addEventListener('click', ()=>{
-  if(isPlaying){ bgm.pause(); bgmToggle.innerText="BGM 켜기"; isPlaying=false; }
-  else{ bgm.play(); bgmToggle.innerText="BGM 끄기"; isPlaying=true; }
+  if(!isPlaying){
+    bgm.muted = false;
+    bgm.play();
+    bgmToggle.innerText = "BGM 끄기";
+    isPlaying = true;
+  } else {
+    bgm.pause();
+    bgmToggle.innerText = "BGM 켜기";
+    isPlaying = false;
+  }
 });
 
 // 약도 모달
