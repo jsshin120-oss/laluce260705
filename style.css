@@ -66,13 +66,13 @@ body {
   font-size: 12px;
   letter-spacing: 2px;
   opacity: 0.75;
-  margin: 0 0 12px;
+  margin-bottom: 12px;
 }
 
 .main-title {
   font-size: 22px;
   font-weight: 700;
-  margin: 0 0 18px;
+  margin-bottom: 18px;
   letter-spacing: -0.2px;
   line-height: 1.35;
 }
@@ -165,13 +165,27 @@ body {
 
 /* ================= 계좌 토글 ================= */
 .toggle-content .inner p {
-  margin: 12px 0 10px;   /* 계좌 텍스트 ↔ 버튼 간격 */
+  margin: 12px 0 10px;   /* 계좌 텍스트 ↔ 복사 버튼 */
 }
 
 .toggle-content .inner .copy-btn {
-  margin-bottom: 16px;  /* 계좌 블록 간 간격 */
+  margin-bottom: 16px;  /* 계좌 블록 기본 간격 */
 }
 
+/* 신랑 본인 계좌 ↔ 혼주 계좌 사이 여백 */
+#groom-account + .copy-btn {
+  margin-bottom: 26px;  /* 여기만 넉넉하게 */
+}
+
+/* 토글 헤더 기본 간격 (신랑측 / 신부측 버튼) */
+.section .toggle-header {
+  margin-top: 16px;
+}
+
+/* 토글 내용 아래 여백 */
+.section .toggle-content {
+  margin-bottom: 10px;
+}
 /* ================= 공유 ================= */
 .share-wrap {
   margin-top: 44px;
