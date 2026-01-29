@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>모바일 청첩장</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --text-shadow: 0 2px 14px rgba(0,0,0,0.55);
+      --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
     }
 
     * { box-sizing: border-box; }
@@ -16,12 +18,9 @@
       margin: 0;
       padding: 0;
       min-height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont,
-        "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      font-family: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
       background: transparent;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       text-align: center;
       color: #fff;
       text-shadow: var(--text-shadow);
@@ -62,7 +61,6 @@
       margin-bottom: 24px;
     }
 
-    /* 중앙 정렬된 짧은 구분선 */
     .section::after {
       content: "";
       display: block;
@@ -75,74 +73,80 @@
       opacity: 0.85;
     }
 
-    .section:last-child::after { display:none; } /* 맨 아래 구분선 제거 */
+    .section:last-child::after { display:none; }
 
-    h1 { font-size: 22px; margin:0 0 16px; font-weight:600; letter-spacing:-0.3px; }
-    h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.98; letter-spacing:-0.2px; }
-
-    .names { font-size:18px; margin:12px 0 12px; font-weight:700; line-height:1.5; }
-    .subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.92; letter-spacing:-0.1px; }
-    p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
-    .muted { opacity:0.85; font-size:13px; }
-
-    .btn {
-      display:block; margin:16px auto 0; padding:14px 16px;
-      width:100%; max-width:360px; border-radius:18px;
-      background: rgba(0,0,0,0.60); color:#fff; text-decoration:none;
-      font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.16);
-      backdrop-filter: blur(8px); transition: transform 0.08s ease;
-      text-align:center;
+    /* ================= 글씨체 ================= */
+    h1, .names { 
+      font-family: 'Nanum Pen Script', cursive; 
     }
-    .btn:active { transform: scale(0.99); }
-    .btn-naver { background: rgba(3,199,90,0.88); border:1px solid rgba(255,255,255,0.18); }
+    h1 { font-size: 28px; margin:0 0 16px; font-weight:400; }
+    h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.95; letter-spacing:-0.2px; }
+
+    .names { font-size:20px; margin:12px 0 12px; font-weight:400; line-height:1.6; }
+    .subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.85; letter-spacing:-0.1px; }
+    p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
+    .muted { opacity:0.8; font-size:13px; }
+
+    /* ================= 버튼 ================= */
+    .btn, .copy-btn, .btn-naver {
+      display:block;
+      width:100%;
+      max-width:360px;
+      margin:16px auto 0;
+      padding:12px 16px;
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+      text-decoration:none;
+      background: rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      text-align:center;
+      transition: background 0.2s;
+    }
+    .btn:hover, .btn-naver:hover, .copy-btn:hover { background: rgba(255,255,255,0.18); }
+    .btn-naver { background: #03c75a; border:none; color:#fff; }
+    .copy-btn { background: rgba(255,255,255,0.12); border:none; cursor:pointer; }
 
     .map-thumb {
       width:100%; max-width:360px; margin:12px auto 0;
-      border-radius:18px; overflow:hidden; cursor:zoom-in;
+      overflow:hidden; cursor:zoom-in;
     }
     .map-thumb img { display:block; width:100%; height:auto; }
 
     .map-hint { margin-top:8px; font-size:12px; opacity:0.8; }
 
     .toggle-header {
-      margin:12px auto 0; padding:14px 16px; width:100%; max-width:360px;
-      background: rgba(0,0,0,0.50); color:#fff; border-radius:18px; cursor:pointer;
-      font-size:14px; font-weight:800; border:1px solid rgba(255,255,255,0.16); backdrop-filter: blur(8px);
+      margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
+      background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;
+      font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
       user-select:none;
     }
     .toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
-    .toggle-content .inner { margin-top:10px; padding:12px 14px; border-radius:18px; background: rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.14); backdrop-filter: blur(8px); }
+    .toggle-content .inner { margin-top:10px; padding:12px 14px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); }
     .toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
 
-    .copy-btn { margin-top:10px; padding:10px 16px; border:none; border-radius:18px; background: rgba(255,255,255,0.14); color:#fff; font-size:13px; cursor:pointer; border:1px solid rgba(255,255,255,0.18); }
-
-    /* 공유 버튼 */
+    /* 공유 / 맨 위 버튼 */
     .share-fab, .scroll-top-fab {
       position: fixed;
       bottom: 16px;
       width: 56px; height: 56px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      background: rgba(0,0,0,0.72);
-      border: 1px solid rgba(255,255,255,0.20);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.42);
+      display: grid; place-items:center;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.2);
       cursor: pointer;
       z-index: 99999;
     }
-    .share-fab { left: 40%; transform: translateX(-50%); }
-    .scroll-top-fab { left: 60%; transform: translateX(-50%); }
+    .share-fab { left: 40%; }
+    .scroll-top-fab { left: 60%; }
 
     .share-fab svg, .scroll-top-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
-    .share-fab:active, .scroll-top-fab:active { transform: translateX(-50%) scale(0.96); }
 
     /* 모달 */
     .modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
     .modal.show { display:flex; }
-    .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); backdrop-filter:blur(10px); text-align:center; }
+    .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
     .modal-inner img { display:block; width:100%; height:auto; }
-    .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; border-radius:18px; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
+    .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
   </style>
 </head>
 
@@ -165,7 +169,6 @@
     <!-- 결혼식 정보 -->
     <div class="section reveal">
       <h1>우리 드디어 결혼해요</h1>
-
       <p class="names">
         신랑 신준섭<br>
         <span class="subline">신광재 · 이동자의 아들</span>
@@ -173,27 +176,23 @@
         신부 김가람<br>
         <span class="subline">한내엽의 딸</span>
       </p>
-      <br><br>
     </div>
 
     <!-- 날짜 & 시간 -->
     <div class="section reveal">
       <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
       <p id="countdown" class="muted">계산 중...</p>
-      <br><br>
     </div>
 
     <!-- 장소 -->
     <div class="section reveal">
       <p>라루체 명동<br>5층 그레이스홀</p>
-      <br><br>
     </div>
 
     <!-- 오시는 길 -->
     <div class="section reveal">
       <h2>오시는 길</h2>
       <p>서울특별시 중구 퇴계로18길 46</p>
-
       <div class="map-thumb" onclick="openMapModal()">
         <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
       </div>
@@ -208,32 +207,26 @@
 
       <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
       <div class="toggle-content"><div class="inner"><p>퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05</p></div></div>
-      <br><br>
     </div>
 
     <!-- 참석 여부 -->
     <div class="section reveal">
       <h2>참석 여부 회신</h2>
       <p class="muted">원활한 예식 준비를 위해 참석 여부를 알려주세요</p>
-
-      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform"
-         target="_blank" rel="noopener">
-        참석 여부 회신하기 (구글폼 열기)
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomgftVaL66ABfMRHbwTpA/viewform" target="_blank" rel="noopener">
+        참석 여부 회신하기 (구글폼)
       </a>
-      <br><br>
     </div>
 
     <!-- 마음 전하실 곳 -->
     <div class="section reveal">
       <h2>마음 전하실 곳</h2>
       <p class="muted">축하의 마음만으로도 감사합니다</p>
-
       <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
       <div class="toggle-content"><div class="inner">
         <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account')">계좌번호 복사</button>
       </div></div>
-
       <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
       <div class="toggle-content"><div class="inner">
         <p id="bride-account">김가람<br>카카오뱅크</p>
@@ -242,7 +235,7 @@
     </div>
   </div>
 
-  <!-- 공유 / 맨 위로 버튼 -->
+  <!-- 공유 / 맨 위 버튼 -->
   <button class="share-fab" type="button" onclick="shareInvite()" aria-label="청첩장 공유하기">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
@@ -289,7 +282,6 @@
     function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
     function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
 
-    // 스크롤 애니메이션
     const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});},{threshold:0.15});
     document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
   </script>
