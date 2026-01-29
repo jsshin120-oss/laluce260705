@@ -4,18 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>모바일 청첩장</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
-
-<!-- 공유 메타 -->
-<meta property="og:title" content="신준섭 ♥ 김가람 결혼합니다">
-<meta property="og:description" content="2026년 7월 5일 오후 1시 30분 | 라루체 명동">
-<meta property="og:image" content="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg">
 
 <style>
 :root { --text-shadow:0 2px 10px rgba(0,0,0,0.45); }
 *{box-sizing:border-box;}
-
 html,body{
   margin:0; padding:0; min-height:100%;
   font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
@@ -25,11 +18,11 @@ html,body{
   overflow-x:hidden;
 }
 
-/* 로딩 페이드인 */
+/* ===== 페이드인 로딩 ===== */
 body{opacity:0; transition:opacity 1s ease;}
 body.loaded{opacity:1}
 
-/* reveal */
+/* ===== reveal 애니메이션 ===== */
 .reveal{
   opacity:0;
   transform:translateY(18px);
@@ -40,7 +33,7 @@ body.loaded{opacity:1}
   transform:translateY(0);
 }
 
-/* 비디오 배경 */
+/* ===== 비디오 배경 ===== */
 .video-bg{
   position:fixed; inset:0; z-index:-2;
 }
@@ -54,85 +47,84 @@ body.loaded{opacity:1}
   background:rgba(0,0,0,.25);
 }
 
-/* 페이지 */
-.page{
-  max-width:420px;
-  margin:0 auto;
-  padding:26px 16px 120px;
-  position:relative;
-  z-index:5;
-}
-
-.section{
-  padding:24px 0;
-  margin-bottom:24px;
-}
+/* ===== 페이지 ===== */
+.page{max-width:420px; margin:0 auto; padding:26px 16px 120px; position:relative; z-index:5;}
+.section{padding:24px 0; margin-bottom:24px;}
 .section::after{
-  content:"";
-  display:block;
+  content:""; display:block;
   width:60%; height:3px;
   margin:20px auto 0;
-  background:#fff;
-  border-radius:2px;
-  opacity:.85;
+  background:#fff; border-radius:2px; opacity:.85;
 }
 .section:last-child::after{display:none}
 
+/* ===== 글씨 ===== */
 h1,.names{font-family:'Nanum Pen Script',cursive;}
-h1{font-size:28px; margin-bottom:16px}
-h2{font-size:16px; margin-bottom:12px}
-.names{font-size:20px; line-height:1.6}
-p{font-size:14px; line-height:1.75}
-.muted{opacity:.8; font-size:13px}
+h1{font-size:28px; margin-bottom:16px;}
+h2{font-size:16px; margin-bottom:12px;}
+.names{font-size:20px; line-height:1.6;}
+p{font-size:14px; line-height:1.75;}
+.subline{font-size:13px; opacity:.85;}
+.muted{opacity:.8; font-size:13px;}
 
-/* ===== 갤러리 ===== */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  margin-top:12px;
-}
-.gallery img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
+/* ===== 버튼 ===== */
+.btn,.copy-btn,.btn-naver{
+  display:block; width:100%; max-width:360px;
+  margin:16px auto 0; padding:12px 16px;
+  font-size:14px; font-weight:700;
+  color:#fff; text-decoration:none; text-align:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  transition:background 0.2s;
   cursor:pointer;
 }
+.btn:hover,.btn-naver:hover,.copy-btn:hover{background:rgba(255,255,255,.18);}
+.btn-naver{background:#03c75a;border:none;color:#fff;}
+.copy-btn{background:rgba(255,255,255,.12);border:none;}
 
-/* 모달 */
-.modal{
-  position:fixed; inset:0;
-  background:rgba(0,0,0,.8);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
+/* ===== 지도 ===== */
+.map-thumb{width:100%; max-width:360px; margin:12px auto 0; overflow:hidden; cursor:zoom-in;}
+.map-thumb img{width:100%; height:auto;}
+.map-hint{margin-top:8px; font-size:12px; opacity:.8;}
+.toggle-header{
+  margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
+  background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;
+  font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
+  user-select:none;
 }
-.modal.show{display:flex}
-.modal img{
-  max-width:92%;
-  max-height:92%;
-}
+.toggle-content{height:0; overflow:hidden; transition:height .25s ease; max-width:360px; margin:0 auto;}
+.toggle-content .inner{margin-top:10px; padding:12px 14px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12);}
+.toggle-content .inner p{margin:0;font-size:13px; line-height:1.6; opacity:.95;}
 
-/* 버튼 */
-.btn{
-  display:block;
-  max-width:360px;
-  margin:16px auto 0;
-  padding:12px;
-  background:rgba(255,255,255,.12);
-  color:#fff;
-  border:none;
-  font-weight:700;
-  text-decoration:none;
+/* ===== 공유 / 맨 위 ===== */
+.share-fab,.scroll-top-fab{
+  position:fixed; bottom:16px; width:56px; height:56px;
+  display:grid; place-items:center;
+  background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);
+  cursor:pointer; z-index:99999;
 }
+.share-fab{left:40%;}
+.scroll-top-fab{left:60%;}
+.share-fab svg,.scroll-top-fab svg{width:24px; height:24px; fill:#fff; opacity:.95;}
+
+/* ===== 모달 ===== */
+.modal{position:fixed; inset:0; background:rgba(0,0,0,.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px;}
+.modal.show{display:flex;}
+.modal-inner{width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,.18); box-shadow:0 18px 50px rgba(0,0,0,.55); background:rgba(0,0,0,.25); text-align:center;}
+.modal-inner img{display:block; width:100%; height:auto;}
+.modal-close{margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background:rgba(255,255,255,.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,.16);}
+
+/* ===== 갤러리 ===== */
+.gallery{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:12px;}
+.gallery img{width:100%; aspect-ratio:1/1; object-fit:cover; cursor:pointer;}
+#galleryModal img{max-width:92%; max-height:92%;}
 </style>
 </head>
-
 <body>
 
+<!-- 비디오 배경 -->
 <div class="video-bg">
-  <video autoplay muted loop playsinline webkit-playsinline>
+  <video autoplay muted loop playsinline>
     <source src="./bg.mp4" type="video/mp4">
   </video>
 </div>
@@ -140,16 +132,14 @@ p{font-size:14px; line-height:1.75}
 <div class="page">
 
   <div class="section reveal">
-    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" style="width:100%" loading="eager">
+    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" style="width:100%">
   </div>
 
   <div class="section reveal">
     <h1>우리 드디어 결혼해요</h1>
     <p class="names">
-      신랑 신준섭<br>
-      <span class="muted">신광재 · 이동자의 아들</span><br><br>
-      신부 김가람<br>
-      <span class="muted">한내엽의 딸</span>
+      신랑 신준섭<br><span class="subline">신광재 · 이동자의 아들</span><br><br>
+      신부 김가람<br><span class="subline">한내엽의 딸</span>
     </p>
   </div>
 
@@ -158,7 +148,6 @@ p{font-size:14px; line-height:1.75}
     <p id="countdown" class="muted"></p>
   </div>
 
-  <!-- 📸 갤러리 -->
   <div class="section reveal">
     <h2>우리의 순간들</h2>
     <div class="gallery">
@@ -171,6 +160,8 @@ p{font-size:14px; line-height:1.75}
     </div>
   </div>
 
+  <!-- 기존 장소 / 지도 / 참석여부 / 마음 전하실 곳 등 동일 -->
+
 </div>
 
 <!-- 갤러리 모달 -->
@@ -179,37 +170,37 @@ p{font-size:14px; line-height:1.75}
 </div>
 
 <script>
-/* 로딩 */
-window.addEventListener('load',()=>{
-  document.body.classList.add('loaded');
-});
+// ===== 로딩 페이드인 =====
+window.addEventListener('load',()=>{document.body.classList.add('loaded');});
 
-/* reveal */
+// ===== reveal 애니메이션 =====
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('show');
-      observer.unobserve(e.target);
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
     }
-  })
-},{threshold:.15});
+  });
+},{threshold:0.15});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-/* 카운트다운 */
-const weddingDate=new Date("2026-07-05T13:30:00");
-setInterval(()=>{
-  const diff=weddingDate-new Date();
-  if(diff<=0){
-    countdown.innerText="🎉 오늘 결혼식입니다!";
-    return;
-  }
-  const days=Math.ceil(diff/86400000);
-  countdown.innerText=`${days}일 남았습니다`;
-},1000);
+// ===== 카운트다운 =====
+const weddingDate = new Date("2026-07-05T13:30:00");
+function updateCountdown(){
+  const diff = weddingDate - new Date();
+  if(diff<=0){document.getElementById("countdown").innerText="🎉 오늘 결혼식입니다! 🎉"; return;}
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hours=Math.floor((diff/(1000*60*60))%24);
+  const minutes=Math.floor((diff/(1000*60))%60);
+  const seconds=Math.floor((diff/1000)%60);
+  document.getElementById("countdown").innerText=`${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`;
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
 
-/* 갤러리 */
+// ===== 갤러리 모달 =====
 function openGallery(img){
-  document.getElementById("galleryImg").src=img.src;
+  document.getElementById("galleryImg").src = img.src;
   document.getElementById("galleryModal").classList.add("show");
 }
 function closeGallery(){
