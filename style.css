@@ -255,3 +255,10 @@ body {
   letter-spacing: -0.01em;
   opacity: 0.9;
 }
+.toggle-content .inner p {
+  margin: 12px 0 6px;   /* 이름+계좌 위아래 */
+}
+
+.toggle-content .inner .copy-btn {
+  margin-bottom: 18px; /* 다음 계좌와의 간격 */
+}
