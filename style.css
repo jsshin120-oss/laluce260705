@@ -25,10 +25,9 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.35; /* 영상 투명도 */
+  opacity: 0.35;
 }
 
-/* 어두운 오버레이 */
 .video-bg::after {
   content: "";
   position: absolute;
@@ -38,16 +37,6 @@ html, body {
 }
 
 /* ================= 페이지 래퍼 ================= */
-.page {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 26px 18px 60px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-/* 모바일에서 가운데 정렬 깨짐 방지 */
 body {
   display: flex;
   justify-content: center;
@@ -55,6 +44,12 @@ body {
 
 .page {
   width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 26px 18px 60px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 /* ================= 섹션 ================= */
@@ -82,48 +77,54 @@ body {
   line-height: 1.35;
 }
 
-/* ================= 이름/가족관계 ================= */
+/* ================= 이름 / 혼주 ================= */
 .names {
+  font-family: 'Nanum Pen Script', cursive;
   margin: 16px 0 14px;
-  font-size: 18px;
-  font-weight: 650;
-  line-height: 1.6;
   letter-spacing: -0.2px;
 }
 
-.names .role {
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.8;
-  letter-spacing: 1.5px;
+.person {
+  margin-bottom: 26px;
+}
+
+.role {
+  font-size: 20px;
+  opacity: 0.9;
   margin-right: 6px;
 }
 
-.names .family {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: 13px;
-  font-weight: 400;
+.main-name {
+  font-size: 38px;
+  line-height: 1.15;
+}
+
+.parents {
+  display: block;
+  margin-top: 8px;
+  font-family: 'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  font-size: 18px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
   opacity: 0.9;
 }
 
-/* 날짜/장소 */
+/* ================= 날짜 / 장소 ================= */
 .date-place {
   font-size: 14px;
   line-height: 1.7;
   opacity: 0.9;
-  margin: 14px 0 0;
+  margin-top: 14px;
 }
 
-/* ================= 본문 텍스트 ================= */
+/* ================= 본문 ================= */
 .text {
   font-size: 14px;
   line-height: 1.9;
   opacity: 0.92;
-  margin: 0;
 }
 
-/* ================= 약도 이미지 ================= */
+/* ================= 지도 ================= */
 .map-img {
   margin-top: 14px;
   border-radius: 18px;
@@ -142,17 +143,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-
   margin-top: 14px;
   padding: 14px 18px;
-
   border-radius: 999px;
-  text-decoration: none;
-
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: -0.2px;
-
+  text-decoration: none;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
@@ -160,7 +156,6 @@ body {
   transform: scale(0.98);
 }
 
-/* 네이버 지도 버튼 */
 .btn-naver {
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
@@ -168,13 +163,21 @@ body {
   backdrop-filter: blur(6px);
 }
 
-/* ================= 공유 버튼 ================= */
+/* ================= 계좌 토글 ================= */
+.toggle-content .inner p {
+  margin: 12px 0 10px;   /* 계좌 텍스트 ↔ 버튼 간격 */
+}
+
+.toggle-content .inner .copy-btn {
+  margin-bottom: 16px;  /* 계좌 블록 간 간격 */
+}
+
+/* ================= 공유 ================= */
 .share-wrap {
   margin-top: 44px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .share-btn {
@@ -183,31 +186,17 @@ body {
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.22);
   background: rgba(255,255,255,0.12);
-  color: #fff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
   backdrop-filter: blur(6px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.share-btn:active {
-  transform: scale(0.96);
 }
 
 .share-text {
   margin-top: 10px;
   font-size: 13px;
   opacity: 0.85;
-  letter-spacing: -0.2px;
 }
 
-/* ================= 반응형(모바일 최적화) ================= */
+/* ================= 모바일 ================= */
 @media (max-width: 420px) {
   .page {
     padding: 22px 16px 54px;
@@ -217,48 +206,11 @@ body {
     font-size: 21px;
   }
 
-  .names {
-    font-size: 17px;
+  .main-name {
+    font-size: 36px;
   }
 
   .text {
     font-size: 13.5px;
   }
-}
-/* ===== 신랑·신부 이름 영역 ===== */
-.names {
-  font-family: 'Nanum Pen Script', cursive;
-  margin-top: 12px;   /* 전체 여백 살짝 증가 */
-}
-
-.person {
-  margin-bottom: 26px; /* 인물 간 간격 ↑ */
-}
-
-.role {
-  font-size: 20px;     /* 신랑 / 신부 */
-  opacity: 0.9;
-  margin-right: 6px;
-}
-
-.main-name {
-  font-size: 38px;     /* ⭐ 이름: 34 → 38 */
-  line-height: 1.15;
-}
-
-.parents {
-  display: block;
-  margin-top: 8px;
-  font-family: 'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-  font-size: 18px;     /* ⭐ 혼주 정보: 16 → 18 */
-  line-height: 1.45;
-  letter-spacing: -0.01em;
-  opacity: 0.9;
-}
-.toggle-content .inner p {
-  margin: 12px 0 6px;   /* 이름+계좌 위아래 */
-}
-
-.toggle-content .inner .copy-btn {
-  margin-bottom: 18px; /* 다음 계좌와의 간격 */
 }
