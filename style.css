@@ -225,3 +225,35 @@ body {
     font-size: 13.5px;
   }
 }
+/* ===== 인사 영역 정리 ===== */
+.names {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 30px;
+  line-height: 1.9;
+}
+
+.person {
+  margin-bottom: 18px;
+}
+
+/* 신랑 · 신부 라벨 */
+.role {
+  font-size: 20px;
+  margin-right: 6px;
+  opacity: 0.9;
+}
+
+/* 신랑 / 신부 이름 */
+.main-name {
+  font-size: 34px;
+}
+
+/* 혼주 관계 */
+.parents {
+  display: block;
+  margin-top: 4px;
+  font-family: 'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  font-size: 18px;      /* ⭐ 혼주 이름 키움 */
+  letter-spacing: -0.01em;
+  opacity: 0.95;
+}
