@@ -47,6 +47,9 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 .modal-inner{width:100%;max-width:520px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 18px 50px rgba(0,0,0,0.55);background: rgba(0,0,0,0.25);text-align:center;}
 .modal-inner img{display:block;width:100%;height:auto;}
 .modal-close{margin-top:10px;width:100%;max-width:520px;border:0;padding:14px 16px;background: rgba(255,255,255,0.12);color:#fff;font-weight:800;cursor:pointer;border:1px solid rgba(255,255,255,0.16);}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:360px;margin:0 auto;}
+.gallery-grid img{width:100%;height:auto;cursor:zoom-in;border-radius:6px;transition:transform 0.2s;}
+.gallery-grid img:hover{transform:scale(1.05);}
 </style>
 </head>
 <body>
@@ -88,6 +91,25 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
     <p>라루체 명동<br>5층 그레이스홀</p>
   </div>
 
+  <!-- 갤러리 섹션 -->
+  <div class="section reveal">
+    <h2>갤러리</h2>
+    <div class="gallery-grid">
+      <img src="PHOTO1.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO2.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO3.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO4.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO5.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO6.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO7.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO8.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO9.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO10.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO11.jpg" onclick="openGalleryModal(this)">
+      <img src="PHOTO12.jpg" onclick="openGalleryModal(this)">
+    </div>
+  </div>
+
   <div class="section reveal">
     <h2>오시는 길</h2>
     <p>서울특별시 중구 퇴계로18길 46</p>
@@ -109,6 +131,7 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
     </div>
   </div>
 
+  <!-- 이하 기존 참석 여부, 마음 전하실 곳 등 그대로 유지 -->
   <div class="section reveal">
     <h2>참석 여부 회신</h2>
     <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
@@ -148,6 +171,13 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   <div class="modal-inner">
     <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
     <button class="modal-close" onclick="closeMapModal()">닫기</button>
+  </div>
+</div>
+
+<div class="modal" id="galleryModal">
+  <div class="modal-inner">
+    <img id="galleryModalImg" src="">
+    <button class="modal-close" onclick="closeGalleryModal()">닫기</button>
   </div>
 </div>
 
@@ -208,43 +238,5 @@ function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
 const observer=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){ entry.target.classList.add("show"); }
-  });
-},{threshold:0.15});
-document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
-// BGM 자동재생 (모바일/PC 호환)
-const bgm = document.getElementById('bgm');
-const bgmToggle = document.getElementById('bgm-toggle');
-let isPlaying = false;
-
-bgm.muted = true;
-bgm.play().then(()=>{
-  // 모바일 자동 재생
-  isPlaying = true;
-  bgm.muted = false;
-  bgmToggle.innerText = "BGM 끄기";
-}).catch(err=>{
-  console.log("자동 재생 실패:", err);
-  bgmToggle.innerText = "BGM 켜기";
-});
-
-bgmToggle.addEventListener('click', ()=>{
-  if(!isPlaying){
-    bgm.muted = false;
-    bgm.play();
-    bgmToggle.innerText = "BGM 끄기";
-    isPlaying = true;
-  } else {
-    bgm.pause();
-    bgmToggle.innerText = "BGM 켜기";
-    isPlaying = false;
-  }
-});
-
-// 약도 모달
-function openMapModal(){document.getElementById("mapModal").classList.add("show");}
-function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
-</script>
-
-</body>
-</html>
+::contentReference[oaicite:0]{index=0}
