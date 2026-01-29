@@ -93,9 +93,9 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   <div class="section reveal">
     <h2>갤러리</h2>
     <div class="gallery">
-      <img src="https://picsum.photos/id/1015/300/300" alt="사진1" onclick="openPhotoModal(this)">
-      <img src="https://picsum.photos/id/1016/300/300" alt="사진2" onclick="openPhotoModal(this)">
-      <img src="https://picsum.photos/id/1018/300/300" alt="사진3" onclick="openPhotoModal(this)">
+      <img src="PHOTO1.jpg" alt="사진1" onclick="openPhotoModal(this)">
+      <img src="PHOTO2.jpg" alt="사진2" onclick="openPhotoModal(this)">
+      <img src="PHOTO3.jpg" alt="사진3" onclick="openPhotoModal(this)">
     </div>
   </div>
 
@@ -108,7 +108,47 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
     </div>
     <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
     <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank">네이버지도에서 보기</a>
+
+    <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
+    <div class="toggle-content"><div class="inner" style="text-align:center;"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
+
+    <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
+    <div class="toggle-content"><div class="inner" style="text-align:center;"><p><strong>퇴계로2가.명동역</strong><br>104, 105, 421, 463, 507, 604, N16, 7011</p><p><strong>명동입구</strong><br>104, 421, 463, 507, 604, N16, 7011, 05</p></div></div>
   </div>
+
+  <!-- 참석 여부 -->
+  <div class="section reveal">
+    <h2>참석 여부 회신</h2>
+    <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank">참석 유무 작성</a>
+  </div>
+
+  <!-- 마음 전하실 곳 -->
+  <div class="section reveal">
+    <h2>마음 전하실 곳</h2>
+    <p class="muted">축하의 마음만으로도 감사합니다</p>
+
+    <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
+    <div class="toggle-content">
+      <div class="inner">
+        <p id="groom-account-main">신준섭<br>기업은행 588-018494-01-019</p>
+        <button class="copy-btn" onclick="copyText(event,'groom-account-main')">계좌번호 복사</button>
+        <p id="groom-account-shingwangjae" style="margin-top:12px;">신광재<br>기업은행 123-456789-00-00</p>
+        <button class="copy-btn" onclick="copyText(event,'groom-account-shingwangjae')">계좌번호 복사</button>
+        <p id="groom-account-ido" style="margin-top:12px;">이동자<br>국민은행 987-654321-00-00</p>
+        <button class="copy-btn" onclick="copyText(event,'groom-account-ido')">계좌번호 복사</button>
+      </div>
+    </div>
+
+    <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
+    <div class="toggle-content">
+      <div class="inner">
+        <p id="bride-account">김가람<br>카카오뱅크 1234-5678-9012</p>
+        <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- 갤러리 모달 -->
@@ -128,7 +168,7 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 </div>
 
 <script>
-// 메시지 잠깐 표시
+// 메시지
 const musicMessage = document.getElementById('musicMessage');
 setTimeout(()=>{ musicMessage.classList.add('show'); }, 500);
 setTimeout(()=>{ musicMessage.classList.remove('show'); }, 4000);
@@ -163,6 +203,20 @@ const observer = new IntersectionObserver((entries)=>{
 },{threshold:0.15});
 document.querySelectorAll('.section').forEach(el=>observer.observe(el));
 
+// 토글박스
+function toggleBox(header){
+  const content=header.nextElementSibling;
+  const isOpen=content.style.height && content.style.height!=="0px";
+  content.style.height=isOpen ? "0px" : content.scrollHeight+"px";
+}
+
+// 계좌 복사
+function copyText(e,id){
+  e.stopPropagation();
+  const text=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다")).catch(()=>alert("복사 실패!"));
+}
+
 // 갤러리 모달
 const photoModal = document.getElementById('photoModal');
 const modalPhoto = document.getElementById('modalPhoto');
@@ -175,6 +229,14 @@ function closePhotoModal(){ photoModal.classList.remove('show'); }
 // 약도 모달
 function openMapModal(){ document.getElementById('mapModal').classList.add('show'); }
 function closeMapModal(){ document.getElementById('mapModal').classList.remove('show'); }
+
+// 공유 버튼
+function shareInvite(){
+  const title="모바일 청첩장", text="우리 결혼식에 초대합니다 🙂", url=window.location.href;
+  if(navigator.share){navigator.share({title,text,url});}
+  else{navigator.clipboard.writeText(url).then(()=>alert("PC에서는 링크를 복사했어요!")).catch(()=>alert("복사 실패!")); }
+}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
 </script>
 </body>
 </html>
