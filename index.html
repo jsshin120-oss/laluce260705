@@ -289,6 +289,17 @@
 
     const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});},{threshold:0.15});
     document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+    
+  // 항상 상단에서 시작
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+    document.body.classList.add('loaded');
+  });
+
   </script>
 
 </body>
