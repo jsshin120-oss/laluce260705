@@ -8,93 +8,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
-}
-* { box-sizing: border-box; }
-html, body {
-  margin:0; padding:0; min-height:100%;
-  font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-  background:transparent; overflow-x:hidden;
-  text-align:center; color:#fff; text-shadow:var(--text-shadow);
-  scroll-behavior: smooth;
-}
-
-.video-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
-.video-bg video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); opacity: 0.78; }
-
-.page { width: 100%; max-width: 420px; margin: 0 auto; padding: 26px 16px 120px; position: relative; z-index: 5; }
-.top-space { height:12px; }
-
-.section { position: relative; padding: 24px 0; margin-bottom: 24px; opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.section.show { opacity: 1; transform: translateY(0); }
-
-.section::after { content:""; display:block; width:60%; max-width:300px; height:3px; background:#fff; margin:20px auto 0; border-radius:2px; opacity:0.85; }
-.section:last-child::after { display:none; }
-
-h1, .names { font-family:'Nanum Pen Script', cursive; }
-h1 { font-size:28px; margin:0 0 16px; font-weight:400; }
-h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.95; letter-spacing:-0.2px; }
-.names { font-size:20px; margin:12px 0 12px; font-weight:400; line-height:1.6; }
-.subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.85; letter-spacing:-0.1px; }
-p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
-.muted { opacity:0.8; font-size:13px; }
-
-.btn, .copy-btn, .btn-naver {
-  display:block; width:100%; max-width:360px; margin:16px auto 0;
-  padding:12px 16px; font-size:14px; font-weight:700; color:#fff;
-  text-decoration:none; background: rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15); text-align:center;
-  transition: background 0.2s;
-}
-.btn:hover, .btn-naver:hover, .copy-btn:hover { background: rgba(255,255,255,0.18); }
-.btn-naver { background:#03c75a; border:none; color:#fff; }
-.copy-btn { background: rgba(255,255,255,0.12); border:none; cursor:pointer; }
-
-.map-thumb { width:100%; max-width:360px; margin:12px auto 0; overflow:hidden; cursor:zoom-in; }
-.map-thumb img { display:block; width:100%; height:auto; }
-.map-hint { margin-top:8px; font-size:12px; opacity:0.8; }
-
-.toggle-header {
-  margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
-  background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;
-  font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
-  user-select:none;
-}
-.toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
-.toggle-content .inner { margin-top:10px; padding:12px 14px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); }
-.toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
-
-.share-fab, .scroll-top-fab {
-  position: fixed; bottom:16px; width:56px; height:56px; display:grid; place-items:center;
-  background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); cursor:pointer; z-index:99999;
-  border-radius:50%;
-}
-.share-fab { left:40%; } 
-.scroll-top-fab { left:60%; }
-.share-fab svg, .scroll-top-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
-
-.bgm-toggle {
-  position: fixed; top:16px; right:16px; z-index:10000;
-  background: rgba(255,255,255,0.2); border:none; color:#fff;
-  font-weight:700; padding:10px 14px; border-radius:8px; cursor:pointer;
-}
-
-.modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
-.modal.show { display:flex; }
-.modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
-.modal-inner img { display:block; width:100%; height:auto; }
-.modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
+:root{--text-shadow:0 2px 10px rgba(0,0,0,0.45);}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;min-height:100%;font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:transparent;overflow-x:hidden;text-align:center;color:#fff;text-shadow:var(--text-shadow);scroll-behavior:smooth;}
+.video-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;}
+.video-bg video{width:100%;height:100%;object-fit:cover;transform:scale(1.03);opacity:0.78;}
+.page{width:100%;max-width:420px;margin:0 auto;padding:26px 16px 120px;position:relative;z-index:5;}
+.top-space{height:12px;}
+.section{position:relative;padding:24px 0;margin-bottom:24px;opacity:0;transform:translateY(30px);transition:opacity 0.8s ease-out, transform 0.8s ease-out;}
+.section.show{opacity:1;transform:translateY(0);}
+.section::after{content:"";display:block;width:60%;max-width:300px;height:3px;background:#fff;margin:20px auto 0;border-radius:2px;opacity:0.85;}
+.section:last-child::after{display:none;}
+h1,.names{font-family:'Nanum Pen Script', cursive;}
+h1{font-size:28px;margin:0 0 16px;font-weight:400;}
+h2{font-size:16px;margin:0 0 12px;font-weight:700;opacity:0.95;letter-spacing:-0.2px;}
+.names{font-size:20px;margin:12px 0 12px;font-weight:400;line-height:1.6;}
+.subline{display:inline-block;margin-top:4px;font-size:13px;font-weight:400;opacity:0.85;letter-spacing:-0.1px;}
+p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
+.muted{opacity:0.8;font-size:13px;}
+.btn,.copy-btn,.btn-naver{display:block;width:100%;max-width:360px;margin:16px auto 0;padding:12px 16px;font-size:14px;font-weight:700;color:#fff;text-decoration:none;background: rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);text-align:center;transition: background 0.2s;}
+.btn:hover,.btn-naver:hover,.copy-btn:hover{background: rgba(255,255,255,0.18);}
+.btn-naver{background:#03c75a;border:none;color:#fff;}
+.copy-btn{background: rgba(255,255,255,0.12);border:none;cursor:pointer;}
+.map-thumb{width:100%;max-width:360px;margin:12px auto 0;overflow:hidden;cursor:zoom-in;}
+.map-thumb img{display:block;width:100%;height:auto;}
+.map-hint{margin-top:8px;font-size:12px;opacity:0.8;}
+.toggle-header{margin:12px auto 0;padding:12px 16px;width:100%;max-width:360px;background: rgba(255,255,255,0.08);color:#fff;cursor:pointer;font-size:14px;font-weight:700;border:1px solid rgba(255,255,255,0.12);user-select:none;}
+.toggle-content{height:0;overflow:hidden;transition:height 0.25s ease;max-width:360px;margin:0 auto;}
+.toggle-content .inner{margin-top:10px;padding:12px 14px;background: rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);}
+.toggle-content .inner p{margin:0;font-size:13px;line-height:1.6;opacity:0.95;}
+.share-fab,.scroll-top-fab{position:fixed;bottom:16px;width:56px;height:56px;display:grid;place-items:center;background: rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);cursor:pointer;z-index:99999;border-radius:50%;}
+.share-fab{left:40%;}
+.scroll-top-fab{left:60%;}
+.share-fab svg,.scroll-top-fab svg{width:24px;height:24px;fill:#fff;opacity:0.95;}
+.bgm-toggle{position:fixed;top:16px;right:16px;z-index:10000;background: rgba(255,255,255,0.2);border:none;color:#fff;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;}
+.modal{position:fixed;inset:0;background: rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:999999;padding:18px;}
+.modal.show{display:flex;}
+.modal-inner{width:100%;max-width:520px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 18px 50px rgba(0,0,0,0.55);background: rgba(0,0,0,0.25);text-align:center;}
+.modal-inner img{display:block;width:100%;height:auto;}
+.modal-close{margin-top:10px;width:100%;max-width:520px;border:0;padding:14px 16px;background: rgba(255,255,255,0.12);color:#fff;font-weight:800;cursor:pointer;border:1px solid rgba(255,255,255,0.16);}
 </style>
 </head>
 <body>
 
-<!-- BGM 오디오 -->
 <audio id="bgm" loop>
   <source src="Si_Llego_A_Besarte.mp3" type="audio/mpeg">
 </audio>
-
-<!-- BGM 토글 버튼 -->
 <button class="bgm-toggle" id="bgm-toggle">BGM 끄기</button>
 
 <div class="video-bg">
@@ -106,12 +65,10 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
 <div class="page">
   <div class="top-space"></div>
 
-  <!-- 메인 이미지 -->
   <div class="section reveal">
     <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
   </div>
 
-  <!-- 결혼식 정보 -->
   <div class="section reveal">
     <h1>우리 드디어 결혼해요</h1>
     <p class="names">
@@ -122,18 +79,15 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
     </p>
   </div>
 
-  <!-- 날짜 & 시간 -->
   <div class="section reveal">
     <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
     <p id="countdown" class="muted">계산 중...</p>
   </div>
 
-  <!-- 장소 -->
   <div class="section reveal">
     <p>라루체 명동<br>5층 그레이스홀</p>
   </div>
 
-  <!-- 오시는 길 -->
   <div class="section reveal">
     <h2>오시는 길</h2>
     <p>서울특별시 중구 퇴계로18길 46</p>
@@ -150,14 +104,12 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
     <div class="toggle-content"><div class="inner"><p>퇴계로2가.명동역 - 104,105,421,463,507,604,N16,7011<br>명동입구 - 104,421,463,507,604,N16,7011,05</p></div></div>
   </div>
 
-  <!-- 참석 여부 회신 -->
   <div class="section reveal">
     <h2>참석 여부 회신</h2>
     <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
     <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank" rel="noopener">참석 유무 작성</a>
   </div>
 
-  <!-- 마음 전하실 곳 -->
   <div class="section reveal">
     <h2>마음 전하실 곳</h2>
     <p class="muted">축하의 마음만으로도 감사합니다</p>
@@ -186,7 +138,6 @@ p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
   </div>
 </div>
 
-<!-- 공유 / 스크롤 버튼 -->
 <div class="share-fab" onclick="shareInvite()">
   <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
 </div>
@@ -249,20 +200,30 @@ const observer=new IntersectionObserver((entries)=>{
 
 document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
-// BGM 제어
+// BGM 자동재생 트릭
 const bgm = document.getElementById('bgm');
 const bgmToggle = document.getElementById('bgm-toggle');
 let isPlaying = true;
 
-// 자동재생 시도
-bgm.play().catch(()=>{
-  const resumeAudio = () => { bgm.play(); document.body.removeEventListener('touchstart', resumeAudio); };
-  document.body.addEventListener('touchstart', resumeAudio);
+// muted 상태로 먼저 재생 → 브라우저 허용
+bgm.muted = true;
+bgm.play().then(()=>{
+  // 재생 성공 시 바로 음소거 해제
+  bgm.muted = false;
+}).catch(err=>{
+  console.log("자동 재생 실패:", err);
 });
 
 bgmToggle.addEventListener('click', ()=>{
-  if(isPlaying){ bgm.pause(); bgmToggle.innerText="BGM 켜기"; isPlaying=false; }
-  else{ bgm.play(); bgmToggle.innerText="BGM 끄기"; isPlaying=true; }
+  if(isPlaying){
+    bgm.pause();
+    bgmToggle.innerText="BGM 켜기";
+    isPlaying=false;
+  } else {
+    bgm.play();
+    bgmToggle.innerText="BGM 끄기";
+    isPlaying=true;
+  }
 });
 </script>
 
