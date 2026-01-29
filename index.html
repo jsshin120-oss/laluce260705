@@ -1,134 +1,153 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>모바일 청첩장</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모바일 청첩장</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
-}
-*{box-sizing:border-box;}
-html,body{
-  margin:0; padding:0; min-height:100%;
-  font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-  background:transparent;
-  overflow-x:hidden;
-  text-align:center;
-  color:#fff;
-  text-shadow:var(--text-shadow);
-  opacity:0;
-  transition:opacity 1s ease;
-}
+  <style>
+    :root{
+      --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+    }
 
-/* ================= 비디오 배경 ================= */
-.video-bg{
-  position:fixed; inset:0; z-index:-2; overflow:hidden;
-}
-.video-bg video{
-  width:100%; height:100%; object-fit:cover;
-  transform:scale(1.03);
-  opacity:0.78;
-}
+    * { box-sizing: border-box; }
 
-/* ================= 페이지 ================= */
-.page{
-  width:100%; max-width:420px;
-  margin:0 auto;
-  padding:26px 16px 120px;
-  position:relative; z-index:5;
-}
-.top-space{height:12px;}
+    html, body {
+      margin:0;
+      padding:0;
+      min-height:100%;
+      font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+      background:transparent;
+      overflow-x:hidden;
+      text-align:center;
+      color:#fff;
+      text-shadow:var(--text-shadow);
+      scroll-behavior: smooth;
+    }
 
-/* ================= 섹션 ================= */
-.section{
-  position:relative;
-  padding:24px 0;
-  margin-bottom:24px;
-}
-.section::after{
-  content:""; display:block;
-  width:60%; max-width:300px; height:3px;
-  background:#fff; margin:20px auto 0;
-  border-radius:2px; opacity:0.85;
-}
-.section:last-child::after{display:none;}
+    /* ================= 비디오 배경 ================= */
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      opacity: 0.78;
+    }
 
-/* reveal 애니메이션 */
-.reveal{
-  opacity:0; transform:translateY(18px);
-  transition:opacity 1.1s ease, transform 1.1s ease;
-  will-change:opacity,transform;
-}
-.reveal.show{opacity:1; transform:translateY(0);}
-.section:first-of-type.reveal{transform:translateY(-14px);}
+    /* ================= 페이지 ================= */
+    .page {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 26px 16px 120px;
+      position: relative;
+      z-index: 5;
+    }
+    .top-space { height:12px; }
 
-/* ================= 글씨체 ================= */
-h1,.names{font-family:'Nanum Pen Script',cursive;}
-h1{font-size:28px; margin:0 0 16px; font-weight:400;}
-h2{font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.95; letter-spacing:-0.2px;}
-.names{font-size:20px; margin:12px 0 12px; font-weight:400; line-height:1.6;}
-.subline{display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.85; letter-spacing:-0.1px;}
-p{font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95;}
-.muted{opacity:0.8; font-size:13px;}
+    /* ================= 섹션 ================= */
+    .section {
+      position: relative;
+      padding: 24px 0;
+      margin-bottom: 24px;
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity 1.1s ease, transform 1.1s ease;
+    }
+    .section.show {
+      opacity:1;
+      transform:translateY(0);
+    }
+    .section::after {
+      content:"";
+      display:block;
+      width:60%;
+      max-width:300px;
+      height:3px;
+      background:#fff;
+      margin:20px auto 0;
+      border-radius:2px;
+      opacity:0.85;
+    }
+    .section:last-child::after { display:none; }
 
-/* ================= 버튼 ================= */
-.btn,.copy-btn,.btn-naver{
-  display:block; width:100%; max-width:360px; margin:16px auto 0;
-  padding:12px 16px; font-size:14px; font-weight:700; color:#fff; text-decoration:none;
-  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); text-align:center;
-  transition:background 0.2s;
-}
-.btn:hover,.btn-naver:hover,.copy-btn:hover{background:rgba(255,255,255,0.18);}
-.btn-naver{background:#03c75a;border:none;color:#fff;}
-.copy-btn{background:rgba(255,255,255,0.12); border:none; cursor:pointer;}
+    /* ================= 글씨체 ================= */
+    h1, .names { font-family:'Nanum Pen Script', cursive; }
+    h1 { font-size:28px; margin:0 0 16px; font-weight:400; }
+    h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.95; letter-spacing:-0.2px; }
 
-.map-thumb{
-  width:100%; max-width:360px; margin:12px auto 0;
-  overflow:hidden; cursor:zoom-in;
-}
-.map-thumb img{display:block; width:100%; height:auto;}
-.map-hint{margin-top:8px; font-size:12px; opacity:0.8;}
+    .names { font-size:20px; margin:12px 0 12px; font-weight:400; line-height:1.6; }
+    .subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.85; letter-spacing:-0.1px; }
+    p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
+    .muted { opacity:0.8; font-size:13px; }
 
-.toggle-header{
-  margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
-  background:rgba(255,255,255,0.08); color:#fff; cursor:pointer;
-  font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
-  user-select:none;
-}
-.toggle-content{height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto;}
-.toggle-content .inner{margin-top:10px; padding:12px 14px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12);}
-.toggle-content .inner p{margin:0; font-size:13px; line-height:1.6; opacity:0.95;}
+    /* ================= 버튼 ================= */
+    .btn, .copy-btn, .btn-naver {
+      display:block;
+      width:100%;
+      max-width:360px;
+      margin:16px auto 0;
+      padding:12px 16px;
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+      text-decoration:none;
+      background: rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      text-align:center;
+      transition: background 0.2s;
+    }
+    .btn:hover, .btn-naver:hover, .copy-btn:hover { background: rgba(255,255,255,0.18); }
+    .btn-naver { background:#03c75a; border:none; color:#fff; }
+    .copy-btn { background: rgba(255,255,255,0.12); border:none; cursor:pointer; }
 
-/* ================= 공유 / 상단 버튼 ================= */
-.share-fab,.scroll-top-fab{
-  position:fixed; bottom:16px; width:56px; height:56px; display:grid; place-items:center;
-  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);
-  cursor:pointer; z-index:99999;
-}
-.share-fab{left:40%;}
-.scroll-top-fab{left:60%;}
-.share-fab svg,.scroll-top-fab svg{width:24px; height:24px; fill:#fff; opacity:0.95;}
+    .map-thumb { width:100%; max-width:360px; margin:12px auto 0; overflow:hidden; cursor:zoom-in; }
+    .map-thumb img { display:block; width:100%; height:auto; }
+    .map-hint { margin-top:8px; font-size:12px; opacity:0.8; }
 
-/* ================= 모달 ================= */
-.modal{position:fixed; inset:0; background:rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; opacity:0; transition:opacity .35s ease;}
-.modal.show{display:flex; opacity:1;}
-.modal-inner{width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background:rgba(0,0,0,0.25); text-align:center; transform:scale(0.85); transition:transform .35s ease;}
-.modal.show .modal-inner{transform:scale(1);}
-.modal-inner img{display:block; width:100%; height:auto;}
-.modal-close{margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background:rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16);}
+    .toggle-header {
+      margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
+      background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;
+      font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
+      user-select:none;
+    }
+    .toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
+    .toggle-content .inner { margin-top:10px; padding:12px 14px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); }
+    .toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
 
-/* ================= 갤러리 ================= */
-.gallery-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:6px;}
-.gallery-grid img{width:100%; height:auto; cursor:zoom-in;}
-</style>
+    /* 공유 / 맨 위 버튼 */
+    .share-fab, .scroll-top-fab {
+      position: fixed;
+      bottom:16px;
+      width:56px; height:56px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.2);
+      cursor:pointer;
+      z-index:99999;
+    }
+    .share-fab { left:40%; }
+    .scroll-top-fab { left:60%; }
+    .share-fab svg, .scroll-top-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
+
+    /* 모달 */
+    .modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
+    .modal.show { display:flex; }
+    .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
+    .modal-inner img { display:block; width:100%; height:auto; }
+    .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
+  </style>
 </head>
 <body>
 
-<!-- 비디오 배경 -->
 <div class="video-bg">
   <video autoplay muted loop playsinline preload="auto">
     <source src="./bg.mp4" type="video/mp4">
@@ -148,11 +167,9 @@ p{font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95;}
     <h1>우리 드디어 결혼해요</h1>
     <p class="names">
       신랑 신준섭<br>
-      <span class="subline">신광재 · 이동자의 아들</span>
-      <br><br>
+      <span class="subline">신광재 · 이동자의 아들</span><br><br>
       신부 김가람<br>
       <span class="subline">한내엽의 딸</span>
-      <br><br>
     </p>
   </div>
 
@@ -175,10 +192,7 @@ p{font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95;}
       <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
     </div>
     <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
-
-    <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">
-      네이버지도에서 보기
-    </a>
+    <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">네이버지도에서 보기</a>
 
     <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
     <div class="toggle-content"><div class="inner"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
@@ -211,86 +225,84 @@ p{font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95;}
       <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
     </div></div>
   </div>
-
-  <!-- 갤러리 -->
-  <div class="section reveal">
-    <h2>갤러리</h2>
-    <div class="gallery-grid">
-      <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/photo1.jpg" onclick="openGallery(this)">
-      <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/photo2.jpg" onclick="openGallery(this)">
-      <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/photo3.jpg" onclick="openGallery(this)">
-      <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/photo4.jpg" onclick="openGallery(this)">
-    </div>
-  </div>
 </div>
 
-<!-- 공유 / 상단 버튼 -->
-<button class="share-fab" type="button" onclick="shareInvite()">
-  <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/></svg>
+<!-- 공유 / 맨 위 버튼 -->
+<button class="share-fab" type="button" onclick="shareInvite()" aria-label="청첩장 공유하기">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
+  </svg>
 </button>
-<button class="scroll-top-fab" type="button" onclick="scrollToTop()">
-  <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83v12.34h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/></svg>
+<button class="scroll-top-fab" type="button" onclick="scrollToTop()" aria-label="맨 위로 이동">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 12l1.41 1.41L11 7.83v12.34h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/>
+  </svg>
 </button>
 
-<!-- 약도 모달 -->
+<!-- 약도 확대 모달 -->
 <div class="modal" id="mapModal" onclick="closeMapModal()">
-  <div class="modal-inner" onclick="event.stopPropagation()">
-    <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg">
-    <button class="modal-close" onclick="closeMapModal()">닫기</button>
-  </div>
-</div>
-
-<!-- 갤러리 모달 -->
-<div class="modal" id="galleryModal" onclick="closeGallery()">
-  <div class="modal-inner" id="galleryInner">
-    <img id="galleryImg">
+  <div>
+    <div class="modal-inner" onclick="event.stopPropagation()">
+      <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도 크게보기">
+    </div>
+    <button class="modal-close" type="button" onclick="closeMapModal()">닫기</button>
   </div>
 </div>
 
 <script>
-// 새로고침 시 상단
-if('scrollRestoration' in history){history.scrollRestoration='manual';}
-window.addEventListener('load',()=>{window.scrollTo(0,0); document.body.style.opacity=1;});
+  // 항상 상단에서 시작
+  if('scrollRestoration' in history){history.scrollRestoration='manual';}
+  window.scrollTo(0,0);
 
-// reveal 애니메이션
-const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});},{threshold:0.15});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+  // 카운트다운 (기존 방식)
+  const weddingDate = new Date("2026-07-05T13:30:00");
+  function updateCountdown(){
+    const now = new Date();
+    const diff = weddingDate - now;
+    if(diff<=0){ 
+      document.getElementById("countdown").innerText="🎉 오늘 결혼식입니다! 🎉"; 
+      clearInterval(countdownInterval); 
+      return; 
+    }
+    const days=Math.floor(diff/(1000*60*60*24));
+    const hours=Math.floor((diff/(1000*60*60))%24);
+    const minutes=Math.floor((diff/(1000*60))%60);
+    const seconds=Math.floor((diff/1000)%60);
+    document.getElementById("countdown").innerText=`${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`;
+  }
+  const countdownInterval=setInterval(updateCountdown,1000);
+  updateCountdown();
 
-// 카운트다운
-const weddingDate=new Date("2026-07-05T13:30:00");
-function updateCountdown(){
-  const now=new Date();
-  const diff=weddingDate-now;
-  if(diff<=0){document.getElementById("countdown").innerText="🎉 오늘 결혼식입니다! 🎉"; clearInterval(countdownInterval); return;}
-  const days=Math.floor(diff/(1000*60*60*24));
-  const hours=Math.floor((diff/(1000*60*60))%24);
-  const minutes=Math.floor((diff/(1000*60))%60);
-  const seconds=Math.floor((diff/1000)%60);
-  document.getElementById("countdown").innerText=`${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`;
-}
-const countdownInterval=setInterval(updateCountdown,1000);
-updateCountdown();
+  // 토글, 복사, 공유, 모달
+  function toggleBox(header){
+    const content=header.nextElementSibling;
+    const isOpen=content.style.height&&content.style.height!=="0px";
+    content.style.height=isOpen?"0px":content.scrollHeight+"px";
+  }
+  function copyText(e,id){
+    e.stopPropagation();
+    const text=document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다")).catch(()=>alert("복사 실패! 브라우저에서 직접 복사해주세요."));
+  }
+  function shareInvite(){
+    const title="모바일 청첩장", text="우리 결혼식에 초대합니다 🙂", url=window.location.href;
+    if(navigator.share){navigator.share({title,text,url});}
+    else{navigator.clipboard.writeText(url).then(()=>alert("PC에서는 공유 대신 링크를 복사했어요!")).catch(()=>alert("복사 실패! 주소창 링크를 복사해주세요."));}
+  }
+  function openMapModal(){document.getElementById("mapModal").classList.add("show");}
+  function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
+  function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
 
-// 토글, 복사, 공유, 모달
-function toggleBox(header){const content=header.nextElementSibling;const isOpen=content.style.height&&content.style.height!=="0px";content.style.height=isOpen?"0px":content.scrollHeight+"px";}
-function copyText(e,id){e.stopPropagation();const text=document.getElementById(id).innerText;navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다")).catch(()=>alert("복사 실패! 직접 복사해주세요."));}
-function shareInvite(){const title="모바일 청첩장",text="우리 결혼식에 초대합니다 🙂",url=window.location.href;if(navigator.share){navigator.share({title,text,url});}else{navigator.clipboard.writeText(url).then(()=>alert("PC에서는 링크 복사 완료")).catch(()=>alert("복사 실패! 주소창에서 복사해주세요."));}}
-function openMapModal(){document.getElementById("mapModal").classList.add("show");}
-function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
-function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+  // reveal 애니메이션
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  },{threshold:0.15});
+  document.querySelectorAll(".section").forEach(el=>observer.observe(el));
+</script>
 
-// 갤러리 모달
-function openGallery(img){
-  const modal=document.getElementById("galleryModal");
-  const inner=document.getElementById("galleryInner");
-  document.getElementById("galleryImg").src=img.src;
-  modal.classList.add("show");
-  inner.style.transform="scale(0.85)";
-  setTimeout(()=>{inner.style.transform="scale(1)";},10);
-}
-function closeGallery(){
-  const modal=document.getElementById("galleryModal");
-  const inner=document.getElementById("galleryInner");
-  inner.style.transform="scale(0.85)";
-
-::contentReference[oaicite:0]{index=0}
+</body>
+</html>
