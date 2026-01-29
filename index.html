@@ -75,9 +75,9 @@
       max-width: 360px;
       padding: 12px 14px;
       margin: 8px 0;
-      border-radius: 8px;
+      border-radius: 4px; /* 버튼과 동일하게 직사각형 */
       border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(0,0,0,0.65);  /* 배경 더 진하게 */
+      background: rgba(0,0,0,0.65);  /* 배경 진하게 */
       color: #fff;                   /* 글자 흰색 */
       font-size: 16px;
       outline: none;
@@ -171,11 +171,38 @@
   <div class="section reveal">
     <h2>마음 전하실 곳</h2>
     <p class="muted">축하의 마음만으로도 감사합니다</p>
-    <!-- 신랑측 & 신부측 계좌 정보 등 동일 -->
+
+    <!-- 신랑측 -->
+    <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
+    <div class="toggle-content">
+      <div class="inner">
+        <p id="groom-account-main">신준섭<br>기업은행 588-018494-01-019</p>
+        <button class="copy-btn" onclick="copyText(event,'groom-account-main')">계좌번호 복사</button>
+
+        <div style="margin-top:12px;">
+          <p id="groom-account-shingwangjae">신광재<br>기업은행 123-456789-00-00</p>
+          <button class="copy-btn" onclick="copyText(event,'groom-account-shingwangjae')">계좌번호 복사</button>
+        </div>
+
+        <div style="margin-top:12px;">
+          <p id="groom-account-ido">이동자<br>국민은행 987-654321-00-00</p>
+          <button class="copy-btn" onclick="copyText(event,'groom-account-ido')">계좌번호 복사</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 신부측 -->
+    <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
+    <div class="toggle-content">
+      <div class="inner">
+        <p id="bride-account">김가람<br>카카오뱅크 1234-5678-9012</p>
+        <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- 기존 스크립트 그대로 적용 -->
+<!-- 기존 스크립트 그대로 -->
 <script>
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
   window.scrollTo(0,0);
