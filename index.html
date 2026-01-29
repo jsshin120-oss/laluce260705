@@ -1,294 +1,295 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>모바일 청첩장</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모바일 청첩장</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
-}
-* { box-sizing: border-box; }
+  <style>
+    :root{
+      --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+    }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  font-family: 'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-  background: transparent;
-  overflow-x: hidden;
-  text-align: center;
-  color: #fff;
-  text-shadow: var(--text-shadow);
-}
+    * { box-sizing: border-box; }
 
-/* ================= 비디오 배경 ================= */
-.video-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  overflow: hidden;
-}
-.video-bg video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.78;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: transparent;
+      overflow-x: hidden;
+      text-align: center;
+      color: #fff;
+      text-shadow: var(--text-shadow);
+    }
 
-/* ================= 페이지 ================= */
-.page {
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 26px 16px 120px;
-  position: relative;
-  z-index: 5;
-}
-.top-space { height: 12px; }
+    /* ================= 비디오 배경 ================= */
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
 
-/* ================= 섹션 ================= */
-.section {
-  padding: 24px 0;
-  margin-bottom: 24px;
-}
-.section::after {
-  content: "";
-  display: block;
-  width: 60%;
-  max-width: 260px;
-  height: 3px;
-  background: #fff;
-  margin: 24px auto 0;
-  opacity: 0.85;
-}
-.section:last-child::after { display:none; }
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      opacity: 0.78;
+    }
 
-/* ================= 텍스트 ================= */
-h1 {
-  font-family: 'Nanum Pen Script', cursive;
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-.names {
-  font-family: 'Nanum Pen Script', cursive;
-  font-size: 26px;
-  line-height: 1.7;
-}
-.subline {
-  display:block;
-  font-size: 15px;
-  opacity: 0.85;
-}
-p { font-size:14px; line-height:1.7; }
-.muted { font-size:13px; opacity:0.85; }
+    /* ================= 페이지 ================= */
+    .page {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 26px 16px 120px;
+      position: relative;
+      z-index: 5;
+    }
 
-/* ================= 버튼 ================= */
-.btn, .copy-btn {
-  display:block;
-  width:100%;
-  max-width:360px;
-  margin:16px auto 0;
-  padding:14px 18px;
-  font-size:14px;
-  font-weight:600;
-  color:#fff;
-  background: rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.22);
-  text-align:center;
-  border-radius:999px;
-  backdrop-filter: blur(6px);
-  cursor:pointer;
-  transition: transform .15s ease, opacity .15s ease;
-}
-.btn:active,
-.copy-btn:active {
-  transform: scale(0.97);
-}
+    .top-space { height: 12px; }
 
-/* ================= RSVP ================= */
-#rsvpForm {
-  margin-top: 10px;
-}
-.text-input {
-  width:100%;
-  max-width:360px;
-  margin:12px auto 0;
-  padding:14px 18px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.22);
-  background: rgba(255,255,255,0.12);
-  color:#fff;
-  font-size:14px;
-  backdrop-filter: blur(6px);
-}
-.text-input::placeholder {
-  color: rgba(255,255,255,0.65);
-}
-.text-input:focus {
-  outline:none;
-  border-color: rgba(255,255,255,0.45);
-  background: rgba(255,255,255,0.18);
-}
+    /* ================= 섹션 ================= */
+    .section {
+      position: relative;
+      padding: 24px 0;
+      margin-bottom: 24px;
+    }
 
-.submit-btn {
-  width:100%;
-  max-width:360px;
-  margin:14px auto 0;
-  padding:14px 18px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.18);
-  color:#fff;
-  font-size:14px;
-  font-weight:600;
-  cursor:pointer;
-  backdrop-filter: blur(6px);
-  transition: transform .15s ease;
-}
-.submit-btn:active { transform: scale(0.97); }
+    .section::after {
+      content: "";
+      display: block;
+      width: 60%;
+      max-width: 300px;
+      height: 3px;
+      background: #fff;
+      margin: 20px auto 0;
+      border-radius: 2px;
+      opacity: 0.85;
+    }
 
-.hidden { display:none; }
+    .section:last-child::after { display:none; }
 
-/* ================= 토글 ================= */
-.toggle-header {
-  max-width:360px;
-  margin:14px auto 0;
-  padding:14px;
-  background: rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.22);
-  border-radius:999px;
-  cursor:pointer;
-}
-.toggle-content {
-  height:0;
-  overflow:hidden;
-  transition:height .3s ease;
-}
-.toggle-content .inner {
-  max-width:360px;
-  margin:10px auto 0;
-  padding:14px;
-  background: rgba(255,255,255,0.12);
-  border-radius:18px;
-}
-</style>
+    /* ================= 글씨체 ================= */
+    h1, .names { 
+      font-family: 'Nanum Pen Script', cursive; 
+    }
+    h1 { font-size: 28px; margin:0 0 16px; font-weight:400; }
+    h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.95; letter-spacing:-0.2px; }
+
+    .names { font-size:20px; margin:12px 0 12px; font-weight:400; line-height:1.6; }
+    .subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.85; letter-spacing:-0.1px; }
+    p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
+    .muted { opacity:0.8; font-size:13px; }
+
+    /* ================= 버튼 ================= */
+    .btn, .copy-btn, .btn-naver {
+      display:block;
+      width:100%;
+      max-width:360px;
+      margin:16px auto 0;
+      padding:12px 16px;
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+      text-decoration:none;
+      background: rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      text-align:center;
+      transition: background 0.2s;
+    }
+    .btn:hover, .btn-naver:hover, .copy-btn:hover { background: rgba(255,255,255,0.18); }
+    .btn-naver { background: #03c75a; border:none; color:#fff; }
+    .copy-btn { background: rgba(255,255,255,0.12); border:none; cursor:pointer; }
+
+    .map-thumb {
+      width:100%; max-width:360px; margin:12px auto 0;
+      overflow:hidden; cursor:zoom-in;
+    }
+    .map-thumb img { display:block; width:100%; height:auto; }
+
+    .map-hint { margin-top:8px; font-size:12px; opacity:0.8; }
+
+    .toggle-header {
+      margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
+      background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;
+      font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
+      user-select:none;
+    }
+    .toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
+    .toggle-content .inner { margin-top:10px; padding:12px 14px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); }
+    .toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
+
+    /* 공유 / 맨 위 버튼 */
+    .share-fab, .scroll-top-fab {
+      position: fixed;
+      bottom: 16px;
+      width: 56px; height: 56px;
+      display: grid; place-items:center;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      z-index: 99999;
+    }
+    .share-fab { left: 40%; }
+    .scroll-top-fab { left: 60%; }
+
+    .share-fab svg, .scroll-top-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
+
+    /* 모달 */
+    .modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
+    .modal.show { display:flex; }
+    .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
+    .modal-inner img { display:block; width:100%; height:auto; }
+    .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
+  </style>
 </head>
 
 <body>
-
-<div class="video-bg">
-  <video autoplay muted loop playsinline>
-    <source src="./bg.mp4" type="video/mp4">
-  </video>
-</div>
-
-<div class="page">
-  <div class="top-space"></div>
-
-  <!-- 메인 이미지 -->
-  <div class="section">
-    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" style="width:100%;">
+  <!-- 비디오 배경 -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="./bg.mp4" type="video/mp4">
+    </video>
   </div>
 
-  <!-- 인사 -->
-  <div class="section">
-    <h1>우리 드디어 결혼해요</h1>
-    <div class="names">
-      신랑 신준섭
-      <span class="subline">신광재 · 이동자의 아들</span><br>
-      신부 김가람
-      <span class="subline">한내엽의 딸</span>
+  <div class="page">
+    <div class="top-space"></div>
+
+    <!-- 메인 이미지 -->
+    <div class="section reveal">
+      <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
     </div>
-  </div>
 
-  <!-- 날짜 -->
-  <div class="section">
-    <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
-    <p id="countdown" class="muted"></p>
-  </div>
-
-  <!-- 장소 -->
-  <div class="section">
-    <p>라루체 명동<br>5층 그레이스홀</p>
-  </div>
-
-  <!-- 참석 -->
-  <div class="section">
-    <h2>참석 여부 회신</h2>
-    <p class="muted">
-      원활한 예식 준비를 위해 참석 가능하신 분들은<br><br>
-      아래 “참석해요” 버튼을 누르신 후<br><br>
-      성함과 연락처를 기재하여 제출해주시면 감사하겠습니다.
-    </p>
-
-    <button class="btn" id="rsvpBtn">참석해요</button>
-
-    <div id="rsvpForm" class="hidden">
-      <input id="rsvpName" class="text-input" placeholder="성함">
-      <input id="rsvpPhone" class="text-input" placeholder="연락처">
-      <button class="submit-btn" onclick="submitRSVP()">제출하기</button>
+    <!-- 결혼식 정보 -->
+    <div class="section reveal">
+      <h1>우리 드디어 결혼해요</h1>
+      <p class="names">
+        신랑 신준섭<br>
+        <span class="subline">신광재 · 이동자의 아들</span>
+        <br><br>
+        신부 김가람<br>
+        <span class="subline">한내엽의 딸</span>
+        <br><br>
+      </p>
     </div>
-  </div>
 
-  <!-- 마음 -->
-  <div class="section">
-    <h2>마음 전하실 곳</h2>
+    <!-- 날짜 & 시간 -->
+    <div class="section reveal">
+      <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
+      <p id="countdown" class="muted">계산 중...</p>
+      <br><br>
+    </div>
 
-    <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
-    <div class="toggle-content">
-      <div class="inner">
-        <p id="a1">신준섭<br>기업은행 588-018494-01-019</p>
-        <button class="copy-btn" onclick="copyText(event,'a1')">계좌번호 복사</button><br><br>
+    <!-- 장소 -->
+    <div class="section reveal">
+      <p>라루체 명동<br>5층 그레이스홀</p>
+      <br><br>
+    </div>
 
-        <p id="a2">신광재<br>우리은행</p>
-        <button class="copy-btn" onclick="copyText(event,'a2')">계좌번호 복사</button><br><br>
-
-        <p id="a3">이동자<br>우리은행</p>
-        <button class="copy-btn" onclick="copyText(event,'a3')">계좌번호 복사</button>
+    <!-- 오시는 길 -->
+    <div class="section reveal">
+      <h2>오시는 길</h2>
+      <p>서울특별시 중구 퇴계로18길 46</p>
+      <div class="map-thumb" onclick="openMapModal()">
+        <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
       </div>
+      <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
+
+      <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">
+        네이버지도에서 보기
+      </a>
+
+      <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
+      <div class="toggle-content"><div class="inner"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
+
+      <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
+      <div class="toggle-content"><div class="inner"><p>퇴계로2가.명동역 - 104, 105, 421, 463, 507, 604, N16, 7011<br>명동입구 - 104, 421, 463, 507, 604, N16, 7011, 05</p></div></div>
+      <br><br>
+    </div>
+
+    <!-- 참석 여부 -->
+    <div class="section reveal">
+      <h2>참석 여부 회신</h2>
+      <p class="muted">원활한 예식 준비를 위해 참석 여부를 알려주세요</p>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomgftVaL66ABfMRHbwTpA/viewform" target="_blank" rel="noopener">
+        참석 여부 회신하기 (구글폼)
+      </a>
+      <br><br>
+    </div>
+
+    <!-- 마음 전하실 곳 -->
+    <div class="section reveal">
+      <h2>마음 전하실 곳</h2>
+      <p class="muted">축하의 마음만으로도 감사합니다</p>
+      <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
+      <div class="toggle-content"><div class="inner">
+        <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
+        <button class="copy-btn" onclick="copyText(event,'groom-account')">계좌번호 복사</button>
+      </div></div>
+      <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
+      <div class="toggle-content"><div class="inner">
+        <p id="bride-account">김가람<br>카카오뱅크</p>
+        <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
+      </div></div>
     </div>
   </div>
-</div>
 
-<script>
-// 카운트다운
-const d = new Date("2026-07-05T13:30:00");
-setInterval(()=>{
-  const diff = d - new Date();
-  if(diff <= 0){
-    countdown.innerText = "오늘, 저희가 부부가 되는 날입니다 🤍";
-    return;
-  }
-  const day = Math.floor(diff / 86400000);
-  countdown.innerText = `결혼식까지 ${day}일 남았습니다`;
-},1000);
+  <!-- 공유 / 맨 위 버튼 -->
+  <button class="share-fab" type="button" onclick="shareInvite()" aria-label="청첩장 공유하기">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7-4.11A2.99 2.99 0 0 0 18 7.91a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .04.49l-7 4.11a3 3 0 1 0 0 6.98l7.05 4.14c-.03.15-.05.31-.05.47a3 3 0 1 0 3-3z"/>
+    </svg>
+  </button>
 
-// RSVP
-rsvpBtn.onclick = () => rsvpForm.classList.remove("hidden");
-function submitRSVP(){
-  const n = rsvpName.value, p = rsvpPhone.value;
-  if(!n || !p) return alert("성함과 연락처를 모두 입력해주세요");
-  window.open(
-    "https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomgftVaL66ABfMRHbwTpA/viewform"
-    + `?entry.1111111111=${encodeURIComponent(n)}&entry.2222222222=${encodeURIComponent(p)}`
-  );
-}
+  <button class="scroll-top-fab" type="button" onclick="scrollToTop()" aria-label="맨 위로 이동">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 12l1.41 1.41L11 7.83v12.34h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/>
+    </svg>
+  </button>
 
-// util
-function toggleBox(h){
-  const c = h.nextElementSibling;
-  c.style.height = c.style.height ? "" : c.scrollHeight + "px";
-}
-function copyText(e,id){
-  e.stopPropagation();
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  alert("복사되었습니다");
-}
-</script>
+  <!-- 약도 확대 모달 -->
+  <div class="modal" id="mapModal" onclick="closeMapModal()">
+    <div>
+      <div class="modal-inner" onclick="event.stopPropagation()">
+        <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도 크게보기">
+      </div>
+      <button class="modal-close" type="button" onclick="closeMapModal()">닫기</button>
+    </div>
+  </div>
+
+  <script>
+    // 카운트다운
+    const weddingDate = new Date("2026-07-05T13:30:00");
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+      if(diff<=0){ document.getElementById("countdown").innerText="🎉 오늘 결혼식입니다! 🎉"; clearInterval(countdownInterval); return; }
+      const days=Math.floor(diff/(1000*60*60*24));
+      const hours=Math.floor((diff/(1000*60*60))%24);
+      const minutes=Math.floor((diff/(1000*60))%60);
+      const seconds=Math.floor((diff/1000)%60);
+      document.getElementById("countdown").innerText=`${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`;
+    }
+    const countdownInterval=setInterval(updateCountdown,1000);
+    updateCountdown();
+
+    // 토글, 복사, 공유, 모달
+    function toggleBox(header){const content=header.nextElementSibling;const isOpen=content.style.height&&content.style.height!=="0px";content.style.height=isOpen?"0px":content.scrollHeight+"px";}
+    function copyText(e,id){e.stopPropagation();const text=document.getElementById(id).innerText;navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다")).catch(()=>alert("복사 실패! 브라우저에서 직접 복사해주세요."));}
+    function shareInvite(){const title="모바일 청첩장",text="우리 결혼식에 초대합니다 🙂",url=window.location.href;if(navigator.share){navigator.share({title,text,url});}else{navigator.clipboard.writeText(url).then(()=>alert("PC에서는 공유 대신 링크를 복사했어요!")).catch(()=>alert("복사 실패! 주소창 링크를 복사해주세요."));}}
+    function openMapModal(){document.getElementById("mapModal").classList.add("show");}
+    function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
+    function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
+
+    const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});},{threshold:0.15});
+    document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+  </script>
 
 </body>
 </html>
