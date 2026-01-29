@@ -45,25 +45,10 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 .modal-inner{width:100%;max-width:520px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 18px 50px rgba(0,0,0,0.55);background: rgba(0,0,0,0.25);text-align:center;}
 .modal-inner img{display:block;width:100%;height:auto;}
 .modal-close{margin-top:10px;width:100%;max-width:520px;border:0;padding:14px 16px;background: rgba(255,255,255,0.12);color:#fff;font-weight:800;cursor:pointer;border:1px solid rgba(255,255,255,0.16);}
-
-/* 갤러리 스타일 */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:6px;
-  max-width:360px;
-  margin:0 auto;
-}
-.gallery img{
-  width:100%;
-  height:auto;
-  cursor:pointer;
-  border-radius:8px;
-  transition: transform 0.2s;
-}
-.gallery img:hover{
-  transform:scale(1.05);
-}
+/* 갤러리 */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:360px;margin:0 auto;}
+.gallery img{width:100%;height:auto;cursor:pointer;border-radius:8px;transition:transform 0.2s;}
+.gallery img:hover{transform:scale(1.05);}
 </style>
 </head>
 <body>
@@ -82,10 +67,9 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 <div class="page">
   <div class="top-space"></div>
 
-  <!-- 청첩장 대표 이미지 -->
+  <!-- 대표 이미지 -->
   <div class="section reveal show">
-    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
-    <br><br>
+    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지">
   </div>
 
   <!-- 이름 섹션 -->
@@ -96,7 +80,6 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
       <span class="subline">신광재 · 이동자의 아들</span><br><br>
       신부 김가람<br>
       <span class="subline">한내엽의 딸</span>
-      <br><br>
     </p>
   </div>
 
@@ -104,16 +87,14 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   <div class="section reveal show">
     <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
     <p id="countdown" class="muted">계산 중...</p>
-    <br><br>
   </div>
 
   <!-- 장소 -->
   <div class="section reveal show">
     <p>라루체 명동<br>5층 그레이스홀</p>
-    <br><br>
   </div>
 
-  <!-- 갤러리 섹션 -->
+  <!-- 갤러리 -->
   <div class="section reveal show">
     <h2>갤러리</h2>
     <div class="gallery">
@@ -137,11 +118,10 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
     <div class="modal-inner">
       <img id="modalPhoto" src="" alt="확대 사진">
       <button class="modal-close" onclick="closePhotoModal()">닫기</button>
-      <br><br>
     </div>
   </div>
 
-  <!-- 오시는 길, 지도, 토글박스 -->
+  <!-- 오시는 길 -->
   <div class="section reveal show">
     <h2>오시는 길</h2>
     <p>서울특별시 중구 퇴계로18길 46</p>
@@ -149,16 +129,15 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
       <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
     </div>
     <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
-    <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">네이버지도에서 보기</a>
+    <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank">네이버지도에서 보기</a>
 
     <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-    <div class="toggle-content"><div class="inner" style="text-align:center;"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
+    <div class="toggle-content"><div class="inner"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
 
     <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
-    <div class="toggle-content"><div class="inner" style="text-align:center;">
+    <div class="toggle-content"><div class="inner">
       <p><strong>퇴계로2가.명동역</strong><br>104, 105, 421, 463, 507, 604, N16, 7011</p>
       <p><strong>명동입구</strong><br>104, 421, 463, 507, 604, N16, 7011, 05</p>
-      <br><br>
     </div></div>
   </div>
 
@@ -166,25 +145,28 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   <div class="section reveal show">
     <h2>참석 여부 회신</h2>
     <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
-    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank" rel="noopener">참석 유무 작성</a>
-    <br><br>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank">참석 유무 작성</a>
   </div>
 
   <!-- 마음 전하실 곳 -->
   <div class="section reveal show">
     <h2>마음 전하실 곳</h2>
     <p class="muted">축하의 마음만으로도 감사합니다</p>
+
     <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
     <div class="toggle-content">
       <div class="inner">
         <p id="groom-account-main">신준섭<br>기업은행 588-018494-01-019</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account-main')">계좌번호 복사</button>
-        <p id="groom-account-shingwangjae" style="margin-top:12px;">신광재<br>기업은행 123-456789-00-00</p>
+
+        <p id="groom-account-shingwangjae">신광재<br>기업은행 123-456789-00-00</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account-shingwangjae')">계좌번호 복사</button>
-        <p id="groom-account-ido" style="margin-top:12px;">이동자<br>국민은행 987-654321-00-00</p>
+
+        <p id="groom-account-ido">이동자<br>국민은행 987-654321-00-00</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account-ido')">계좌번호 복사</button>
       </div>
     </div>
+
     <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
     <div class="toggle-content">
       <div class="inner">
@@ -193,7 +175,6 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- 지도 모달 -->
@@ -204,7 +185,7 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   </div>
 </div>
 
-<!-- 공유 / 스크롤 버튼 -->
+<!-- 공유/스크롤 -->
 <div class="share-fab" onclick="shareInvite()">
   <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
 </div>
@@ -213,25 +194,38 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 </div>
 
 <script>
-// 스크롤, 토글, 카운트다운 등
+// 스크롤 복원 방지
 if('scrollRestoration' in history){history.scrollRestoration='manual';}
 window.scrollTo(0,0);
 
-const weddingDate=new Date("2026-07-05T13:30:00");
-function updateCountdown(){
-  const now=new Date();
-  const diff=weddingDate-now;
-  if(diff<=0){ document.getElementById("countdown").innerText="🎉 오늘 결혼식입니다! 🎉"; clearInterval(countdownInterval); return; }
-  const days=Math.floor(diff/(1000*60*60*24));
-  const hours=Math.floor((diff/(1000*60*60))%24);
-  const minutes=Math.floor((diff/(1000*60))%60);
-  const seconds=Math.floor((diff/1000)%60);
-  document.getElementById("countdown").innerText=`${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`;
+// 카운트다운
+const weddingDate = new Date("2026-07-05T13:30:00");
+function updateCountdown() {
+  const now = new Date();
+  const diff = weddingDate - now;
+  const countdownEl = document.getElementById("countdown");
+  if (diff <= 0) { countdownEl.innerText = "🎉 오늘 결혼식입니다! 🎉"; clearInterval(countdownInterval); return; }
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff/(1000*60*60))%24);
+  const minutes = Math.floor((diff/(1000*60))%60);
+  const seconds = Math.floor((diff/1000)%60);
+  countdownEl.innerText = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`;
 }
-const countdownInterval=setInterval(updateCountdown,1000);
+const countdownInterval = setInterval(updateCountdown, 1000);
 updateCountdown();
 
-function toggleBox(header){ const content=header.nextElementSibling; const isOpen=content.style.height&&content.style.height!=="0px"; content.style.height=isOpen?"0px":content.scrollHeight+"px"; }
+// 섹션 fade-in
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add("show"); });
+},{threshold:0.15});
+document.querySelectorAll(".section").forEach(el=>observer.observe(el));
+
+// 토글박스
+function toggleBox(header){ const content=header.nextElementSibling; const isOpen=content.style.height && content.style.height!=="0px"; content.style.height=isOpen?"0px":content.scrollHeight+"px"; }
+
+// 계좌 복사
 function copyText(e,id){ e.stopPropagation(); const text=document.getElementById(id).innerText; navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다")).catch(()=>alert("복사 실패!")); }
-function shareInvite(){ const title="모바일 청첩장", text="우리 결혼식에 초대합니다 🙂", url=window.location.href
+
+// 공유/스크롤
+function shareInvite(){ const url=window.location.href; if(navigator.share){navigator.share({title:"모바일 청첩장", text:"우리 결혼식에 초대합니다 🙂", url}); } else{navigator.clipboard.writeText(url).
 ::contentReference[oaicite:0]{index=0}
