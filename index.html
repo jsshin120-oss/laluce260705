@@ -67,9 +67,25 @@
     .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
     .modal-inner img { display:block; width:100%; height:auto; }
     .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
+
+    /* ===== 성함/연락처 입력란 ===== */
     input[type=text], input[type=tel] {
-      width:100%; padding:10px; margin:6px 0; border-radius:4px;
-      border:1px solid rgba(255,255,255,0.3); background:rgba(0,0,0,0.2); color:#fff; display:block;
+      width:100%; 
+      max-width:360px;
+      padding:10px; 
+      margin:6px auto; 
+      border-radius:4px;
+      border:1px solid rgba(255,255,255,0.3); 
+      background:rgba(0,0,0,0.2); 
+      color:#fff;            /* 입력 글씨 색 */
+      text-align:center;     /* 입력 전/후 모두 가운데 정렬 */
+      font-size:14px;
+      display:block;
+    }
+    input::placeholder {
+      color: rgba(255,255,255,0.7);  /* placeholder 밝게 */
+      text-align:center;              /* placeholder도 가운데 정렬 */
+      opacity:1;                      /* 항상 선명하게 */
     }
     form input { max-width:360px; margin:6px auto; } /* 버튼과 동일 폭 */
   </style>
@@ -244,13 +260,5 @@
   function openMapModal(){document.getElementById("mapModal").classList.add("show");}
   function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
   function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
-  const observer=new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){ entry.target.classList.add("show"); }
-    });
-  },{threshold:0.15});
-  document.querySelectorAll(".section").forEach(el=>observer.observe(el));
-</script>
-
-</body>
-</html>
+ 
+::contentReference[oaicite:0]{index=0}
