@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>모바일 청첩장</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
 <style>
 :root{--text-shadow:0 2px 10px rgba(0,0,0,0.45);}
 *{box-sizing:border-box;}
@@ -29,7 +31,7 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 .btn-naver{background:#03c75a;border:none;color:#fff;}
 .copy-btn{background: rgba(255,255,255,0.12);border:none;cursor:pointer;}
 .map-thumb{width:100%;max-width:360px;margin:12px auto 0;overflow:hidden;cursor:zoom-in;}
-.map-thumb img{display:block;width:100%;height:auto;border-radius:8px;}
+.map-thumb img{display:block;width:100%;height:auto;}
 .map-hint{margin-top:8px;font-size:12px;opacity:0.8;}
 .toggle-header{margin:12px auto 0;padding:12px 16px;width:100%;max-width:360px;background: rgba(255,255,255,0.08);color:#fff;cursor:pointer;font-size:14px;font-weight:700;border:1px solid rgba(255,255,255,0.12);user-select:none;}
 .toggle-content{height:0;overflow:hidden;transition:height 0.25s ease;max-width:360px;margin:0 auto;}
@@ -42,11 +44,12 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 .bgm-toggle{position:fixed;top:16px;right:16px;z-index:10000;background: rgba(255,255,255,0.2);border:none;color:#fff;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;}
 .modal{position:fixed;inset:0;background: rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:999999;padding:18px;}
 .modal.show{display:flex;}
-.modal-inner{width:100%;max-width:90%;max-height:90%;border-radius:20px;overflow:hidden;text-align:center;}
-.modal-inner img{display:block;width:auto;max-width:100%;max-height:100%;margin:0 auto;border-radius:12px;}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:360px;margin:0 auto;}
-.gallery img{width:100%;height:auto;cursor:pointer;border-radius:8px;transition: transform 0.2s;}
-.gallery img:hover{transform:scale(1.05);}
+.modal-inner{position:relative;width:100%;max-width:420px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 18px 50px rgba(0,0,0,0.55);background: rgba(0,0,0,0.25);text-align:center;}
+.modal-inner img{display:block;width:100%;height:auto;}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:32px;color:#fff;font-weight:800;background: rgba(0,0,0,0.3);width:40px;height:60px;line-height:60px;text-align:center;border-radius:8px;cursor:pointer;user-select:none;}
+.arrow-left{left:10px;}
+.arrow-right{right:10px;}
+.fade-msg{position:fixed;top:80px;left:50%;transform:translateX(-50%);background: rgba(0,0,0,0.4);padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;color:#fff;transition:opacity 0.5s;z-index:10001;}
 </style>
 </head>
 <body>
@@ -55,6 +58,8 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   <source src="Si_Llego_A_Besarte.mp3" type="audio/mpeg">
 </audio>
 <button class="bgm-toggle" id="bgm-toggle">BGM 켜기</button>
+
+<div class="fade-msg" id="bgm-msg">아내가 준비한 음악을 들어보세요</div>
 
 <div class="video-bg">
   <video autoplay muted loop playsinline preload="auto">
@@ -65,18 +70,13 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 <div class="page">
   <div class="top-space"></div>
 
-  <!-- 상단 메시지 -->
-  <div class="section reveal show">
-    <p>아내가 준비한 음악을 들어보세요</p>
-  </div>
-
   <!-- 대표 이미지 -->
-  <div class="section reveal show">
-    <img src="main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
+  <div class="section reveal">
+    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
   </div>
 
-  <!-- 이름 섹션 -->
-  <div class="section reveal show">
+  <!-- 이름 -->
+  <div class="section reveal">
     <h1>우리 드디어 결혼해요</h1>
     <p class="names">
       신랑 신준섭<br>
@@ -87,43 +87,35 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   </div>
 
   <!-- 날짜/카운트다운 -->
-  <div class="section reveal show">
+  <div class="section reveal">
     <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
     <p id="countdown" class="muted">계산 중...</p>
   </div>
 
   <!-- 장소 -->
-  <div class="section reveal show">
+  <div class="section reveal">
     <p>라루체 명동<br>5층 그레이스홀</p>
   </div>
 
-  <!-- 갤러리 섹션 -->
-  <div class="section reveal show">
+  <!-- 갤러리 -->
+  <div class="section reveal">
     <h2>갤러리</h2>
     <div class="gallery">
-      <img src="PHOTO1.jpg" alt="사진1" onclick="openModal(this)">
-      <img src="PHOTO2.jpg" alt="사진2" onclick="openModal(this)">
-      <img src="PHOTO3.jpg" alt="사진3" onclick="openModal(this)">
-      <img src="PHOTO4.jpg" alt="사진4" onclick="openModal(this)">
-      <img src="PHOTO5.jpg" alt="사진5" onclick="openModal(this)">
-      <img src="PHOTO6.jpg" alt="사진6" onclick="openModal(this)">
-      <img src="PHOTO7.jpg" alt="사진7" onclick="openModal(this)">
-      <img src="PHOTO8.jpg" alt="사진8" onclick="openModal(this)">
-      <img src="PHOTO9.jpg" alt="사진9" onclick="openModal(this)">
-      <img src="PHOTO10.jpg" alt="사진10" onclick="openModal(this)">
-      <img src="PHOTO11.jpg" alt="사진11" onclick="openModal(this)">
-      <img src="PHOTO12.jpg" alt="사진12" onclick="openModal(this)">
+      <img src="PHOTO1.jpg" alt="사진1" onclick="openPhotoModal(0)">
+      <img src="PHOTO2.jpg" alt="사진2" onclick="openPhotoModal(1)">
+      <img src="PHOTO3.jpg" alt="사진3" onclick="openPhotoModal(2)">
+      <img src="PHOTO4.jpg" alt="사진4" onclick="openPhotoModal(3)">
     </div>
   </div>
 
   <!-- 오시는 길 -->
-  <div class="section reveal show">
+  <div class="section reveal">
     <h2>오시는 길</h2>
     <p>서울특별시 중구 퇴계로18길 46</p>
-    <div class="map-thumb" onclick="openModal(this)">
-      <img src="map.jpg" alt="약도">
+    <div class="map-thumb" onclick="toggleMapModal()">
+      <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
     </div>
-    <div class="map-hint">약도를 누르면 확대됩니다</div>
+    <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
     <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">네이버지도에서 보기</a>
 
     <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
@@ -139,14 +131,14 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   </div>
 
   <!-- 참석 여부 -->
-  <div class="section reveal show">
+  <div class="section reveal">
     <h2>참석 여부 회신</h2>
     <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
     <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank" rel="noopener">참석 유무 작성</a>
   </div>
 
   <!-- 마음 전하실 곳 -->
-  <div class="section reveal show">
+  <div class="section reveal">
     <h2>마음 전하실 곳</h2>
     <p class="muted">축하의 마음만으로도 감사합니다</p>
     <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
@@ -154,12 +146,15 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
       <div class="inner">
         <p id="groom-account-main">신준섭<br>기업은행 588-018494-01-019</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account-main')">계좌번호 복사</button>
-        <p id="groom-account-shingwangjae" style="margin-top:12px;">신광재<br>기업은행 123-456789-00-00</p>
+
+        <p id="groom-account-shingwangjae">신광재<br>기업은행 123-456789-00-00</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account-shingwangjae')">계좌번호 복사</button>
-        <p id="groom-account-ido" style="margin-top:12px;">이동자<br>국민은행 987-654321-00-00</p>
+
+        <p id="groom-account-ido">이동자<br>국민은행 987-654321-00-00</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account-ido')">계좌번호 복사</button>
       </div>
     </div>
+
     <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
     <div class="toggle-content">
       <div class="inner">
@@ -171,14 +166,23 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 
 </div>
 
-<!-- 모달 -->
-<div class="modal" id="modal">
+<!-- 갤러리 모달 -->
+<div class="modal" id="photoModal">
   <div class="modal-inner">
-    <img id="modalImg" src="" alt="확대">
+    <span class="arrow arrow-left" onclick="prevPhoto()">&#10094;</span>
+    <span class="arrow arrow-right" onclick="nextPhoto()">&#10095;</span>
+    <img id="modalPhoto" src="" alt="확대 사진" onclick="closePhotoModal()">
   </div>
 </div>
 
-<!-- 공유/스크롤 -->
+<!-- 지도 모달 -->
+<div class="modal" id="mapModal">
+  <div class="modal-inner" onclick="toggleMapModal()">
+    <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
+  </div>
+</div>
+
+<!-- 공유 / 스크롤 버튼 -->
 <div class="share-fab" onclick="shareInvite()">
   <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
 </div>
@@ -187,9 +191,15 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 </div>
 
 <script>
-// 스크롤 복원 방지
+// 스크롤 복원
 if('scrollRestoration' in history){history.scrollRestoration='manual';}
 window.scrollTo(0,0);
+
+// 섹션 fade-in
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});
+},{threshold:0.15});
+document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
 // 카운트다운
 const weddingDate = new Date("2026-07-05T13:30:00");
@@ -232,13 +242,10 @@ function shareInvite(){
 }
 function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
 
-// 섹션 fade-in
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add("show"); });
-},{threshold:0.15});
-document.querySelectorAll(".section").forEach(el=>observer.observe(el));
-
 // BGM
 const bgm = document.getElementById('bgm');
-
+const bgmToggle = document.getElementById('bgm-toggle');
+let isPlaying = false;
+bgm.muted = true;
+bgm.play().then(()=>{isPlaying
 ::contentReference[oaicite:0]{index=0}
