@@ -9,19 +9,24 @@ body,html{margin:0;padding:0;font-family:'Nanum Gothic',sans-serif;color:#fff;te
 .video-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;}
 .video-bg video{width:100%;height:100%;object-fit:cover;}
 .page{max-width:420px;margin:0 auto;padding:20px 16px 120px;position:relative;z-index:1;}
-.section{margin-bottom:20px;}
+.section{margin-bottom:20px;opacity:0;transform:translateY(20px);transition:opacity 0.8s, transform 0.8s;}
+.section.show{opacity:1;transform:translateY(0);}
 .names{margin:10px 0;}
 .muted{opacity:0.8;font-size:13px;}
 .btn,.copy-btn{display:block;width:100%;margin:10px auto;padding:10px;background:rgba(255,255,255,0.1);color:#fff;border:none;border-radius:6px;text-decoration:none;}
 .bgm-toggle{position:fixed;top:16px;right:16px;background:rgba(255,255,255,0.2);padding:10px 14px;border-radius:8px;cursor:pointer;z-index:1000;}
 .fade-msg{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.4);padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;transition:opacity 0.5s;z-index:1001;}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:9999;}
-.modal img{max-width:95%;max-height:80%;}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:32px;color:#fff;background:rgba(0,0,0,0.3);width:40px;height:60px;line-height:60px;text-align:center;border-radius:8px;cursor:pointer;}
+.modal img{max-width:95%;max-height:80%;cursor:pointer;}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:32px;color:#fff;background:rgba(0,0,0,0.3);width:40px;height:60px;line-height:60px;text-align:center;border-radius:8px;cursor:pointer;user-select:none;}
 .arrow-left{left:10px;}
 .arrow-right{right:10px;}
 .toggle-header{margin:8px 0;padding:10px;background:rgba(255,255,255,0.1);cursor:pointer;}
 .toggle-content{height:0;overflow:hidden;transition:height 0.25s;}
+.fab{position:fixed;bottom:16px;width:56px;height:56px;display:grid;place-items:center;background:rgba(255,255,255,0.12);border-radius:50%;cursor:pointer;z-index:1000;}
+.fab svg{width:24px;height:24px;fill:#fff;}
+.fab-share{left:40%;}
+.fab-top{right:16px;}
 </style>
 </head>
 <body>
@@ -36,36 +41,74 @@ body,html{margin:0;padding:0;font-family:'Nanum Gothic',sans-serif;color:#fff;te
 <div class="fade-msg" id="bgmMsg">아내가 준비한 음악을 들어보세요</div>
 
 <div class="page">
-  <div class="section">
-    <h1>우리 드디어 결혼해요</h1>
-    <p class="names">신랑 신준섭<br>신부 김가람</p>
+  <!-- 이름 -->
+  <div class="section"><h1>우리 드디어 결혼해요</h1>
+    <p class="names">신랑 신준섭<br><span class="subline">신광재·이동자의 아들</span><br><br>신부 김가람<br><span class="subline">한내엽의 딸</span></p>
   </div>
 
-  <div class="section">
-    <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
+  <!-- 날짜 -->
+  <div class="section"><p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
     <p id="countdown" class="muted">계산 중...</p>
   </div>
 
+  <!-- 갤러리 -->
   <div class="section">
     <h2>갤러리</h2>
     <img src="PHOTO1.jpg" style="width:100%;margin-bottom:8px;" onclick="openPhotoModal(0)">
     <img src="PHOTO2.jpg" style="width:100%;margin-bottom:8px;" onclick="openPhotoModal(1)">
+    <img src="PHOTO3.jpg" style="width:100%;margin-bottom:8px;" onclick="openPhotoModal(2)">
   </div>
 
+  <!-- 오시는 길 -->
   <div class="section">
     <h2>오시는 길</h2>
-    <div onclick="toggleMapModal()"><img src="map.jpg" style="width:100%;cursor:pointer;"></div>
+    <p>서울특별시 중구 퇴계로18길 46</p>
+    <img src="map.jpg" style="width:100%;cursor:pointer;" onclick="toggleMapModal()">
+    <a class="btn" href="https://map.naver.com/v5/search/라루체명동" target="_blank">네이버 지도 보기</a>
+    <div class="toggle-header">지하철 안내</div>
+    <div class="toggle-content"><p>4호선 명동역 3번 출구 도보 60m</p></div>
+    <div class="toggle-header">버스 안내</div>
+    <div class="toggle-content"><p>퇴계로2가.명동역 104,105,421,463,507,604,N16,7011</p></div>
+  </div>
+
+  <!-- 계좌 -->
+  <div class="section">
+    <h2>마음 전하실 곳</h2>
+    <div class="toggle-header">신랑측</div>
+    <div class="toggle-content">
+      <p>신준섭<br>기업은행 588-018494-01-019</p>
+      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
+      <p>신광재<br>기업은행 123-456789-00-00</p>
+      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
+      <p>이동자<br>국민은행 987-654321-00-00</p>
+      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
+    </div>
+    <div class="toggle-header">신부측</div>
+    <div class="toggle-content">
+      <p>김가람<br>카카오뱅크 1234-5678-9012</p>
+      <button class="copy-btn" onclick="copyText(this)">계좌번호 복사</button>
+    </div>
   </div>
 </div>
 
+<!-- 갤러리 모달 -->
 <div class="modal" id="photoModal">
   <span class="arrow arrow-left" onclick="prevPhoto()">&#10094;</span>
   <img id="modalPhoto" src="" onclick="closePhotoModal()">
   <span class="arrow arrow-right" onclick="nextPhoto()">&#10095;</span>
 </div>
 
+<!-- 약도 모달 -->
 <div class="modal" id="mapModal" onclick="toggleMapModal()">
   <img src="map.jpg">
+</div>
+
+<!-- 하단 버튼 -->
+<div class="fab fab-share" onclick="shareInvite()">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
+</div>
+<div class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/></svg>
 </div>
 
 <audio id="bgm" loop>
@@ -73,20 +116,9 @@ body,html{margin:0;padding:0;font-family:'Nanum Gothic',sans-serif;color:#fff;te
 </audio>
 
 <script>
-const bgm=document.getElementById('bgm');
-const bgmToggle=document.getElementById('bgmToggle');
-const bgmMsg=document.getElementById('bgmMsg');
-let isPlaying=false;
-
-// BGM 버튼
-bgmToggle.onclick=function(){
-  if(!isPlaying){bgm.play();isPlaying=true;bgmToggle.innerText="BGM 끄기";}
-  else{bgm.pause();isPlaying=false;bgmToggle.innerText="BGM 켜기";}
-}
-
-// 잠깐 메시지
-bgmMsg.style.opacity=1;
-setTimeout(()=>{bgmMsg.style.opacity=0;},3000);
+// fade-in
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');});},{threshold:0.1});
+document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 
 // 카운트다운
 const weddingDate=new Date("2026-07-05T13:30:00");
@@ -102,8 +134,20 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 updateCountdown();
 
+// BGM
+const bgm=document.getElementById('bgm');
+const bgmToggle=document.getElementById('bgmToggle');
+const bgmMsg=document.getElementById('bgmMsg');
+let isPlaying=false;
+bgmToggle.onclick=function(){
+  if(!isPlaying){bgm.play();isPlaying=true;bgmToggle.innerText="BGM 끄기";}
+  else{bgm.pause();isPlaying=false;bgmToggle.innerText="BGM 켜기";}
+}
+bgmMsg.style.opacity=1;
+setTimeout(()=>{bgmMsg.style.opacity=0;},3000);
+
 // 갤러리
-const photos=["PHOTO1.jpg","PHOTO2.jpg"];
+const photos=["PHOTO1.jpg","PHOTO2.jpg","PHOTO3.jpg"];
 let currentPhoto=0;
 function openPhotoModal(idx){currentPhoto=idx;document.getElementById('modalPhoto').src=photos[idx];document.getElementById('photoModal').style.display='flex';}
 function closePhotoModal(){document.getElementById('photoModal').style.display='none';}
@@ -113,10 +157,11 @@ function nextPhoto(){currentPhoto=(currentPhoto+1)%photos.length;document.getEle
 // 약도
 function toggleMapModal(){const m=document.getElementById('mapModal');m.style.display=(m.style.display==='flex'?'none':'flex');}
 
-// 토글박스
-document.querySelectorAll('.toggle-header').forEach(h=>{
-  h.onclick=()=>{const c=h.nextElementSibling;c.style.height=(c.style.height&&c.style.height!=='0px'?'0px':c.scrollHeight+'px');}
-});
+// 계좌 복사
+function copyText(btn){const text=btn.previousElementSibling.innerText;navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다"));}
+
+// 공유
+function shareInvite(){const url=window.location.href;if(navigator.share){navigator.share({title:"모바일 청첩장",text:"우리 결혼식에 초대합니다",url});} else{navigator.clipboard.writeText(url).then(()=>alert("링크가 복사되었습니다"));}}
 </script>
 
 </body>
