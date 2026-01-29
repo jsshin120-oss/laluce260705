@@ -227,11 +227,37 @@
     <div class="section reveal">
       <h2>마음 전하실 곳</h2>
       <p class="muted">축하의 마음만으로도 감사합니다</p>
-      <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
-      <div class="toggle-content"><div class="inner">
-        <p id="groom-account">신준섭<br>기업은행 588-018494-01-019</p>
-        <button class="copy-btn" onclick="copyText(event,'groom-account')">계좌번호 복사</button>
-      </div></div>
+   <!-- 신랑 계좌 -->
+<div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
+<div class="toggle-content">
+  <div class="inner">
+
+    <p id="groom-account">
+      신준섭<br>
+      기업은행 588-018494-01-019
+    </p>
+    <button class="copy-btn" onclick="copyText(event,'groom-account')">
+      계좌번호 복사
+    </button>
+
+    <p id="groom-father">
+      신광재<br>
+      국민은행 123-456-789012
+    </p>
+    <button class="copy-btn" onclick="copyText(event,'groom-father')">
+      계좌번호 복사
+    </button>
+
+    <p id="groom-mother">
+      이동자<br>
+      신한은행 987-654-321098
+    </p>
+    <button class="copy-btn" onclick="copyText(event,'groom-mother')">
+      계좌번호 복사
+    </button>
+
+  </div>
+</div>
       <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
       <div class="toggle-content"><div class="inner">
         <p id="bride-account">김가람<br>카카오뱅크</p>
