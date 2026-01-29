@@ -98,10 +98,15 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
     <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">네이버지도에서 보기</a>
 
     <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-    <div class="toggle-content"><div class="inner"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
+    <div class="toggle-content"><div class="inner" style="text-align:center;"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
 
     <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
-    <div class="toggle-content"><div class="inner"><p>퇴계로2가.명동역 - 104,105,421,463,507,604,N16,7011<br>명동입구 - 104,421,463,507,604,N16,7011,05</p></div></div>
+    <div class="toggle-content">
+      <div class="inner" style="text-align:center;">
+        <p><strong>퇴계로2가.명동역</strong><br>104, 105, 421, 463, 507, 604, N16, 7011</p>
+        <p><strong>명동입구</strong><br>104, 421, 463, 507, 604, N16, 7011, 05</p>
+      </div>
+    </div>
   </div>
 
   <div class="section reveal">
@@ -135,6 +140,14 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
         <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- 모달 -->
+<div class="modal" id="mapModal">
+  <div class="modal-inner">
+    <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
+    <button class="modal-close" onclick="closeMapModal()">닫기</button>
   </div>
 </div>
 
@@ -197,34 +210,22 @@ const observer=new IntersectionObserver((entries)=>{
     if(entry.isIntersecting){ entry.target.classList.add("show"); }
   });
 },{threshold:0.15});
-
 document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
 // BGM 자동재생 트릭
 const bgm = document.getElementById('bgm');
 const bgmToggle = document.getElementById('bgm-toggle');
 let isPlaying = true;
-
-// muted 상태로 먼저 재생 → 브라우저 허용
 bgm.muted = true;
-bgm.play().then(()=>{
-  // 재생 성공 시 바로 음소거 해제
-  bgm.muted = false;
-}).catch(err=>{
-  console.log("자동 재생 실패:", err);
+bgm.play().then(()=>{ bgm.muted=false; }).catch(err=>console.log("자동 재생 실패:",err));
+bgmToggle.addEventListener('click', ()=>{
+  if(isPlaying){ bgm.pause(); bgmToggle.innerText="BGM 켜기"; isPlaying=false; }
+  else{ bgm.play(); bgmToggle.innerText="BGM 끄기"; isPlaying=true; }
 });
 
-bgmToggle.addEventListener('click', ()=>{
-  if(isPlaying){
-    bgm.pause();
-    bgmToggle.innerText="BGM 켜기";
-    isPlaying=false;
-  } else {
-    bgm.play();
-    bgmToggle.innerText="BGM 끄기";
-    isPlaying=true;
-  }
-});
+// 약도 모달
+function openMapModal(){document.getElementById("mapModal").classList.add("show");}
+function closeMapModal(){document.getElementById("mapModal").classList.remove("show");}
 </script>
 
 </body>
