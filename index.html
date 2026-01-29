@@ -67,31 +67,6 @@
     .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
     .modal-inner img { display:block; width:100%; height:auto; }
     .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
-
-    /* 참석 여부 폼 개선 */
-    form input[type=text],
-    form input[type=tel] {
-      width: 100%;
-      max-width: 360px;
-      padding: 12px 14px;
-      margin: 8px 0;
-      border-radius: 4px; /* 버튼과 동일하게 직사각형 */
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(0,0,0,0.65);  /* 배경 진하게 */
-      color: #fff;                   /* 글자 흰색 */
-      font-size: 16px;
-      outline: none;
-      transition: background 0.2s, border 0.2s;
-    }
-    form input[type=text]::placeholder,
-    form input[type=tel]::placeholder {
-      color: rgba(255,255,255,0.7);  /* placeholder 색상 */
-    }
-    form input[type=text]:focus,
-    form input[type=tel]:focus {
-      background: rgba(0,0,0,0.8);
-      border: 1px solid #fff;
-    }
   </style>
 </head>
 <body>
@@ -153,16 +128,16 @@
     <br><br>
   </div>
 
-  <!-- 참석 여부 회신 -->
+  <!-- 참석 여부 회신 버튼 -->
   <div class="section reveal">
     <h2>참석 여부 회신</h2>
-    <p class="muted">원활한 예식 준비를 위해 참석하시는 분들께서는<br>성함과 연락처를 입력해주세요</p>
+    <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
 
-    <form onsubmit="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header', '_blank'); return false;" style="max-width:360px; margin:0 auto;">
-      <input type="text" placeholder="성함" required>
-      <input type="tel" placeholder="연락처" required>
-      <button class="btn" type="submit">제출</button>
-    </form>
+    <div style="max-width:360px; margin:0 auto;">
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank" rel="noopener">
+        참석 유무 작성
+      </a>
+    </div>
     <br><br>
   </div>
 
@@ -201,7 +176,7 @@
   </div>
 </div>
 
-<!-- 공유 / 스크롤 버튼 및 모달 스크립트는 그대로 -->
+<!-- 공유 / 스크롤 버튼 및 모달 스크립트 -->
 <script>
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
   window.scrollTo(0,0);
