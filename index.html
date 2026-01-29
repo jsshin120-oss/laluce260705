@@ -1,98 +1,104 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>모바일 청첩장</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>모바일 청첩장</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
-    }
-    * { box-sizing: border-box; }
-    html, body {
-      margin:0; padding:0; min-height:100%;
-      font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-      background:transparent; overflow-x:hidden;
-      text-align:center; color:#fff; text-shadow:var(--text-shadow);
-      scroll-behavior: smooth;
-    }
-    .video-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
-    .video-bg video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); opacity: 0; transition: opacity 1s ease-out; }
-    .video-bg video.loaded { opacity: 0.78; }
-    
-    .page { width: 100%; max-width: 420px; margin: 0 auto; padding: 26px 16px 120px; position: relative; z-index: 5; }
-    .top-space { height:12px; }
-    .section { 
-      position: relative; 
-      padding: 24px 0; 
-      margin-bottom: 24px; 
-      opacity: 0; 
-      transform: translateY(30px); 
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
-    }
-    .section.show { 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-    .section:first-child img { opacity: 0; transition: opacity 1s ease-out; }
-    .section:first-child img.loaded { opacity: 1; }
+<style>
+:root{
+  --text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin:0; padding:0; min-height:100%;
+  font-family:'Nanum Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  background:transparent; overflow-x:hidden;
+  text-align:center; color:#fff; text-shadow:var(--text-shadow);
+  scroll-behavior: smooth;
+}
 
-    .section::after { content:""; display:block; width:60%; max-width:300px; height:3px; background:#fff; margin:20px auto 0; border-radius:2px; opacity:0.85; }
-    .section:last-child::after { display:none; }
+.video-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
+.video-bg video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); opacity: 0; transition: opacity 1s ease-out; }
+.video-bg video.loaded { opacity: 0.78; }
 
-    h1, .names { font-family:'Nanum Pen Script', cursive; }
-    h1 { font-size:28px; margin:0 0 16px; font-weight:400; }
-    h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.95; letter-spacing:-0.2px; }
-    .names { font-size:20px; margin:12px 0 12px; font-weight:400; line-height:1.6; }
-    .subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.85; letter-spacing:-0.1px; }
-    p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
-    .muted { opacity:0.8; font-size:13px; }
-    .btn, .copy-btn, .btn-naver {
-      display:block; width:100%; max-width:360px; margin:16px auto 0;
-      padding:12px 16px; font-size:14px; font-weight:700; color:#fff;
-      text-decoration:none; background: rgba(255,255,255,0.08);
-      border:1px solid rgba(255,255,255,0.15); text-align:center;
-      transition: background 0.2s;
-    }
-    .btn:hover, .btn-naver:hover, .copy-btn:hover { background: rgba(255,255,255,0.18); }
-    .btn-naver { background:#03c75a; border:none; color:#fff; }
-    .copy-btn { background: rgba(255,255,255,0.12); border:none; cursor:pointer; }
+.page { width: 100%; max-width: 420px; margin: 0 auto; padding: 26px 16px 120px; position: relative; z-index: 5; }
+.top-space { height:12px; }
 
-    .map-thumb { width:100%; max-width:360px; margin:12px auto 0; overflow:hidden; cursor:zoom-in; }
-    .map-thumb img { display:block; width:100%; height:auto; }
-    .map-hint { margin-top:8px; font-size:12px; opacity:0.8; }
+.section { position: relative; padding: 24px 0; margin-bottom: 24px; opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.section.show { opacity: 1; transform: translateY(0); }
 
-    .toggle-header {
-      margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
-      background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;
-      font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
-      user-select:none;
-    }
-    .toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
-    .toggle-content .inner { margin-top:10px; padding:12px 14px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); }
-    .toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
+.section:first-child img { opacity: 0; transition: opacity 1s ease-out; }
+.section:first-child img.loaded { opacity: 1; }
 
-    /* 공유/상단 버튼 */
-    .share-fab, .scroll-top-fab {
-      position: fixed; bottom:16px; width:56px; height:56px; display:grid; place-items:center;
-      background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); cursor:pointer; z-index:99999;
-      border-radius:50%;
-    }
-    .share-fab { left:40%; } 
-    .scroll-top-fab { left:60%; }
-    .share-fab svg, .scroll-top-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
+.section::after { content:""; display:block; width:60%; max-width:300px; height:3px; background:#fff; margin:20px auto 0; border-radius:2px; opacity:0.85; }
+.section:last-child::after { display:none; }
 
-    .modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
-    .modal.show { display:flex; }
-    .modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
-    .modal-inner img { display:block; width:100%; height:auto; }
-    .modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
-  </style>
+h1, .names { font-family:'Nanum Pen Script', cursive; }
+h1 { font-size:28px; margin:0 0 16px; font-weight:400; }
+h2 { font-size:16px; margin:0 0 12px; font-weight:700; opacity:0.95; letter-spacing:-0.2px; }
+.names { font-size:20px; margin:12px 0 12px; font-weight:400; line-height:1.6; }
+.subline { display:inline-block; margin-top:4px; font-size:13px; font-weight:400; opacity:0.85; letter-spacing:-0.1px; }
+p { font-size:14px; line-height:1.75; margin:8px 0; opacity:0.95; }
+.muted { opacity:0.8; font-size:13px; }
+
+.btn, .copy-btn, .btn-naver {
+  display:block; width:100%; max-width:360px; margin:16px auto 0;
+  padding:12px 16px; font-size:14px; font-weight:700; color:#fff;
+  text-decoration:none; background: rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15); text-align:center;
+  transition: background 0.2s;
+}
+.btn:hover, .btn-naver:hover, .copy-btn:hover { background: rgba(255,255,255,0.18); }
+.btn-naver { background:#03c75a; border:none; color:#fff; }
+.copy-btn { background: rgba(255,255,255,0.12); border:none; cursor:pointer; }
+
+.map-thumb { width:100%; max-width:360px; margin:12px auto 0; overflow:hidden; cursor:zoom-in; }
+.map-thumb img { display:block; width:100%; height:auto; }
+.map-hint { margin-top:8px; font-size:12px; opacity:0.8; }
+
+.toggle-header {
+  margin:12px auto 0; padding:12px 16px; width:100%; max-width:360px;
+  background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;
+  font-size:14px; font-weight:700; border:1px solid rgba(255,255,255,0.12);
+  user-select:none;
+}
+.toggle-content { height:0; overflow:hidden; transition:height 0.25s ease; max-width:360px; margin:0 auto; }
+.toggle-content .inner { margin-top:10px; padding:12px 14px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); }
+.toggle-content .inner p { margin:0; font-size:13px; line-height:1.6; opacity:0.95; }
+
+.share-fab, .scroll-top-fab {
+  position: fixed; bottom:16px; width:56px; height:56px; display:grid; place-items:center;
+  background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); cursor:pointer; z-index:99999;
+  border-radius:50%;
+}
+.share-fab { left:40%; } 
+.scroll-top-fab { left:60%; }
+.share-fab svg, .scroll-top-fab svg { width:24px; height:24px; fill:#fff; opacity:0.95; }
+
+.modal { position:fixed; inset:0; background: rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:999999; padding:18px; }
+.modal.show { display:flex; }
+.modal-inner { width:100%; max-width:520px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.18); box-shadow:0 18px 50px rgba(0,0,0,0.55); background: rgba(0,0,0,0.25); text-align:center; }
+.modal-inner img { display:block; width:100%; height:auto; }
+.modal-close { margin-top:10px; width:100%; max-width:520px; border:0; padding:14px 16px; background: rgba(255,255,255,0.12); color:#fff; font-weight:800; cursor:pointer; border:1px solid rgba(255,255,255,0.16); }
+</style>
 </head>
 <body>
+
+<!-- BGM 오디오 -->
+<audio id="bgm" loop>
+  <source src="Si_Llego_A_Besarte.mp3" type="audio/mpeg">
+</audio>
+
+<!-- BGM 토글 버튼 -->
+<button id="bgm-toggle" style="
+  position: fixed; top:16px; right:16px; z-index:10000;
+  background: rgba(255,255,255,0.2); border:none; color:#fff;
+  font-weight:700; padding:10px 14px; border-radius:8px;
+  cursor:pointer;
+">BGM 끄기</button>
 
 <div class="video-bg">
   <video autoplay muted loop playsinline preload="auto">
@@ -108,7 +114,6 @@
     <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
   </div>
 
-  <!-- 나머지 섹션들은 동일 -->
   <!-- 결혼식 정보 -->
   <div class="section reveal">
     <h1>우리 드디어 결혼해요</h1>
@@ -166,19 +171,16 @@
       <div class="inner">
         <p id="groom-account-main">신준섭<br>기업은행 588-018494-01-019</p>
         <button class="copy-btn" onclick="copyText(event,'groom-account-main')">계좌번호 복사</button>
-
         <div style="margin-top:12px;">
           <p id="groom-account-shingwangjae">신광재<br>기업은행 123-456789-00-00</p>
           <button class="copy-btn" onclick="copyText(event,'groom-account-shingwangjae')">계좌번호 복사</button>
         </div>
-
         <div style="margin-top:12px;">
           <p id="groom-account-ido">이동자<br>국민은행 987-654321-00-00</p>
           <button class="copy-btn" onclick="copyText(event,'groom-account-ido')">계좌번호 복사</button>
         </div>
       </div>
     </div>
-
     <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
     <div class="toggle-content">
       <div class="inner">
@@ -249,7 +251,6 @@ const observer = new IntersectionObserver((entries)=>{
 document.querySelectorAll(".section").forEach((el, idx)=>{
   if(idx===0){
     el.classList.add("show"); // 첫 섹션 바로 표시
-    // 이미지 로딩 후 fade-in
     const img = el.querySelector('img');
     if(img.complete) img.classList.add('loaded');
     else img.addEventListener('load',()=>img.classList.add('loaded'));
@@ -260,7 +261,19 @@ document.querySelectorAll(".section").forEach((el, idx)=>{
 // 배경 영상 로딩 후 fade-in
 const video = document.querySelector('.video-bg video');
 video.addEventListener('canplaythrough', ()=> { video.classList.add('loaded'); });
-</script>
 
-</body>
-</html>
+// BGM 제어
+const bgm = document.getElementById('bgm');
+const bgmToggle = document.getElementById('bgm-toggle');
+let isPlaying = true;
+
+// 자동 재생 시도
+bgm.play().catch(()=>{
+  const resumeAudio = () => { bgm.play(); document.body.removeEventListener('touchstart', resumeAudio); };
+  document.body.addEventListener('touchstart', resumeAudio);
+});
+
+bgmToggle.addEventListener('click', ()=>{
+  if(isPlaying){ bgm.pause(); bgmToggle.innerText = "BGM 켜기"; isPlaying=false; }
+  else{ bgm
+::contentReference[oaicite:0]{index=0}
