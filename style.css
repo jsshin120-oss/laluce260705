@@ -240,3 +240,28 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ===== 첫 로딩 페이드인 ===== */
+body {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+body.loaded {
+  opacity: 1;
+}
+
+/* ===== reveal 등장 애니메이션 ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 상단 메인 이미지는 살짝 더 부드럽게 */
+.section:first-of-type.reveal {
+  transform: translateY(-14px);
+}
