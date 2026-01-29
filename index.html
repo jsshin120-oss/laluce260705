@@ -80,111 +80,15 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 </div>
 
 <div class="page">
-  <div class="top-space"></div>
+<!-- 여기에 기존 HTML 그대로 넣기 (갤러리, 섹션, 지도, 계좌, 토글 모두 포함) -->
+</div>
 
-  <!-- 청첩장 이미지 -->
-  <div class="section reveal">
-    <img src="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/main.jpg" alt="청첩장 이미지" style="width:100%; height:auto; display:block; margin:0 auto;">
+<!-- 갤러리 모달 -->
+<div class="modal" id="photoModal">
+  <div class="modal-inner">
+    <img id="modalPhoto" src="" alt="확대 사진">
+    <button class="modal-close" onclick="closePhotoModal()">닫기</button>
   </div>
-
-  <!-- 이름 -->
-  <div class="section reveal">
-    <h1>우리 드디어 결혼해요</h1>
-    <p class="names">
-      신랑 신준섭<br>
-      <span class="subline">신광재 · 이동자의 아들</span><br><br>
-      신부 김가람<br>
-      <span class="subline">한내엽의 딸</span>
-    </p>
-  </div>
-
-  <!-- 날짜 / 카운트다운 -->
-  <div class="section reveal">
-    <p>2026년 7월 5일 일요일<br>오후 1시 30분</p>
-    <p id="countdown" class="muted">계산 중...</p>
-  </div>
-
-  <!-- 장소 -->
-  <div class="section reveal">
-    <p>라루체 명동<br>5층 그레이스홀</p>
-  </div>
-
-  <!-- 갤러리 섹션 -->
-  <div class="section reveal">
-    <h2>갤러리</h2>
-    <div class="gallery">
-      <img src="PHOTO1.jpg" alt="사진1" onclick="openPhotoModal(this)">
-      <img src="PHOTO2.jpg" alt="사진2" onclick="openPhotoModal(this)">
-      <img src="PHOTO3.jpg" alt="사진3" onclick="openPhotoModal(this)">
-      <img src="PHOTO4.jpg" alt="사진4" onclick="openPhotoModal(this)">
-      <img src="PHOTO5.jpg" alt="사진5" onclick="openPhotoModal(this)">
-      <img src="PHOTO6.jpg" alt="사진6" onclick="openPhotoModal(this)">
-      <img src="PHOTO7.jpg" alt="사진7" onclick="openPhotoModal(this)">
-      <img src="PHOTO8.jpg" alt="사진8" onclick="openPhotoModal(this)">
-      <img src="PHOTO9.jpg" alt="사진9" onclick="openPhotoModal(this)">
-      <img src="PHOTO10.jpg" alt="사진10" onclick="openPhotoModal(this)">
-      <img src="PHOTO11.jpg" alt="사진11" onclick="openPhotoModal(this)">
-      <img src="PHOTO12.jpg" alt="사진12" onclick="openPhotoModal(this)">
-    </div>
-  </div>
-
-  <!-- 갤러리 모달 -->
-  <div class="modal" id="photoModal">
-    <div class="modal-inner">
-      <img id="modalPhoto" src="" alt="확대 사진">
-      <button class="modal-close" onclick="closePhotoModal()">닫기</button>
-    </div>
-  </div>
-
-  <!-- 오시는 길 -->
-  <div class="section reveal">
-    <h2>오시는 길</h2>
-    <p>서울특별시 중구 퇴계로18길 46</p>
-    <div class="map-thumb" onclick="openMapModal()">
-      <img src="https://cdn.imweb.me/thumbnail/20230127/6b24ed0ed20b2.jpg" alt="약도">
-    </div>
-    <div class="map-hint">약도를 누르면 크게 볼 수 있어요</div>
-    <a class="btn btn-naver" href="https://map.naver.com/v5/search/라루체명동" target="_blank" rel="noopener">네이버지도에서 보기</a>
-
-    <div class="toggle-header" onclick="toggleBox(this)">지하철 이용 안내</div>
-    <div class="toggle-content"><div class="inner"><p>4호선 <strong>명동역 3번 출구</strong> 도보 60m</p></div></div>
-
-    <div class="toggle-header" onclick="toggleBox(this)">버스 이용 안내</div>
-    <div class="toggle-content"><div class="inner"><p><strong>퇴계로2가.명동역</strong><br>104, 105, 421, 463, 507, 604, N16, 7011</p>
-    <p><strong>명동입구</strong><br>104, 421, 463, 507, 604, N16, 7011, 05</p></div></div>
-  </div>
-
-  <!-- 참석 여부 -->
-  <div class="section reveal">
-    <h2>참석 여부 회신</h2>
-    <p class="muted">원활한 예식 준비를 위해 참석 여부를 작성해주세요</p>
-    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeJQFHcbsnxeGuWe5T41nr4prdsomxgftVaL66ABfMRHbwTpA/viewform?usp=header" target="_blank" rel="noopener">참석 유무 작성</a>
-  </div>
-
-  <!-- 마음 전하실 곳 -->
-  <div class="section reveal">
-    <h2>마음 전하실 곳</h2>
-    <p class="muted">축하의 마음만으로도 감사합니다</p>
-    <div class="toggle-header" onclick="toggleBox(this)">신랑측</div>
-    <div class="toggle-content">
-      <div class="inner">
-        <p id="groom-account-main">신준섭<br>기업은행 588-018494-01-019</p>
-        <button class="copy-btn" onclick="copyText(event,'groom-account-main')">계좌번호 복사</button>
-        <p id="groom-account-shingwangjae">신광재<br>기업은행 123-456789-00-00</p>
-        <button class="copy-btn" onclick="copyText(event,'groom-account-shingwangjae')">계좌번호 복사</button>
-        <p id="groom-account-ido">이동자<br>국민은행 987-654321-00-00</p>
-        <button class="copy-btn" onclick="copyText(event,'groom-account-ido')">계좌번호 복사</button>
-      </div>
-    </div>
-    <div class="toggle-header" onclick="toggleBox(this)">신부측</div>
-    <div class="toggle-content">
-      <div class="inner">
-        <p id="bride-account">김가람<br>카카오뱅크 1234-5678-9012</p>
-        <button class="copy-btn" onclick="copyText(event,'bride-account')">계좌번호 복사</button>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <!-- 지도 모달 -->
@@ -195,16 +99,11 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
   </div>
 </div>
 
-<!-- 공유 / 스크롤 -->
-<div class="share-fab" onclick="shareInvite()">
-  <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-</div>
-<div class="scroll-top-fab" onclick="scrollToTop()">
-  <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/></svg>
-</div>
+<div class="share-fab" onclick="shareInvite()">공유</div>
+<div class="scroll-top-fab" onclick="scrollToTop()">▲</div>
 
 <script>
-// 카운트다운
+// ------------------ 카운트다운 ------------------
 const weddingDate = new Date("2026-07-05T13:30:00");
 function updateCountdown(){
   const now = new Date();
@@ -223,36 +122,53 @@ function updateCountdown(){
 const countdownInterval = setInterval(updateCountdown,1000);
 updateCountdown();
 
-// 섹션 fade-in
+// ------------------ 섹션 fade-in ------------------
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){entry.target.classList.add("show");}
+    if(entry.isIntersecting) entry.target.classList.add("show");
   });
 },{threshold:0.15});
 document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
-// 토글박스
+// ------------------ 토글 ------------------
 function toggleBox(header){
   const content = header.nextElementSibling;
   const isOpen = content.style.height && content.style.height !== "0px";
   content.style.height = isOpen ? "0px" : content.scrollHeight+"px";
 }
 
-// 계좌 복사
+// ------------------ 계좌 복사 ------------------
 function copyText(e,id){
   e.stopPropagation();
   const text=document.getElementById(id).innerText;
   navigator.clipboard.writeText(text).then(()=>alert("계좌번호가 복사되었습니다")).catch(()=>alert("복사 실패!"));
 }
 
-// 공유 / 스크롤
+// ------------------ BGM ------------------
+const bgm=document.getElementById("bgm");
+document.getElementById("bgm-toggle").addEventListener("click",()=>{
+  if(bgm.paused){bgm.play();} else {bgm.pause();}
+});
+
+// ------------------ 갤러리 모달 ------------------
+function openPhotoModal(img){
+  document.getElementById("modalPhoto").src = img.src;
+  document.getElementById("photoModal").classList.add("show");
+}
+function closePhotoModal(){ document.getElementById("photoModal").classList.remove("show"); }
+
+// ------------------ 지도 모달 ------------------
+function openMapModal(){ document.getElementById("mapModal").classList.add("show"); }
+function closeMapModal(){ document.getElementById("mapModal").classList.remove("show"); }
+
+// ------------------ 공유 / 스크롤 ------------------
 function shareInvite(){
   const title="모바일 청첩장", text="우리 결혼식에 초대합니다 🙂", url=window.location.href;
-  if(navigator.share){
-    navigator.share({title,text,url});
-  } else {
-    navigator.clipboard.writeText(url).then(()=>alert("PC에서는 링크를 복사했어요!")).catch(()=>alert("복사 실패!"));
-  }
+  if(navigator.share){ navigator.share({title,text,url}); }
+  else{ navigator.clipboard.writeText(url).then(()=>alert("링크 복사 완료")).catch(()=>alert("복사 실패")); }
 }
-function scrollToTop
-::contentReference[oaicite:0]{index=0}
+function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+
+</script>
+</body>
+</html>
