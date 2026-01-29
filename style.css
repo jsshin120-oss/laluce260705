@@ -228,3 +228,15 @@ body {
     font-size: 13.5px;
   }
 }
+
+/* 상단 메인 이미지 전용 등장 효과 */
+.section:first-of-type {
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.section:first-of-type.show {
+  opacity: 1;
+  transform: translateY(0);
+}
