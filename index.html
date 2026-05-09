@@ -50,6 +50,7 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 .modal-close{margin-top:10px;width:100%;max-width:520px;border:0;padding:14px 16px;background: rgba(255,255,255,0.12);color:#fff;font-weight:800;cursor:pointer;border:1px solid rgba(255,255,255,0.2);border-radius:8px;}
 
 /* 갤러리 스타일 */
+/* 갤러리 스타일 */
 .gallery-container{width:100%;max-width:360px;margin:12px auto 0;position:relative;overflow:hidden;border-radius:12px;}
 .gallery-slider{display:flex;transition:transform 0.5s ease;width:100%;}
 .gallery-slide{width:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-height:300px;}
@@ -58,6 +59,18 @@ p{font-size:14px;line-height:1.75;margin:8px 0;opacity:0.95;}
 .gallery-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.3s ease;border:none;padding:0;}
 .gallery-dot.active{background:#fff;width:24px;border-radius:4px;}
 .gallery-counter{font-size:12px;opacity:0.8;min-width:40px;text-align:center;}
+
+/* 메인 사진 등장 효과 */
+.photo-reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+
+.photo-reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
 </style>
 </head>
 <body>
