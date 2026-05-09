@@ -265,3 +265,16 @@ body.loaded {
 .section:first-of-type.reveal {
   transform: translateY(-14px);
 }
+
+
+
+.photo-reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+
+.photo-reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
