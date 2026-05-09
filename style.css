@@ -281,3 +281,38 @@ body.loaded {
   opacity:1;
   transform:translateY(0);
 }
+
+
+.countdown-box{
+  width:100%;
+  max-width:360px;
+  margin:0 auto;
+  padding:28px 20px;
+
+  background:rgba(255,255,255,0.14);
+  backdrop-filter:blur(10px);
+
+  border:1px solid rgba(255,255,255,0.22);
+
+  text-align:center;
+}
+
+.countdown-title{
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:10px;
+  letter-spacing:-0.2px;
+}
+
+.countdown-sub{
+  font-size:13px;
+  opacity:0.82;
+  margin-bottom:18px;
+}
+
+.countdown-timer{
+  font-size:28px;
+  font-weight:800;
+  line-height:1.4;
+  letter-spacing:-1px;
+}
