@@ -243,13 +243,17 @@ function shareInvite(){
 }
 function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
 
-// 섹션 자연스러운 fade-in
+// 섹션 fade-in
 const observer=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){ entry.target.classList.add("show"); }
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
   });
 },{threshold:0.15});
+
 document.querySelectorAll(".section").forEach(el=>observer.observe(el));
+document.querySelectorAll(".photo-reveal").forEach(el=>observer.observe(el));
 
 // BGM 자동재생 (모바일/PC 호환)
 const bgm = document.getElementById('bgm');
