@@ -256,17 +256,41 @@ function shareInvite(){
 }
 function scrollToTop(){window.scrollTo({top:0, behavior:'smooth'});}
 
-// 섹션 fade-in
-const observer=new IntersectionObserver((entries)=>{
+// 섹션 등장 효과
+const sectionObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       entry.target.classList.add("show");
+    } else {
+      entry.target.classList.remove("show");
     }
   });
-},{threshold:0.15});
+},{
+  threshold:0.15
+});
 
-document.querySelectorAll(".section").forEach(el=>observer.observe(el));
-document.querySelectorAll(".photo-reveal").forEach(el=>observer.observe(el));
+document.querySelectorAll(".section").forEach(el=>{
+  sectionObserver.observe(el);
+});
+
+// 메인 사진 개별 등장 효과
+const photoObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    } else {
+      entry.target.classList.remove("show");
+    }
+  });
+},{
+  threshold:0.45,
+  rootMargin:"0px 0px -10% 0px"
+});
+
+document.querySelectorAll(".photo-reveal").forEach((el,index)=>{
+  el.style.transitionDelay = `${index * 0.15}s`;
+  photoObserver.observe(el);
+});
 
 // BGM 자동재생 (모바일/PC 호환)
 const bgm = document.getElementById('bgm');
