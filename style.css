@@ -282,37 +282,44 @@ body.loaded {
   transform:translateY(0);
 }
 
-
+/* 카운트다운 박스 */
 .countdown-box{
   width:100%;
   max-width:360px;
   margin:0 auto;
   padding:28px 20px;
-
-  background:rgba(255,255,255,0.14);
-  backdrop-filter:blur(10px);
-
-  border:1px solid rgba(255,255,255,0.22);
-
+  background:rgba(255,255,255,0.92);
+  border-radius:22px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.25);
   text-align:center;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
 }
 
+/* 날짜 */
 .countdown-title{
   font-size:15px;
   font-weight:700;
-  margin-bottom:10px;
+  color:#444;
+  margin-bottom:8px;
+  text-shadow:none;
   letter-spacing:-0.2px;
 }
 
+/* 서브 문구 */
 .countdown-sub{
   font-size:13px;
-  opacity:0.82;
+  color:#888;
   margin-bottom:18px;
+  text-shadow:none;
 }
 
+/* 실제 카운트 */
 .countdown-timer{
   font-size:28px;
   font-weight:800;
-  line-height:1.4;
+  line-height:1.5;
+  color:#111;
+  text-shadow:none;
   letter-spacing:-1px;
 }
