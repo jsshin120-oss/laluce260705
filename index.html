@@ -4,6 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>모바일 청첩장</title>
+  <meta property="og:type" content="website">
+
+<meta property="og:title" content="저희 드디어 결혼해요">
+
+<meta property="og:description" content="김가람 신준섭 · 7월 5일 13:30 · 명동 라루체 5층 그레이스홀">
+
+<meta property="og:image" content="https://raw.githubusercontent.com/jsshin120-oss/laluce260705/main/thumb.jpg">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
 
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
@@ -294,7 +304,8 @@ function copyText(e,id){
 
 // 공유 / 스크롤
 function shareInvite(){
-  const title="모바일 청첩장", text="저희 결혼식에 초대합니다 🙂", url=window.location.href;
+  const title="저희 드디어 결혼해요",
+text="김가람 신준섭 · 7월 5일 13:30 · 명동 라루체 5층 그레이스홀", url=window.location.href;
   if(navigator.share){navigator.share({title,text,url});}
   else{navigator.clipboard.writeText(url).then(()=>alert("PC에서는 링크를 복사했어요!")).catch(()=>alert("복사 실패!")); }
 }
